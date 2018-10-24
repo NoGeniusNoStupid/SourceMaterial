@@ -10,51 +10,160 @@
     <meta name="description" content="Your description">
     <meta name="keywords" content="Your keywords">
     <meta name="author" content="Your name">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
-    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
-    <script src="js/jquery.js"></script>
-    <script src="js/jquery-migrate-1.1.1.js"></script>
-    <script src="js/bgstretcher.js"></script>
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <link rel="icon" href="~/Content/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico" type="image/x-icon" />
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Content/js/jquery-migrate-1.1.1.js"></script>
+    <script src="~/Content/js/bgstretcher.js"></script>
+    <link href="~/Content/css/login.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
     <script>
     $(function () {
-                    //  Initialize Backgound Stretcher
-                    $('BODY').bgStretcher({
-                        images: ['images/slide-1.jpg', 'images/slide-2.jpg', 'images/slide-3.jpg'],
-                        imageWidth: 1600,
-                        imageHeight: 964,
-                        resizeProportionally: true,
-                        slideDirection: 'N',
-                        slideShowSpeed: 1000,
-                        transitionEffect: 'fade',
-                        sequenceMode: 'normal',
-                        pagination: '#nav'
+        //  Initialize Backgound Stretcher
+        $('BODY').bgStretcher({
+            images: ['../images/slide-1.jpg', '../images/slide-2.jpg', '../images/slide-3.jpg'],
+            imageWidth: 1600,
+            imageHeight: 964,
+            resizeProportionally: true,
+            slideDirection: 'N',
+            slideShowSpeed: 1000,
+            transitionEffect: 'fade',
+            sequenceMode: 'normal',
+            pagination: '#nav'
 
-                    });
+        });
+        //隐藏登入成功的页面
+        $("#OutDiv").css("display", "None");
+
+        $(document).ready(function () {
+            //打开会员登录 
+            $("#Login_start_").click(function () {
+                $("#regist_container").hide();
+                $("#_close").show();
+                $("#_start").animate({
+                   
+                    height: '520px',
+                    width: '350px'
+                }, 500, function () {
+                    $("#login_container").show(500);
+                    $("#_close").animate({
+                        height: '40px',
+                        width: '40px'
+                    }, 500);
+                });
+            });
+            //打开会员注册
+            $("#Regist_start_").click(function () {
+                $("#login_container").hide();
+                $("#_close").show();
+                $("#_start").animate({
+                  
+                    height: '520px',
+                    width: '350px'
+                }, 500, function () {
+                    $("#regist_container").show(500);
+                    $("#_close").animate({
+                        height: '40px',
+                        width: '40px'
+                    }, 500);
+                });
+            });
+            //关闭
+            $("#_close").click(function () {
+
+                $("#_close").animate({
+                    height: '0px',
+                    width: '0px'
+                }, 500, function () {
+                    $("#_close").hide(500);
+                    $("#login_container").hide(500);
+                    $("#regist_container").hide(500);
+                    $("#_start").animate({
+                        left: '0px',
+                        height: '0px',
+                        width: '0px'
+                    }, 500);
+                });
+            });
+            //去 注册
+            $("#toRegist").click(function () {
+                $("#login_container").hide(500);
+                $("#regist_container").show(500);
+            });
+            //去 登录
+            $("#toLogin").click(function () {
+                $("#regist_container").hide(500);
+                $("#login_container").show(500);
+            });
+        });
+        //注册
+        $("#regist_btn").click(function () {
+            //表单校验
+            validateInfo($("#registerForm"));
+            $("#registerForm").submit();//提交表单
+        });
+        //表单校验
+        function validateInfo(control) {
+            control.validate({//表示对哪个form表单进行校验，获取form标签的id属性的值
+                rules: {//表示验证规则
+                    regist_account: "required",//表示对哪个表单元素进行校验，要写具体的表单元素的name属性的值
+                    regist_password1: {
+                        required: true,
+                        minlength: 6
+
+                    },
+                    regist_password2: {
+                        required: true,
+                        minlength: 6
+                    },
+                    regist_vcode: "required",
+                    regist_phone: {
+                        required: true,
+                        minlength: 6,
+                        Maxlength: 6
+                    }
+                },
+                messages: {
+                    regist_account: "请输入用户名",
+                    regist_password1: {
+                        required: "请输入密码",
+                        minlength: jQuery.format("密码不能小于6个字 符")
+                    },
+                    regist_password2: {
+                        required: "请输入密码",
+                        minlength: jQuery.format("密码不能小于6个字 符")
+                    },
+                    regist_vcode: {
+                        required: "请输入验证码"
+                    },
+                    regist_phone: {
+                        required: "请输入电话",
+                        minlength: jQuery.format("电话长度为11！")
+                    }
+                }
+            });
+        }
     });
     </script>
-
-    <!--[if lt IE 8]>
-    <div style='text-align:center'><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/img/upgrade.jpg"border="0"alt=""/></a></div>
-     <![endif]-->
-    <!--[if lt IE 9]>
-      <link rel="stylesheet" href="css/ie.css" type="text/css" media="screen">
-     <script src="js/html5shiv.js"></script>
-      <link href='//fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
-      <link href='//fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
-      <link href='//fonts.googleapis.com/css?family=Open+Sans:600' rel='stylesheet' type='text/css'>
-      <link href='//fonts.googleapis.com/css?family=Open+Sans:700' rel='stylesheet' type='text/css'>
-    <![endif]-->
-
 </head>
 <body>
+    
     <div class="extra-block1">
         <!--==============================row-top=================================-->
         <div class="row-top">
-            <div class="main">
-                <ul class="list-soc">
-                    <li><a href="#"><img alt="" src="images/soc-icon1.png"></a></li>
-                    <li><a href="#"><img alt="" src="images/soc-icon2.png"></a></li>
+            <div class="main" id="LoginDiv">
+                <ul class="list-soc menu">
+                    <li><a id="Login_start_" href="#">登陆</a></li>
+                    <li><a id="Regist_start_" href="#">注册</a></li>
+                </ul>
+            </div>
+            <div id="OutDiv">
+                <ul class="list-soc menu">
+                    <li><a href="#">注销</a></li>
                 </ul>
             </div>
         </div>
@@ -64,57 +173,154 @@
         <header>
             <div class="row-nav">
                 <div class="main">
-                    <h1 class="logo"><a href="index.html"><img alt="Eni Gma" src="images/logo.png"></a></h1>
+                    <h1 class="logo"><a href="~/Home/Index"><img alt="Eni Gma" src="~/Content/images/logo.png"></a></h1>
                     <nav>
                         <ul class="menu">
-                            <li class="current"><a href="index.html">Home</a></li>
-                            <li><a href="index-1.html">About Us</a></li>
-                            <li><a href="index-2.html">Services</a></li>
-                            <li><a href="index-3.html">Gallery</a></li>
-                            <li><a href="index-4.html">Contacts</a></li>
+                            <li class="current"><a href="index.html">首页</a></li>
+                            <li><a href="index-1.html">关于我们</a></li>
+                            <li><a href="index-2.html">产品服务</a></li>
+                            <li><a href="index-3.html">联系我们</a></li>
+                            <li><a href="index-4.html">会员中心</a></li>
                         </ul>
                     </nav>
                     <div class="clear"></div>
                 </div>
             </div>
         </header>
-    </div>
-    <div class="copyrights">Collect from <a href="http://www.mycodes.net/">Website Template</a></div>
-    <div class="block">
-        <div class="nav-buttons">
-            <div id="nav">&nbsp;</div>
+        <div style="width:600px;margin-left:auto;margin-right:auto">
+            <!--登陆注册-->
+            <div id='_start'>
+                <div id='_close' style="display: none;">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </div>
+                <br />
+                <!--登录框-->
+                <div id="login_container">
+                    <div id="lab1">
+                        <span id="lab_login">&nbsp;会员登录</span>
+                        <span id="lab_toRegist">
+                            &emsp;还没有账号&nbsp;
+                            <span id='toRegist' style="color: #EB9316;cursor: pointer;">立即注册</span>
+                        </span>
+                    </div>
+                    <div style="width:330px;">
+                        <span id="lab_type1">&nbsp;&nbsp;手机号/账号登录</span>
+                    </div>
+                    <div id="form_container1">
+                        <br />
+                        <input type="text" class="form-control" placeholder="手机号/用户名" id="login_number" value="admin" />
+                        <input type="password" class="form-control" placeholder="密码" id="login_password" />
+                        <input type="button" value="登录" class="btn btn-success" id="login_btn" />
+                        <span id="rememberOrfindPwd">
+                            <span>
+                                <input id="remember" type="checkbox" style="margin-bottom: -1.5px;">
+                            </span>
+                            <span style="color:#000000">
+                                记住密码&emsp;&emsp;&emsp;&emsp;
+                            </span>
+                        </span>
+                    </div>
+                </div>
+                <!--注册框-->
+                @using (Ajax.BeginForm("RegisterInfo", "Register", new { }, new AjaxOptions { HttpMethod = "post", OnSuccess = "afterRegister" }, new { id = "registerForm" }))
+                {
+                <div id='regist_container' style="display: none;">
+                    <div id="lab1">
+                        <span id="lab_login">&nbsp;会员注册</span>
+                        <span id="lab_toLogin">
+                            &emsp;已有账号&nbsp;
+                            <span id='toLogin' style="color: #EB9316;cursor: pointer;">立即登录</span>
+                        </span>
+                    </div>
+                    <div id="form_container2" style="padding-top: 25px;">
+
+                        <input type="text" class="form-control" value="admin" placeholder="用户名" id="regist_account">
+                        <input type="password" class="form-control" placeholder="密码" id="regist_password1" />
+                        <input type="password" class="form-control" placeholder="确认密码" id="regist_password2" />
+                        <input type="text" class="form-control" placeholder="手机号" id="regist_phone" />
+                        <input type="text" class="form-control" placeholder="验证码" id="regist_vcode" />
+                        <input id="getVCode" type="button" class="btn btn-success" value="点击发送验证码" onclick="sendCode(this)" />
+                    </div>
+                    <input type="button" value="注册" class="btn btn-success" id="regist_btn" />
+                </div>
+                }
+            </div>
+            <!--登入注册结束-->
         </div>
-        <div class="row-1">
-            <div class="container_12">
-                <div class="wrapper">
-                    <article class="grid_4">
-                        <figure class="box-1">
-                            <img src="images/page1-img1.jpg" alt="" />
-                            <figcaption>Face Care <a href="more.html"></a></figcaption>
-                        </figure>
-                    </article>
-                    <article class="grid_4">
-                        <figure class="box-1">
-                            <img src="images/page1-img2.jpg" alt="" />
-                            <figcaption>Hand Care <a href="more.html"></a></figcaption>
-                        </figure>
-                    </article>
-                    <article class="grid_4">
-                        <figure class="box-1">
-                            <img src="images/page1-img3.jpg" alt="" />
-                            <figcaption>Foot Care <a href="more.html"></a></figcaption>
-                        </figure>
-                    </article>
+    </div>  
+   
+    <div class="copyrights">Collect from <a href="http://www.mycodes.net/">Website Template</a></div>
+        
+    <div class="block">
+
+            <div class="nav-buttons">
+                <div id="nav">&nbsp;</div>
+            </div>
+            <div class="row-1">
+                <div class="container_12">
+                    <div class="wrapper">
+                        <article class="grid_4">
+                            <figure class="box-1">
+                                <img src="~/Content/images/page1-img1.jpg" alt="" />
+                                <figcaption>脸部清洁<a href="more.html"></a></figcaption>
+                            </figure>
+                        </article>
+                        <article class="grid_4">
+                            <figure class="box-1">
+                                <img src="~/Content/images/page1-img2.jpg" alt="" />
+                                <figcaption>美甲<a href="more.html"></a></figcaption>
+                            </figure>
+                        </article>
+                        <article class="grid_4">
+                            <figure class="box-1">
+                                <img src="~/Content/images/page1-img3.jpg" alt="" />
+                                <figcaption>足底按摩<a href="more.html"></a></figcaption>
+                            </figure>
+                        </article>
+                    </div>
                 </div>
             </div>
+
+            <!--==============================footer================================-->
+            <footer>
+                <div class="main aligncenter">
+                    <div class="privacy">Enigma   &copy; 2018 <span>|</span> <a href="index-5.html" rel="nofollow">Privacy Policy</a> <span>|</span><strong>Website Template Collect from</div>
+                </div>
+            </footer>
         </div>
 
-        <!--==============================footer================================-->
-        <footer>
-            <div class="main aligncenter">
-                <div class="privacy">Enigma   &copy; 2013 <span>|</span> <a href="index-5.html" rel="nofollow">Privacy Policy</a> <span>|</span> <strong>Website Template Collect from <a href="http://www.mycodes.net">网页模板</a></strong> </div>
-            </div>
-        </footer>
-    </div>
+    <script type="text/javascript">
+        var clock = '';
+        var nums = 30;
+        var btn;
+        function sendCode(thisBtn) {
+            btn = thisBtn;
+            btn.disabled = true; //将按钮置为不可点击
+            btn.value = '重新获取（' + nums + '）';
+            $("#regist_vcode").val(RndNum(5));
+            clock = setInterval(doLoop, 1000); //一秒执行一次
+        }
+
+        function doLoop() {
+            nums--;
+            if (nums > 0) {
+                btn.value = '重新获取（' + nums + '）';
+            } else {
+              
+                clearInterval(clock); //清除js定时器
+                btn.disabled = false;
+                btn.value = '点击发送验证码';
+                nums = 10; //重置时间
+                //随机赋值一个            
+            }
+        }
+        //产生随机数函数
+        function RndNum(n) {
+            var rnd = "";
+            for (var i = 0; i < n; i++)
+                rnd += Math.floor(Math.random() * 10);
+            return rnd;
+        }
+    </script>
 </body>
 </html>

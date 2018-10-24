@@ -6,15 +6,18 @@ using System.Web.Mvc;
 
 namespace BeautySalonWebApp.Controllers
 {
-    public class HomeController : Controller
+    /// <summary>
+    /// 表示注册的控制器
+    /// </summary>
+    public class RegisterController : Controller
     {
         //
-        // GET: /Home/
+        // GET: /Register/
+
         public ActionResult Index()
         {
             return View();
         }
 
-        
     }
 }
