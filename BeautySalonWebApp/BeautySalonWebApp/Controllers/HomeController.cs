@@ -26,6 +26,10 @@ namespace BeautySalonWebApp.Controllers
         {
             return View();
         }
+        public ActionResult Goods()
+        {
+            return View();
+        }
         public ActionResult VIPCentral()
         {
             return View();

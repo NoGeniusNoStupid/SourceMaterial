@@ -71,3 +71,11 @@ Models.BeautySalon.msl(13,12) : 错误 2019: 指定的成员映射无效。类型“BeautySalon
 2018-10-25 14:56:16,455 [6] ERROR errorMsg - 指定的架构无效。错误: 
 Models.BeautySalon.msl(7,12) : 错误 2019: 指定的成员映射无效。类型“BeautySalonModel.BS_UserInfo”中的成员“Level”的类型“Edm.Int32[Nullable=True,DefaultValue=]”与类型“BeautySalonModel.Store.BS_UserInfo”中的成员“Level”的“SqlServer.varchar[Nullable=True,DefaultValue=,MaxLength=2,Unicode=False,FixedLength=False]”不兼容。
 Models.BeautySalon.msl(13,12) : 错误 2019: 指定的成员映射无效。类型“BeautySalonModel.BS_UserInfo”中的成员“Age”的类型“Edm.Int32[Nullable=True,DefaultValue=]”与类型“BeautySalonModel.Store.BS_UserInfo”中的成员“Age”的“SqlServer.varchar[Nullable=True,DefaultValue=,MaxLength=3,Unicode=False,FixedLength=False]”不兼容。
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------

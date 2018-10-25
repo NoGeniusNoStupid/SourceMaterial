@@ -337,6 +337,11 @@
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\master.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Service.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\VIPCentral.cshtml" />
+    <Content Include="Views\Home\Goods.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
