@@ -19,8 +19,9 @@ namespace BeautySalonWebApp.Models
         public string Password { get; set; }
         public string RealName { get; set; }
         public string Sex { get; set; }
-        public Nullable<int> Age { get; set; }
+        public string Age { get; set; }
         public string Email { get; set; }
         public string Tel { get; set; }
+        public string Level { get; set; }
     }
 }

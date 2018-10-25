@@ -1,0 +1,259 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Contacts</title>
+    <meta charset="utf-8">
+    <meta name="description" content="Your description">
+    <meta name="keywords" content="Your keywords">
+    <meta name="author" content="Your name">
+    <link rel="stylesheet" href="~/Content/css/style.css">
+    <link rel="icon" href="~/Content/images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="~/Content/images/favicon.ico" type="image/x-icon" />
+    <script src="~/Content/js/jquery.js"></script>
+    <script src="~/Content/js/jquery-migrate-1.1.1.js"></script>
+    <script src="~/Content/js/bgstretcher.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            //  Initialize Backgound Stretcher
+            $('BODY').bgStretcher({
+                images: ['../Content/images/slide-1.jpg'],
+                imageWidth: 1600,
+                imageHeight: 964,
+                resizeProportionally: true
+            });
+        });
+        
+        function checkit() {
+            var myform = document.getElementById("contact-form");
+            var username = myform.UserName.value;
+            if (username == "")
+            {
+                alert("请输入用户名");
+                return false;
+            }
+            if (username.length < 6 || username.length > 15)
+            {
+                alert("请输入6-15位用户名");
+                return false;
+            }
+            var password = myform.Password.value;
+            var suerPassword = myform.SurePassword.value;
+            if (password.length < 6 || password.length > 10) {
+                alert("请输入6-10位密码");
+                return false;
+            }
+            if (password != suerPassword)
+            {
+                alert("两次输入的密码不一致，请检查");
+                return false;
+            }
+            var realname = myform.RealName.value;
+            if (realname == "") {
+                alert("请输入姓名");
+                return false;
+            }
+            if (!isChinese(realname))
+            {
+                return false;
+            }
+            var age = myform.Age.value;
+            if (age != parseInt(age) || (age < 0 || age>100)) {
+                alert("年龄不符合要求");
+                return false;
+            }
+            var email = myform.Email.value;
+            if (!CheckEmail(email)) {
+                return false;
+            }
+            var tel = myform.Tel.value;
+            if (!validatemobile(tel)) {
+                return false;
+            }
+            return true;
+        }
+        //输入中文
+        function isChinese(obj) {
+            var reg = /^[\u0391-\uFFE5]+$/;
+            if (obj != "" && !reg.test(obj)) {
+                alert('必须输入中文！');
+                return false;
+            }
+            return true;
+        }
+        function CheckEmail(obj) {
+            //对电子邮件的验证
+            var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if (!myreg.test(obj)) {
+                alert('请输入有效的邮箱！');
+                return false;
+            }
+            return true;
+
+        }
+        function validatemobile(mobile) {
+            if (mobile.length == 0) {
+                alert('手机号码不能为空！');
+                return false;
+            }
+            if (mobile.length != 11) {
+                alert('请输入有效的手机号码，需是11位！');
+                return false;
+            }
+            var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            if (!myreg.test(mobile)) {
+                alert('请输入有效的手机号码！');
+                return false;
+            }
+            return true;
+        }
+        //异步注册
+        function registeInfo()
+        {
+            //表单校验
+            if (!checkit())
+            {
+                return false;
+            }
+            $("#contact-form").submit();
+        }
+        //完成注册后调用该方法
+        function afterregister(data) {
+            if (data == "ok") {
+                alert("注册成功");
+                //跳转
+                window.location.href = "/Home/Index";
+            }
+            else
+                alert(data);
+        }
+    </script>
+</head>
+<body>
+    <div class="extra-block">
+        <!--==============================row-top=================================-->
+        <div class="row-top">
+            @if (Session["realName"] == null)
+            {
+                <div class="main" id="LoginDiv">
+                    <ul class="list-soc menu">
+                        <li><a id="Login_start_" href="../Login/Index">登陆</a></li>
+                        <li><a id="Regist_start_" href="../Register/Index">注册</a></li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="main" id="LoginDiv">
+                    <ul class="list-soc menu">
+                        <li><a href="#">@Session["realName"]</a></li>
+                        <li><a id="Out_start_" href="/Register/OutInfo">注销</a></li>
+                    </ul>
+                </div>
+            }
+        </div>
+
+        <!--==============================header=================================-->
+
+        <header>
+            <div class="row-nav">
+                <div class="main">
+                    <h1 class="logo"><a href="~/Home/Index"><img alt="Eni Gma" src="~/Content/images/logo.png"></a></h1>
+                    <nav>
+                        <ul class="menu">
+                            <li class="current"><a href="index.html">首页</a></li>
+                            <li><a href="index-1.html">关于我们</a></li>
+                            <li><a href="index-2.html">产品服务</a></li>
+                            <li><a href="index-3.html">联系我们</a></li>
+                            <li><a href="index-4.html">会员中心</a></li>
+                        </ul>
+                    </nav>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </header>
+        <!--==============================content=================================-->
+        <section id="content">
+            <div class="main-block">
+                <div class="container_12">
+                    <div class="wrapper">
+                        <div style="width:400px;margin-left:auto;margin-right:auto">
+                            @*<form id="contact-form"  action="/Register/RegisterInfo" method="get">*@
+                   @using (Ajax.BeginForm("RegisterInfo", "Register", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterregister" }, new { id = "contact-form" }))
+                         {
+                                <input type="hidden" name="Id" />
+                                <input type="hidden" name="Level" value="1" />
+                                <div>
+                                    用户名:<label>
+                                        <input type="text" name="UserName" id="UserName">
+                                    </label>
+                                </div>
+                                <div>
+                                    密码：<label>
+                                        <input type="password" name="Password" id="Password">
+                                    </label>
+                                </div>
+                                <div>
+                                    确认密码：<label>
+                                        <input type="password" name="SurePassword" id="SurePassword">
+                                    </label>
+                                </div>
+                                <div>
+                                    姓名:<label>
+                                        <input type="text" value="" name="RealName" id="RealName">
+                                    </label>
+                                </div>
+                                <div>
+                                    年龄:<label>
+                                        <input type="text" value="" name="Age" id="Age">
+                                    </label>
+                                </div>
+                                <div>
+                                    <label>
+                                        性别：<select style="width:100px" name="Sex">
+                                            <option selected>男</option>
+                                            <option>女</option>
+                                        </select>
+
+                                    </label>
+                                </div>
+                                <div>
+                                    邮箱:<label>
+                                        <input type="email" value="" name="Email" id="Email">
+                                    </label>
+                                </div>
+                                <div>
+                                    电话:<label>
+                                        <input type="tel" value="" name="Tel" id="Tel">
+                                        <br>
+                                    </label>
+                                </div>
+                                <div class="buttons-wrapper">
+                                    <input class="button" style="color:green"
+                                           type="button" value="注册" onclick="registeInfo()" />
+                                </div>
+                         }
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+         </section>
+
+    </div>
+      
+    <div class="block">
+        <!--==============================footer================================-->
+        <footer>
+            <div class="main aligncenter">
+                <div class="privacy">Enigma   &copy; 2013 <span>|</span> <a href="index-5.html" rel="nofollow">Privacy Policy</a> <span>|</span> <strong>Website Template Collect from <a href="http://www.mycodes.net">网页模板</a></strong> </div>
+            </div>
+        </footer>
+    </div>
+  
+
+</body>
+</html>

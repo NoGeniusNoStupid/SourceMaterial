@@ -23,7 +23,9 @@
 						".email":{rx:/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i,target:'input'},
 						".phone":{rx:/^\+?(\d[\d\-\+\(\) ]{5,}\d$)/,target:'input'},
 						".fax":{rx:/^\+?(\d[\d\-\+\(\) ]{5,}\d$)/,target:'input'},
-						".message":{rx:/.{20}/,target:'textarea'}
+						".message": {
+						    rx: /.{20}/, target: 'textarea'
+						}
 					},
 					preFu:function(){
 						_.labels.each(function(){
@@ -156,12 +158,14 @@
 						_.controlsFu()
 														
 						_.form
-							.bind('submit',function(){
-								if(_.validate)
-									_.submitFu()
-								else
-									_.form[0].submit()
-								return false
+							.bind('submit', function () {
+							    _.form[0].submit()
+							    return false
+								//if(_.validate)
+								//	_.submitFu()
+								//else
+								//	_.form[0].submit()
+								//return false
 							})
 							.bind('reset',function(){
 								_.labels.removeClass(_.invalidCl)									

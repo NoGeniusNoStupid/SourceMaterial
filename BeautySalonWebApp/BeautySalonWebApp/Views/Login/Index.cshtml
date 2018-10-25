@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/master.cshtml";
+}
+@section scripts {
+    <script type="text/javascript">
+         //登陆
+        function LoginInfo() {
+            //表单校验
+            if (!checkit()) {
+                return false;
+            }
+            $("#contact-form").submit();
+        }
+        //登陆后
+        function afterLogin(data)
+        {
+            if (data == "ok") {
+                alert("登陆成功");
+                //跳转
+                window.location.href = "/Home/Index";
+            }
+            else
+                alert(data);
+        }
+        //校验
+        function checkit() {
+            var myform = document.getElementById("contact-form");
+            var username = myform.UserName.value;
+            if (username == "") {
+                alert("请输入用户名");
+                return false;
+            }
+            if (username.length < 6 || username.length > 15) {
+                alert("请输入6-15位用户名");
+                return false;
+            }
+            var password = myform.Password.value;
+            if (password.length < 6 || password.length > 10) {
+                alert("请输入6-10位密码");
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
+
+<div class="main-block">
+    <div class="container_12">
+        <div class="wrapper">
+            <div style="width:400px;margin-left:auto;margin-right:auto">
+                @*<form id="contact-form"  action="/Register/RegisterInfo" method="get">*@
+                @using (Ajax.BeginForm("LoginInfo", "Login", new { }, new AjaxOptions() { HttpMethod = "post", OnSuccess = "afterLogin" }, new { id = "contact-form" }))
+                {
+                    <input type="hidden" name="Id" />
+                    <input type="hidden" name="Level" value="1" />
+                    <div>
+                        用户名:<label>
+                            <input type="text" name="UserName" id="UserName">
+                        </label>
+                    </div>
+                    <div>
+                        密码：<label>
+                            <input type="password" name="Password" id="Password">
+                        </label>
+                    </div> 
+                     <div class="buttons-wrapper">
+                                    <input class="button" style="color:green"
+                                           type="button" value="登陆" onclick="LoginInfo()" />
+                     </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+

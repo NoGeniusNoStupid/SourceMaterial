@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using BeautySalonWebApp.Public;
+using System.Web;
 using System.Web.Mvc;
 
 namespace BeautySalonWebApp
@@ -7,7 +8,7 @@ namespace BeautySalonWebApp
     {
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
-            filters.Add(new HandleErrorAttribute());
+            filters.Add(new MyExceptionAttribute());
         }
     }
 }

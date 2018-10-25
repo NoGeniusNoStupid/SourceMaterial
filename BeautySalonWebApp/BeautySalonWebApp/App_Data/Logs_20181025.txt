@@ -1,0 +1,73 @@
+
+----------------------header--------------------------
+2018-10-25 11:54:17,464 [7] ERROR errorMsg - 未找到视图“Index”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Login/Index.aspx
+~/Views/Login/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Login/Index.cshtml
+~/Views/Login/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml
+
+----------------------header--------------------------
+2018-10-25 11:54:46,351 [6] ERROR errorMsg - 未找到视图“Index”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Login/Index.aspx
+~/Views/Login/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Login/Index.cshtml
+~/Views/Login/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml
+
+----------------------header--------------------------
+2018-10-25 11:55:18,437 [6] ERROR errorMsg - 未找到视图“Index”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Login/Index.aspx
+~/Views/Login/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Login/Index.cshtml
+~/Views/Login/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml
+
+----------------------header--------------------------
+2018-10-25 11:56:53,740 [6] ERROR errorMsg - 未找到视图“Index”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Login/Index.aspx
+~/Views/Login/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Login/Index.cshtml
+~/Views/Login/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2018-10-25 14:34:43,823 [7] ERROR errorMsg - 更新条目时出错。有关详细信息，请参见内部异常。
+2018-10-25 14:36:02,188 [7] ERROR errorMsg - 更新条目时出错。有关详细信息，请参见内部异常。
+
+----------------------header--------------------------
+2018-10-25 14:39:36,142 [7] ERROR errorMsg - 更新条目时出错。有关详细信息，请参见内部异常。
+
+----------------------header--------------------------
+2018-10-25 14:46:25,983 [7] ERROR errorMsg - 更新条目时出错。有关详细信息，请参见内部异常。
+
+----------------------header--------------------------
+2018-10-25 14:48:00,666 [6] ERROR errorMsg - 更新条目时出错。有关详细信息，请参见内部异常。
+
+----------------------header--------------------------
+2018-10-25 14:56:01,443 [6] ERROR errorMsg - 指定的架构无效。错误: 
+Models.BeautySalon.msl(7,12) : 错误 2019: 指定的成员映射无效。类型“BeautySalonModel.BS_UserInfo”中的成员“Level”的类型“Edm.Int32[Nullable=True,DefaultValue=]”与类型“BeautySalonModel.Store.BS_UserInfo”中的成员“Level”的“SqlServer.varchar[Nullable=True,DefaultValue=,MaxLength=2,Unicode=False,FixedLength=False]”不兼容。
+Models.BeautySalon.msl(13,12) : 错误 2019: 指定的成员映射无效。类型“BeautySalonModel.BS_UserInfo”中的成员“Age”的类型“Edm.Int32[Nullable=True,DefaultValue=]”与类型“BeautySalonModel.Store.BS_UserInfo”中的成员“Age”的“SqlServer.varchar[Nullable=True,DefaultValue=,MaxLength=3,Unicode=False,FixedLength=False]”不兼容。
+2018-10-25 14:56:16,455 [6] ERROR errorMsg - 指定的架构无效。错误: 
+Models.BeautySalon.msl(7,12) : 错误 2019: 指定的成员映射无效。类型“BeautySalonModel.BS_UserInfo”中的成员“Level”的类型“Edm.Int32[Nullable=True,DefaultValue=]”与类型“BeautySalonModel.Store.BS_UserInfo”中的成员“Level”的“SqlServer.varchar[Nullable=True,DefaultValue=,MaxLength=2,Unicode=False,FixedLength=False]”不兼容。
+Models.BeautySalon.msl(13,12) : 错误 2019: 指定的成员映射无效。类型“BeautySalonModel.BS_UserInfo”中的成员“Age”的类型“Edm.Int32[Nullable=True,DefaultValue=]”与类型“BeautySalonModel.Store.BS_UserInfo”中的成员“Age”的“SqlServer.varchar[Nullable=True,DefaultValue=,MaxLength=3,Unicode=False,FixedLength=False]”不兼容。

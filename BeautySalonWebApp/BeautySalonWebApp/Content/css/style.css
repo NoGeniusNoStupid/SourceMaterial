@@ -518,6 +518,7 @@ dl.address dd span {
   position: relative;
   z-index: 10;
 }
+#registerForm label,
 #contact-form label {
   display: block;
   min-height: 45px;
@@ -532,6 +533,7 @@ dl.address dd span {
   display: block !important;
   width: 100%;
 }
+#registerForm input,
 #contact-form input,
 #contact-form textarea {
 	font-family:Arial, Helvetica, sans-serif;
@@ -556,9 +558,11 @@ dl.address dd span {
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+#registerForm input,
 #contact-form input {
   height: 30px;
 }
+#registerForm input:focus,
 #contact-form input:focus,
 #contact-form textarea:focus {
   -webkit-box-shadow: none;
