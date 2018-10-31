@@ -4,7 +4,18 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BeautySalonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="BeautySalonModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityType Name="BS_Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdminName" Type="varchar" MaxLength="50" />
+          <Property Name="AdminPassword" Type="varchar" MaxLength="20" />
+          <Property Name="LoginCount" Type="varchar" MaxLength="20" />
+          <Property Name="LastTime" Type="datetime" />
+          <Property Name="Lock" Type="varchar" MaxLength="1" />
+        </EntityType>
         <EntityType Name="BS_UserInfo">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,12 +29,13 @@
           <Property Name="Email" Type="varchar" MaxLength="30" />
           <Property Name="Tel" Type="varchar" MaxLength="20" />
           <Property Name="Level" Type="varchar" MaxLength="2" />
+          <Property Name="regTime" Type="datetime" />
         </EntityType>
         <EntityContainer Name="BeautySalonModelStoreContainer">
+          <EntitySet Name="BS_Admin" EntityType="Self.BS_Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BS_UserInfo" EntityType="Self.BS_UserInfo" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BeautySalonModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -40,10 +52,23 @@
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Level" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="regTime" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityContainer Name="BeautySalonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BS_UserInfo" EntityType="Self.BS_UserInfo" />
+          <EntitySet Name="BS_Admin" EntityType="BeautySalonModel.BS_Admin" />
         </EntityContainer>
+        <EntityType Name="BS_Admin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdminPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LoginCount" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastTime" Type="DateTime" Precision="3" />
+          <Property Name="Lock" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -53,6 +78,7 @@
           <EntitySetMapping Name="BS_UserInfo">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_UserInfo">
               <MappingFragment StoreEntitySet="BS_UserInfo">
+                <ScalarProperty Name="regTime" ColumnName="regTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
@@ -62,6 +88,18 @@
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Tel" ColumnName="Tel" />
                 <ScalarProperty Name="Level" ColumnName="Level" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BS_Admin">
+            <EntityTypeMapping TypeName="BeautySalonModel.BS_Admin">
+              <MappingFragment StoreEntitySet="BS_Admin">
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
+                <ScalarProperty Name="LastTime" ColumnName="LastTime" />
+                <ScalarProperty Name="LoginCount" ColumnName="LoginCount" />
+                <ScalarProperty Name="AdminPassword" ColumnName="AdminPassword" />
+                <ScalarProperty Name="AdminName" ColumnName="AdminName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -26,5 +26,6 @@ namespace BeautySalonWebApp.Models
         }
     
         public DbSet<BS_UserInfo> BS_UserInfo { get; set; }
+        public DbSet<BS_Admin> BS_Admin { get; set; }
     }
 }

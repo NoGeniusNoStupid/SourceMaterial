@@ -23,5 +23,6 @@ namespace BeautySalonWebApp.Models
         public string Email { get; set; }
         public string Tel { get; set; }
         public string Level { get; set; }
+        public Nullable<System.DateTime> regTime { get; set; }
     }
 }

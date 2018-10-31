@@ -50,5 +50,7 @@ namespace BeautySalonWebApp.Controllers
             Session["Id"] = null;//用户id
             return RedirectToAction("Index", "Home"); 
         }
+
+
     }
 }

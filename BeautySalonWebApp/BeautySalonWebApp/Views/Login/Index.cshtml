@@ -20,8 +20,14 @@
                 //跳转
                 window.location.href = "/Home/Index";
             }
-            else
+            else {
                 alert(data);
+                changeCheckCode();
+            }
+        }
+        //验证码
+        function changeCheckCode() {
+            $("#img").attr("src", $("#img").attr("src") + 1);
         }
         //校验
         function checkit() {
@@ -31,6 +37,7 @@
                 alert("请输入用户名");
                 return false;
             }
+
             if (username.length < 6 || username.length > 15) {
                 alert("请输入6-15位用户名");
                 return false;
@@ -40,8 +47,15 @@
                 alert("请输入6-10位密码");
                 return false;
             }
+            var vCode = myform.vCode.value;
+            if (vCode == "") {
+                alert("请输入验证码");
+                return false;
+            }
             return true;
         }
+
+
     </script>
 }
 
@@ -63,6 +77,25 @@
                         密码：<label>
                             <input type="password" name="Password" id="Password">
                         </label>
+                    </div> 
+                     <div>
+                        验证码：
+                         <table>
+                             <tr>
+                                 <td>
+                                     <label>
+                                         <input type="text" name="vCode" id="vCode">
+                                     </label>
+                                 </td>
+                                 <td>
+                                     <img id="img" src="/Login/ShowValidateCode?id=1" style="float: left; height: 24px;" />
+                                     <div style="float: left; margin-left: 5px; margin-top: 10px;">
+                                         <a href="javascript:void(0)" onclick="changeCheckCode();return false;">看不清，换一张</a>
+                                     </div>
+                                 </td>
+                             </tr>
+                         </table>
+                        
                     </div> 
                      <div class="buttons-wrapper">
                                     <input class="button" style="color:green"

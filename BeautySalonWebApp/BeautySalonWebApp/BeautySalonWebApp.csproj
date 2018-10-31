@@ -136,6 +136,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminBaseController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -158,6 +160,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BeautySalon.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\BS_Admin.cs">
+      <DependentUpon>BeautySalon.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BS_UserInfo.cs">
       <DependentUpon>BeautySalon.tt</DependentUpon>
     </Compile>
@@ -165,8 +170,71 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public\Common.cs" />
     <Compile Include="Public\MyExceptionAttribute.cs" />
+    <Compile Include="Public\ValidateCode.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\admin\css\alogin.css" />
+    <Content Include="Content\admin\css\css.css" />
+    <Content Include="Content\admin\css\main.css" />
+    <Content Include="Content\admin\images\login\bg.gif" />
+    <Content Include="Content\admin\images\login\btnlogin.gif" />
+    <Content Include="Content\admin\images\login\code.gif" />
+    <Content Include="Content\admin\images\login\login_01.gif" />
+    <Content Include="Content\admin\images\login\login_02.gif" />
+    <Content Include="Content\admin\images\login\login_03.gif" />
+    <Content Include="Content\admin\images\login\login_04.gif" />
+    <Content Include="Content\admin\images\login\login_05.gif" />
+    <Content Include="Content\admin\images\login\login_06.gif" />
+    <Content Include="Content\admin\images\login\login_07.gif" />
+    <Content Include="Content\admin\images\login\login_08.gif" />
+    <Content Include="Content\admin\images\login\login_09.gif" />
+    <Content Include="Content\admin\images\login\login_10.gif" />
+    <Content Include="Content\admin\images\login\login_11.gif" />
+    <Content Include="Content\admin\images\login\login_12.gif" />
+    <Content Include="Content\admin\images\login\login_13.gif" />
+    <Content Include="Content\admin\images\login\login_14.gif" />
+    <Content Include="Content\admin\images\login\logo.gif" />
+    <Content Include="Content\admin\images\login\logo.jpg" />
+    <Content Include="Content\admin\images\login\txt.gif" />
+    <Content Include="Content\admin\images\main\add.jpg" />
+    <Content Include="Content\admin\images\main\addinfoblack.jpg" />
+    <Content Include="Content\admin\images\main\addinfoblue.jpg" />
+    <Content Include="Content\admin\images\main\bool.jpg" />
+    <Content Include="Content\admin\images\main\boolon.jpg" />
+    <Content Include="Content\admin\images\main\bottombg.jpg" />
+    <Content Include="Content\admin\images\main\collapsed.jpg" />
+    <Content Include="Content\admin\images\main\dirfirst.gif" />
+    <Content Include="Content\admin\images\main\dirsecond.gif" />
+    <Content Include="Content\admin\images\main\exit.jpg" />
+    <Content Include="Content\admin\images\main\exiton.jpg" />
+    <Content Include="Content\admin\images\main\expanded.jpg" />
+    <Content Include="Content\admin\images\main\home.jpg" />
+    <Content Include="Content\admin\images\main\homeon.jpg" />
+    <Content Include="Content\admin\images\main\leftbg.jpg" />
+    <Content Include="Content\admin\images\main\line.jpg" />
+    <Content Include="Content\admin\images\main\list_bg.jpg" />
+    <Content Include="Content\admin\images\main\list_input.jpg" />
+    <Content Include="Content\admin\images\main\logo.jpg" />
+    <Content Include="Content\admin\images\main\main_r2_c2.jpg" />
+    <Content Include="Content\admin\images\main\main_r4_c2.jpg" />
+    <Content Include="Content\admin\images\main\main_r6_c2.jpg" />
+    <Content Include="Content\admin\images\main\member.gif" />
+    <Content Include="Content\admin\images\main\memberbg.jpg" />
+    <Content Include="Content\admin\images\main\menu.jpg" />
+    <Content Include="Content\admin\images\main\menuon.jpg" />
+    <Content Include="Content\admin\images\main\pic23.jpg" />
+    <Content Include="Content\admin\images\main\pic24.jpg" />
+    <Content Include="Content\admin\images\main\replayblack.jpg" />
+    <Content Include="Content\admin\images\main\replayblue.jpg" />
+    <Content Include="Content\admin\images\main\switchbg.jpg" />
+    <Content Include="Content\admin\images\main\time.jpg" />
+    <Content Include="Content\admin\images\main\top_r1_c5.jpg" />
+    <Content Include="Content\admin\images\main\why.gif" />
+    <Content Include="Content\admin\js\clock.js" />
+    <Content Include="Content\admin\js\moo.fx.js" />
+    <Content Include="Content\admin\js\moo.fx.pack.js" />
+    <Content Include="Content\admin\js\prototype.lite.js" />
+    <Content Include="Content\admin\js\sdmenu.js" />
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Content\css\grid.css" />
@@ -296,6 +364,7 @@
     <Content Include="Models\BeautySalon.edmx.diagram">
       <DependentUpon>BeautySalon.edmx</DependentUpon>
     </Content>
+    <Content Include="Content\admin\images\login\logo.psd" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Models\BeautySalon.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -322,7 +391,9 @@
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -342,6 +413,14 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\VIPCentral.cshtml" />
     <Content Include="Views\Home\Goods.cshtml" />
+    <Content Include="Views\Login\AdminLogin.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Left.cshtml" />
+    <Content Include="Views\Admin\Swich.cshtml" />
+    <Content Include="Views\Admin\Main.cshtml" />
+    <Content Include="Views\Admin\Bottom.cshtml" />
+    <Content Include="Views\Admin\Top.cshtml" />
+    <Content Include="Views\Admin\AdminManage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

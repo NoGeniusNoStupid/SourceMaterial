@@ -1,0 +1,55 @@
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2018-10-31 12:03:36,536 [7] ERROR errorMsg - 未找到视图“Swich”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Admin/Swich.aspx
+~/Views/Admin/Swich.ascx
+~/Views/Shared/Swich.aspx
+~/Views/Shared/Swich.ascx
+~/Views/Admin/Swich.cshtml
+~/Views/Admin/Swich.vbhtml
+~/Views/Shared/Swich.cshtml
+~/Views/Shared/Swich.vbhtml
+2018-10-31 12:03:51,562 [7] ERROR errorMsg - 未找到视图“Swich”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Admin/Swich.aspx
+~/Views/Admin/Swich.ascx
+~/Views/Shared/Swich.aspx
+~/Views/Shared/Swich.ascx
+~/Views/Admin/Swich.cshtml
+~/Views/Admin/Swich.vbhtml
+~/Views/Shared/Swich.cshtml
+~/Views/Shared/Swich.vbhtml
+
+----------------------header--------------------------
+
+----------------------footer--------------------------
+
+----------------------header--------------------------
+2018-10-31 16:52:36,863 [7] ERROR errorMsg - 应为“{”，但找到的是“return”。块语句必须括在“{”和“}”中。不能在 CSHTML 页中使用单语句控制流的语句。例如，不允许使用以下语句:
+
+@if(isLoggedIn)
+    <p>Hello, @user</p>
+
+请改为将块内容括在“{}”中:
+
+@if(isLoggedIn) {
+    <p>Hello, @user</p>
+}
+
+2018-10-31 16:53:08,461 [7] ERROR errorMsg - 应为“{”，但找到的是“return”。块语句必须括在“{”和“}”中。不能在 CSHTML 页中使用单语句控制流的语句。例如，不允许使用以下语句:
+
+@if(isLoggedIn)
+    <p>Hello, @user</p>
+
+请改为将块内容括在“{}”中:
+
+@if(isLoggedIn) {
+    <p>Hello, @user</p>
+}
+
+
+----------------------header--------------------------
+2018-10-31 16:54:24,660 [6] ERROR errorMsg - 无法将类型为“System.Data.Entity.Infrastructure.DbQuery`1[BeautySalonWebApp.Models.BS_Admin]”的对象强制转换为类型“System.Collections.Generic.List`1[BeautySalonWebApp.Models.BS_Admin]”。
