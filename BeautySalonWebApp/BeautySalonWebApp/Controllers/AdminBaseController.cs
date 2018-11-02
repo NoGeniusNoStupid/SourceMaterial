@@ -6,19 +6,19 @@ using System.Web.Mvc;
 
 namespace BeautySalonWebApp.Controllers
 {
-    public class AdminBaseController : Controller
+    public class AdminBaseController : BaseController
     {
         /// <summary>
         /// 执行控制器中的方法之前先执行该方法。
         /// </summary>
         /// <param name="filterContext"></param>
-        protected override void OnActionExecuted(ActionExecutedContext filterContext)
-        {
-            base.OnActionExecuted(filterContext);
-            if (Session["adminInfo"] == null)
-            {
-                filterContext.Result = Redirect("~/Login/AdminLogin");
-            }
-        }
+        //protected override void OnActionExecuted(ActionExecutedContext filterContext)
+        //{
+        //    base.OnActionExecuted(filterContext);
+        //    if (Session["adminInfo"] == null)
+        //    {
+        //        filterContext.Result = Redirect("~/Login/AdminLogin");
+        //    }
+        //}
     }
 }

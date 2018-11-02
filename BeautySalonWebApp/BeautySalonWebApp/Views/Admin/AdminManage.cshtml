@@ -63,7 +63,7 @@
             }
 
             #search a.add {
-                background: url(~/Content/Admin/images/main/add.jpg) no-repeat -3px 7px #548fc9;
+                background: url(../Content/Admin/images/main/add.jpg) no-repeat -3px 7px #548fc9;
                 padding: 0 10px 0 26px;
                 height: 40px;
                 line-height: 40px;
@@ -86,7 +86,7 @@
 
             #main-tab th {
                 font-size: 12px;
-                background: url(~/Content/Admin/images/main/list_bg.jpg) repeat-x;
+                background: url(../Content/Admin/images/main/list_bg.jpg) repeat-x;
                 height: 32px;
                 line-height: 32px;
             }
@@ -154,7 +154,7 @@
                             </form>
                         </td>
                         <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;">
-                        <a  onclick="addInfo()" target="mainFrame" onfocus="  this.blur()" class="add">新增管理员</a>
+                        <a  href="~/Admin/AddAdminInfo" target="mainFrame" onfocus="  this.blur()" class="add">新增管理员</a>
                         </td>
                     </tr>
                 </table>
@@ -169,6 +169,7 @@
                         <th align="center" valign="middle" class="borderright">登陆次数</th>
                         <th align="center" valign="middle" class="borderright">锁定</th>
                         <th align="center" valign="middle" class="borderright">最后登录</th>
+                        <th align="center" valign="middle" class="borderright">权限</th>
                         <th align="center" valign="middle">操作</th>
                     </tr>
                     @{
@@ -185,7 +186,25 @@
                                @mlock
                            </td>
                            <td align="center" valign="middle" class="borderright borderbottom">@item.LastTime.ToString("yyyy-MM-dd")</td>
-                           <td align="center" valign="middle" class="borderbottom"><a href="add.html" target="mainFrame" onfocus="this.blur()" class="add">编辑</a><span class="gray">&nbsp;|&nbsp;</span><a href="add.html" target="mainFrame" onfocus="this.blur()" class="add">删除</a></td>
+                           <td align="center" valign="middle" class="borderright borderbottom">
+                               @{string power = item.Power == "1" ? "普通管理员" : "超级管理员";}
+                               @power
+                           </td>
+                           <td align="center" valign="middle" class="borderbottom">
+                               <a href="~/Admin/AdminUpdatePwd/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">密码重置</a>
+                               <span class="gray">&nbsp;|&nbsp;</span>
+                               <a href="~/Admin/AdminLock/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">
+                                   @if (item.Lock == "0")
+                                   { @Html.Raw("锁定")}
+                                   else
+                                   { @Html.Raw("解锁")}
+                               </a>
+                               <span class="gray">&nbsp;|&nbsp;</span>
+                               <a href="~/Admin/EditInfo/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">编辑</a>
+                               <span class="gray">&nbsp;|&nbsp;</span>
+                               <a href="~/Admin/DeleteInfo/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
+                               
+                           </td>
                            </tr>            
                         }
                     }

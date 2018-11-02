@@ -12,7 +12,7 @@ namespace BeautySalonWebApp.Controllers
     /// <summary>
     /// 表示后台管理
     /// </summary>
-    public class AdminController : Controller
+    public class AdminController : AdminBaseController
     {
         BeautySalonEntities db = (BeautySalonEntities)DBContextFactory.CreateDbContext();
 
@@ -44,6 +44,8 @@ namespace BeautySalonWebApp.Controllers
         #endregion
 
         #region  管理员操作
+
+        #region 查询
         /// <summary>
         /// 管理员列表页面
         /// </summary>
@@ -73,11 +75,23 @@ namespace BeautySalonWebApp.Controllers
 
             return View();
         }
+        #endregion
+
+        #region 添加
+        /// <summary>
+        /// 显示添加管理员界面
+        /// </summary>
+        /// <returns></returns>
+         public ActionResult AddAdminInfo()
+         {
+             return View();
+         }
         /// <summary>
         /// 添加管理员
         /// </summary>
         /// <returns></returns>
-        public ActionResult AddAdminInfo(string AdminName, string AdminPassword)
+        [HttpPost]
+         public ActionResult AddAdminInfo(string AdminName, string AdminPassword, string Power)
         {
             BS_Admin adminInfo = new BS_Admin();
             adminInfo.AdminName = AdminName;
@@ -85,10 +99,88 @@ namespace BeautySalonWebApp.Controllers
             adminInfo.LastTime = DateTime.Now;
             adminInfo.Lock = "0";
             adminInfo.LoginCount = "0";
+            adminInfo.Power = Power;
             db.BS_Admin.Add(adminInfo);
-            db.SaveChanges();
+
+            return RedirectDialogToAction("AdminManage", "Admin", db.SaveChanges());
+        }
+        /// <summary>
+        /// 是否存在用户名
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult IsExistAdminName()
+        {
+            string adminName = Request["AdminName"];
+            //判断用户名是否重复
+            var tempInfo = db.BS_Admin.FirstOrDefault(a => a.AdminName == adminName);
+            if (tempInfo != null)
+                return Content("用户名已存在！");
             return Content("ok");
         }
-        #endregion 
+        #endregion
+
+        #region 详情
+        public ActionResult EditInfo(int id)
+        { 
+            var adminInfo = db.BS_Admin.FirstOrDefault(a => a.Id == id);
+            return View(adminInfo);
+        }
+        [HttpPost]
+        public ActionResult EditInfo(int id, string Power)
+        {
+            //获取对象
+            var adminInfo = db.BS_Admin.FirstOrDefault(a => a.Id == id);
+
+            //更新操作
+            adminInfo.Power = Power;
+            db.Entry(adminInfo).State = System.Data.EntityState.Modified;
+
+            return RedirectDialogToAction("AdminManage", "Admin", db.SaveChanges());
+        }
+        #endregion
+
+        #region 删除
+        public ActionResult DeleteInfo(int id)
+        {
+            var adminInfo = db.BS_Admin.FirstOrDefault(a => a.Id == id);
+
+            //删除操作
+            db.Entry(adminInfo).State = System.Data.EntityState.Deleted;
+           
+
+            return RedirectDialogToAction("AdminManage", "Admin", db.SaveChanges());
+        }
+        #endregion
+
+        #region 锁定账号
+        public ActionResult AdminLock(int id)
+        {
+            var adminInfo = db.BS_Admin.FirstOrDefault(a => a.Id == id);
+
+            //锁定操作
+            if (adminInfo.Lock == "1")
+                adminInfo.Lock = "0";
+            else
+                adminInfo.Lock = "1";
+            db.Entry(adminInfo).State = System.Data.EntityState.Modified;
+          
+            return RedirectDialogToAction("AdminManage", "Admin", db.SaveChanges());
+        }
+        #endregion
+
+        #region 密码重置
+        public ActionResult AdminUpdatePwd(int id)
+        {
+            var adminInfo = db.BS_Admin.FirstOrDefault(a => a.Id == id);
+
+            //密码重置
+            adminInfo.AdminPassword = "123456";
+
+            db.Entry(adminInfo).State = System.Data.EntityState.Modified;
+
+            return RedirectDialogToAction("AdminManage", "Admin", db.SaveChanges());
+        }
+        #endregion
+        #endregion
     }
 }

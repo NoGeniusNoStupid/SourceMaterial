@@ -21,6 +21,11 @@ namespace BeautySalonWebApp.Public
         {
            string result = name == null ? string.Empty : name.ToString();
            return result;
+           
         }
+
+
+
+       
     }
 }

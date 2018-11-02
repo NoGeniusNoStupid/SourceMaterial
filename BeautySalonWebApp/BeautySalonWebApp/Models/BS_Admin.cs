@@ -18,7 +18,8 @@ namespace BeautySalonWebApp.Models
         public string AdminName { get; set; }
         public string AdminPassword { get; set; }
         public string LoginCount { get; set; }
-        public DateTime LastTime { get; set; }
+        public System.DateTime LastTime { get; set; }
         public string Lock { get; set; }
+        public string Power { get; set; }
     }
 }

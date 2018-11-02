@@ -868,6 +868,8 @@
     <Content Include="Views\Admin\Bottom.cshtml" />
     <Content Include="Views\Admin\Top.cshtml" />
     <Content Include="Views\Admin\AdminManage.cshtml" />
+    <Content Include="Views\Admin\AddAdminInfo.cshtml" />
+    <Content Include="Views\Admin\EditInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

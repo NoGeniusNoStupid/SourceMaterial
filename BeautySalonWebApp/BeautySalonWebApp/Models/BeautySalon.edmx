@@ -13,8 +13,9 @@
           <Property Name="AdminName" Type="varchar" MaxLength="50" />
           <Property Name="AdminPassword" Type="varchar" MaxLength="20" />
           <Property Name="LoginCount" Type="varchar" MaxLength="20" />
-          <Property Name="LastTime" Type="datetime" />
+          <Property Name="LastTime" Type="datetime" Nullable="false" />
           <Property Name="Lock" Type="varchar" MaxLength="1" />
+          <Property Name="Power" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="BS_UserInfo">
           <Key>
@@ -29,7 +30,8 @@
           <Property Name="Email" Type="varchar" MaxLength="30" />
           <Property Name="Tel" Type="varchar" MaxLength="20" />
           <Property Name="Level" Type="varchar" MaxLength="2" />
-          <Property Name="regTime" Type="datetime" />
+          <Property Name="regTime" Type="datetime" Nullable="false" />
+          <Property Name="Lock" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityContainer Name="BeautySalonModelStoreContainer">
           <EntitySet Name="BS_Admin" EntityType="Self.BS_Admin" Schema="dbo" store:Type="Tables" />
@@ -52,7 +54,8 @@
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Tel" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Level" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
-          <Property Name="regTime" Type="DateTime" Precision="3" />
+          <Property Name="regTime" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="Lock" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="BeautySalonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BS_UserInfo" EntityType="Self.BS_UserInfo" />
@@ -66,8 +69,9 @@
           <Property Name="AdminName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AdminPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="LoginCount" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="LastTime" Type="DateTime" Precision="3" />
+          <Property Name="LastTime" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Lock" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Power" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -78,6 +82,7 @@
           <EntitySetMapping Name="BS_UserInfo">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_UserInfo">
               <MappingFragment StoreEntitySet="BS_UserInfo">
+                <ScalarProperty Name="Lock" ColumnName="Lock" />
                 <ScalarProperty Name="regTime" ColumnName="regTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -94,6 +99,7 @@
           <EntitySetMapping Name="BS_Admin">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_Admin">
               <MappingFragment StoreEntitySet="BS_Admin">
+                <ScalarProperty Name="Power" ColumnName="Power" />
                 <ScalarProperty Name="Lock" ColumnName="Lock" />
                 <ScalarProperty Name="LastTime" ColumnName="LastTime" />
                 <ScalarProperty Name="LoginCount" ColumnName="LoginCount" />
