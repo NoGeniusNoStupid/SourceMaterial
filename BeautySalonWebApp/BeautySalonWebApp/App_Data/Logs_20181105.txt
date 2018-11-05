@@ -1,0 +1,54 @@
+
+----------------------header--------------------------
+2018-11-05 13:27:13,885 [7] ERROR errorMsg - 为方法“Boolean Equals(System.String, System.String, System.StringComparison)”的调用提供的参数的数量不正确
+
+----------------------header--------------------------
+2018-11-05 13:30:22,300 [6] ERROR errorMsg - 为方法“Boolean Equals(System.String, System.String, System.StringComparison)”的调用提供的参数的数量不正确
+
+----------------------header--------------------------
+2018-11-05 15:12:03,668 [6] ERROR errorMsg - 未找到视图“Index”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Goods/Index.aspx
+~/Views/Goods/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Goods/Index.cshtml
+~/Views/Goods/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml
+
+----------------------header--------------------------
+2018-11-05 16:30:18,238 [6] ERROR errorMsg - 未找到视图“Index”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Goods/Index.aspx
+~/Views/Goods/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Goods/Index.cshtml
+~/Views/Goods/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml
+
+----------------------header--------------------------
+2018-11-05 16:42:00,224 [6] ERROR errorMsg - 未找到视图“Index”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Goods/Index.aspx
+~/Views/Goods/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Goods/Index.cshtml
+~/Views/Goods/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml
+
+----------------------header--------------------------
+2018-11-05 16:56:00,669 [6] ERROR errorMsg - 未找到视图“Index”或其母版视图，或没有视图引擎支持搜索的位置。搜索了以下位置: 
+~/Views/Goods/Index.aspx
+~/Views/Goods/Index.ascx
+~/Views/Shared/Index.aspx
+~/Views/Shared/Index.ascx
+~/Views/Goods/Index.cshtml
+~/Views/Goods/Index.vbhtml
+~/Views/Shared/Index.cshtml
+~/Views/Shared/Index.vbhtml
+
+----------------------header--------------------------
+2018-11-05 17:14:52,816 [6] ERROR errorMsg - 未将对象引用设置到对象的实例。
+2018-11-05 17:15:58,148 [6] ERROR errorMsg - 未将对象引用设置到对象的实例。

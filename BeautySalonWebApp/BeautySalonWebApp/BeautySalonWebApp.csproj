@@ -139,6 +139,7 @@
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
@@ -161,6 +162,9 @@
       <DependentUpon>BeautySalon.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\BS_Admin.cs">
+      <DependentUpon>BeautySalon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BS_Goods.cs">
       <DependentUpon>BeautySalon.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BS_UserInfo.cs">
@@ -238,9 +242,11 @@
     <Content Include="Content\admin\js\sdmenu.js" />
     <Content Include="Content\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\css\addPage.css" />
     <Content Include="Content\css\grid.css" />
     <Content Include="Content\css\ie.css" />
     <Content Include="Content\css\jquery.fancybox.css" />
+    <Content Include="Content\css\listPage.css" />
     <Content Include="Content\css\login.css" />
     <Content Include="Content\css\reset.css" />
     <Content Include="Content\css\style.css" />
@@ -870,9 +876,13 @@
     <Content Include="Views\Admin\AdminManage.cshtml" />
     <Content Include="Views\Admin\AddAdminInfo.cshtml" />
     <Content Include="Views\Admin\EditInfo.cshtml" />
+    <Content Include="Views\Goods\Create.cshtml" />
+    <Content Include="Views\Goods\Index.cshtml" />
+    <Content Include="Views\Goods\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="File\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

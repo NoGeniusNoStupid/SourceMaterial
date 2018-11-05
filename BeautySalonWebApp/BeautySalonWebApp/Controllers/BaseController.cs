@@ -44,6 +44,14 @@ namespace BeautySalonWebApp.Controllers
             return null;
         }
 
+
+        protected ActionResult RedirectDialogToAction(string msg)
+        {
+            string strTip = string.Format(@"<script languge='javascript'>alert('{0}');</script>", msg); ;
+            Response.Write(strTip);
+            return null;
+        }
+
         ///// <summary>
         ///// 执行控制器中的方法之前先执行该方法。
         ///// </summary>

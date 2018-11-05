@@ -1,0 +1,112 @@
+﻿@model BeautySalonWebApp.Models.BS_Goods
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>主要内容区main</title>
+    <link href="~/Content/Admin/css/css.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Admin/css/main.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/css/addPage.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/Content/Admin/images/main/favicon.ico" />
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript">
+        function addform() {
+            //验证
+            var myform = document.getElementById("addForm");
+            var goodsName = $("#GoodsName").val();
+            var price = $("#GoodsPrice").val();
+            var image = $("#GoodsPic").val();
+
+            if (goodsName == "") {
+                alert("请输入商品名称");
+                return false;
+            }
+            if (image == "") {
+                alert("请上传图片");
+                return false;
+            }
+            if (price == "") {
+                alert("请输入商品价格");
+                return false;
+            }
+            var ival = parseInt(price);//如果变量val是字符类型的数则转换为int类型 如果不是则ival为NaN
+            if (isNaN(ival)) {
+                alert(price + "不是数字");
+                return false;
+            }
+            $("#addForm").submit();
+        }
+    </script>
+</head>
+<body>
+    <!--main_top-->
+    <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
+        <tr>
+            <td width="99%" align="left" valign="top">您的位置：<a href="/Goods/Index">商品管理</a>&nbsp;&nbsp;>&nbsp;&nbsp;添加商品</td>
+        </tr>
+        <tr>
+            <td align="left" valign="top" id="addinfo">
+                <a href="/Goods/Index" target="mainFrame" onfocus="this.blur()" class="add">返回上一级</a>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">
+                <form id="addForm" method="post" action="/Goods/Edit" enctype="multipart/form-data">
+                    <input type="hidden" value="@Model.Id"/>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">名称：</td>
+                            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                                <input type="text" id="GoodsName" name="GoodsName" value="@Model.GoodsName" class="text-word">
+                            </td>
+                        </tr>
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">类别：</td>
+                            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                                <select name="GoodsType" id="GoodsType">
+                                    <option value="护肤品" selected="selected">&nbsp;&nbsp;护肤品</option>
+                                    <option value="保健品">&nbsp;&nbsp;保健品</option>
+                                    <option value="其他">&nbsp;&nbsp;其他</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">图片：</td>
+                            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                                <input type="file" id="GoodsPic" name="GoodsPic" value="@Model.GoodsPic">
+                            </td>
+                        </tr>
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">价格：</td>
+                            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                                <input type="text" id="GoodsPrice" name="GoodsPrice" value="@Model.GoodsPrice" class="text-word">元 *请输入数字
+                            </td>
+                        </tr>
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">详细介绍：</td>
+                            <td align="left" height="200px" valign="middle" class="borderright borderbottom main-for">
+                                <textarea rows="10" cols="60" name="Detail" class="text">@Model.Detail</textarea>
+                            </td>
+                        </tr>
+
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">&nbsp;</td>
+                            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                                <input name="" type="button" value="提交" onclick="addform()" class="text-but">
+                                <input name="" type="reset" value="重置" class="text-but">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
+

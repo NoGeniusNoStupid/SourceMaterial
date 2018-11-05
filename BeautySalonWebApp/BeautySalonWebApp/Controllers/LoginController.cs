@@ -11,7 +11,7 @@ namespace BeautySalonWebApp.Controllers
     /// <summary>
     /// 表示登陆的控制器
     /// </summary>
-    public class LoginController : Controller
+    public class LoginController : BaseController
     {
         //
         // GET: /Login/
@@ -39,6 +39,7 @@ namespace BeautySalonWebApp.Controllers
             {
                 return Content("验证码错误!!");
             }
+            //查询
             BS_UserInfo userInfo = db.BS_UserInfo.FirstOrDefault(a => a.UserName == UserName && a.Password == Password);
             if (userInfo==null)
                 return Content("用户名或密码输入错误");
@@ -68,6 +69,31 @@ namespace BeautySalonWebApp.Controllers
         public ActionResult AdminLogin()
         {
             return View();
+        }
+        //后台登陆功能实现
+        [HttpPost]
+        public ActionResult AdminLogin(string username, string pwd)
+        {
+            if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(pwd))
+                return RedirectToAction("AdminLogin", "Login");
+            //查询
+            var adminInfo = db.BS_Admin.FirstOrDefault(a => a.AdminName == username && a.AdminPassword == pwd);
+            if (adminInfo == null)
+                return RedirectDialogToAction("AdminLogin", "Login", 1, "用户名或密码输入错误");
+
+            Session["AdminName"] = adminInfo.AdminName;//用户名
+            Session["AdminId"] = adminInfo.Id;//用户id
+            return RedirectToAction("Index","Admin");
+        }
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AdminOut()
+        {
+            Session["AdminName"] = null;//用户名
+            Session["AdminId"] = null;//用户id
+            return RedirectToAction("AdminLogin", "Login");
         }
         #endregion 
     }
