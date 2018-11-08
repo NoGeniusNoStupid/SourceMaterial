@@ -2,6 +2,7 @@
 using BeautySalonWebApp.Public;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -62,6 +63,7 @@ namespace BeautySalonWebApp.Controllers
             try
             {
                 goodsIndo.AddTime = DateTime.Now;
+                goodsIndo.GoodsType = goodsIndo.GoodsType.Trim();
                 //上传图片
                 if (Request.Files.Count > 0)
                 {
@@ -93,14 +95,22 @@ namespace BeautySalonWebApp.Controllers
         // POST: /Goods/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(BS_Goods goodsIndo)
+        public ActionResult Edit(BS_Goods goodsIndo, string oldPic)
         {
             try
             {
-             
-                // TODO: Add update logic here
+                //图片处理
+                if (Request.Files.Count > 0)
+                {
+                    goodsIndo.GoodsPic = SaveImage(Request.Files["GoodsPic"]);
+                }
+                if (string.IsNullOrEmpty(goodsIndo.GoodsPic))
+                    goodsIndo.GoodsPic = oldPic;
+              
+                db.Entry(goodsIndo).State = EntityState.Modified;
 
-                return RedirectToAction("Index");
+                // TODO: Add update logic here
+                return RedirectDialogToAction("Index", "Goods", db.SaveChanges());
             }
             catch
             {

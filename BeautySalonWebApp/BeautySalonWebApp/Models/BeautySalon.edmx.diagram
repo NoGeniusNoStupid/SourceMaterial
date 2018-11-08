@@ -8,6 +8,12 @@
         <EntityTypeShape EntityType="BeautySalonModel.BS_UserInfo" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="BeautySalonModel.BS_Admin" Width="1.5" PointX="3.375" PointY="0.75" />
         <EntityTypeShape EntityType="BeautySalonModel.BS_Goods" Width="1.5" PointX="6.75" PointY="1" />
+        <EntityTypeShape EntityType="BeautySalonModel.BS_Appointment" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.BS_Contact" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.BS_GoodsCar" Width="1.5" PointX="4.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.BS_Order" Width="1.5" PointX="6.75" PointY="4.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.BS_OrderDetail" Width="1.5" PointX="4.75" PointY="7.75" />
+        <EntityTypeShape EntityType="BeautySalonModel.BS_Service" Width="1.5" PointX="6.75" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

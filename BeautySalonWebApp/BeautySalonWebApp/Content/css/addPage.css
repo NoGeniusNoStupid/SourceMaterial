@@ -39,7 +39,7 @@
                 height: 24px;
                 line-height: 24px;
                 width: 55px;
-                background: url(../Content/Admin/images/main/list_input.jpg) no-repeat left top;
+                background: url(/Content/Admin/images/main/list_input.jpg) no-repeat left top;
                 border: none;
                 cursor: pointer;
                 font-family: "Microsoft YaHei","Tahoma","Arial",'宋体';
@@ -50,7 +50,7 @@
             }
 
             #search a.add {
-                background: url(../Content/Admin/images/main/add.jpg) no-repeat 0px 6px;
+                background: url(/Content/Admin/images/main/add.jpg) no-repeat 0px 6px;
                 padding: 0 10px 0 26px;
                 height: 40px;
                 line-height: 40px;
@@ -72,7 +72,7 @@
 
             #main-tab th {
                 font-size: 12px;
-                background: url(../Content/Admin/images/main/list_bg.jpg) repeat-x;
+                background: url(/Content/Admin/images/main/list_bg.jpg) repeat-x;
                 height: 32px;
                 line-height: 32px;
             }

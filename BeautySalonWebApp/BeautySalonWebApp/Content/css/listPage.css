@@ -51,7 +51,7 @@
             }
 
             #search a.add {
-                background: url(../Content/Admin/images/main/add.jpg) no-repeat -3px 7px #548fc9;
+                background: url(/Content/Admin/images/main/add.jpg) no-repeat -3px 7px #548fc9;
                 padding: 0 10px 0 26px;
                 height: 40px;
                 line-height: 40px;
@@ -74,7 +74,7 @@
 
             #main-tab th {
                 font-size: 12px;
-                background: url(../Content/Admin/images/main/list_bg.jpg) repeat-x;
+                background: url(/Content/Admin/images/main/list_bg.jpg) repeat-x;
                 height: 32px;
                 line-height: 32px;
             }

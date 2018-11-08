@@ -12,19 +12,15 @@ namespace BeautySalonWebApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class BS_UserInfo
+    public partial class BS_Contact
     {
         public int Id { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string RealName { get; set; }
-        public string Sex { get; set; }
-        public string Age { get; set; }
+        public string Name { get; set; }
         public string Email { get; set; }
-        public string Tel { get; set; }
-        public string Level { get; set; }
-        public System.DateTime regTime { get; set; }
-        public string Lock { get; set; }
-        public string Money { get; set; }
+        public string Phone { get; set; }
+        public string Message { get; set; }
+        public string Reply { get; set; }
+        public Nullable<System.DateTime> AddTime { get; set; }
+        public Nullable<System.DateTime> ReplyTime { get; set; }
     }
 }

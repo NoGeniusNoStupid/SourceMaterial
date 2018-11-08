@@ -17,6 +17,31 @@
           <Property Name="Lock" Type="varchar" MaxLength="1" />
           <Property Name="Power" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="BS_Appointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ServiceId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Time" Type="datetime" />
+          <Property Name="TimeSlot" Type="varchar" MaxLength="50" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="Tel" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BS_Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+          <Property Name="Message" Type="varchar" MaxLength="50" />
+          <Property Name="Reply" Type="varchar" MaxLength="50" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="ReplyTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="BS_Goods">
           <Key>
             <PropertyRef Name="Id" />
@@ -28,6 +53,45 @@
           <Property Name="GoodsPrice" Type="varchar" MaxLength="50" />
           <Property Name="Detail" Type="varchar" MaxLength="250" />
           <Property Name="AddTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BS_GoodsCar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoodsId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="SeqNo" Type="int" />
+          <Property Name="AddTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BS_Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="PayType" Type="varchar" MaxLength="50" />
+          <Property Name="Money" Type="varchar" MaxLength="50" />
+          <Property Name="OperTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="BS_OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoodsId" Type="int" />
+          <Property Name="OrderId" Type="int" />
+        </EntityType>
+        <EntityType Name="BS_Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="Price" Type="varchar" MaxLength="50" />
+          <Property Name="Detail" Type="varchar" MaxLength="50" />
+          <Property Name="ServerPic" Type="varchar" MaxLength="50" />
+          <Property Name="AddTime" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="BS_UserInfo">
           <Key>
@@ -44,10 +108,17 @@
           <Property Name="Level" Type="varchar" MaxLength="2" />
           <Property Name="regTime" Type="datetime" Nullable="false" />
           <Property Name="Lock" Type="varchar" MaxLength="1" />
+          <Property Name="Money" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityContainer Name="BeautySalonModelStoreContainer">
           <EntitySet Name="BS_Admin" EntityType="Self.BS_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BS_Appointment" EntityType="Self.BS_Appointment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BS_Contact" EntityType="Self.BS_Contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BS_Goods" EntityType="Self.BS_Goods" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BS_GoodsCar" EntityType="Self.BS_GoodsCar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BS_Order" EntityType="Self.BS_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BS_OrderDetail" EntityType="Self.BS_OrderDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BS_Service" EntityType="Self.BS_Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BS_UserInfo" EntityType="Self.BS_UserInfo" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -69,11 +140,18 @@
           <Property Name="Level" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Name="regTime" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Lock" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="Money" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityContainer Name="BeautySalonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BS_UserInfo" EntityType="Self.BS_UserInfo" />
           <EntitySet Name="BS_Admin" EntityType="BeautySalonModel.BS_Admin" />
           <EntitySet Name="BS_Goods" EntityType="BeautySalonModel.BS_Goods" />
+          <EntitySet Name="BS_Appointment" EntityType="BeautySalonModel.BS_Appointment" />
+          <EntitySet Name="BS_Contact" EntityType="BeautySalonModel.BS_Contact" />
+          <EntitySet Name="BS_GoodsCar" EntityType="BeautySalonModel.BS_GoodsCar" />
+          <EntitySet Name="BS_Order" EntityType="BeautySalonModel.BS_Order" />
+          <EntitySet Name="BS_OrderDetail" EntityType="BeautySalonModel.BS_OrderDetail" />
+          <EntitySet Name="BS_Service" EntityType="BeautySalonModel.BS_Service" />
         </EntityContainer>
         <EntityType Name="BS_Admin">
           <Key>
@@ -99,6 +177,70 @@
           <Property Name="Detail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="BS_Appointment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ServiceId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Time" Type="DateTime" Precision="3" />
+          <Property Name="TimeSlot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="BS_Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Reply" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="ReplyTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BS_GoodsCar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoodsId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="SeqNo" Type="Int32" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BS_Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Money" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OperTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="BS_OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoodsId" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="BS_Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServerPic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -108,6 +250,7 @@
           <EntitySetMapping Name="BS_UserInfo">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_UserInfo">
               <MappingFragment StoreEntitySet="BS_UserInfo">
+                <ScalarProperty Name="Money" ColumnName="Money" />
                 <ScalarProperty Name="Lock" ColumnName="Lock" />
                 <ScalarProperty Name="regTime" ColumnName="regTime" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
@@ -144,6 +287,76 @@
                 <ScalarProperty Name="GoodsPic" ColumnName="GoodsPic" />
                 <ScalarProperty Name="GoodsType" ColumnName="GoodsType" />
                 <ScalarProperty Name="GoodsName" ColumnName="GoodsName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BS_Appointment">
+            <EntityTypeMapping TypeName="BeautySalonModel.BS_Appointment">
+              <MappingFragment StoreEntitySet="BS_Appointment">
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="TimeSlot" ColumnName="TimeSlot" />
+                <ScalarProperty Name="Time" ColumnName="Time" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BS_Contact">
+            <EntityTypeMapping TypeName="BeautySalonModel.BS_Contact">
+              <MappingFragment StoreEntitySet="BS_Contact">
+                <ScalarProperty Name="ReplyTime" ColumnName="ReplyTime" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="Reply" ColumnName="Reply" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BS_GoodsCar">
+            <EntityTypeMapping TypeName="BeautySalonModel.BS_GoodsCar">
+              <MappingFragment StoreEntitySet="BS_GoodsCar">
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="GoodsId" ColumnName="GoodsId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BS_Order">
+            <EntityTypeMapping TypeName="BeautySalonModel.BS_Order">
+              <MappingFragment StoreEntitySet="BS_Order">
+                <ScalarProperty Name="OperTime" ColumnName="OperTime" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BS_OrderDetail">
+            <EntityTypeMapping TypeName="BeautySalonModel.BS_OrderDetail">
+              <MappingFragment StoreEntitySet="BS_OrderDetail">
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+                <ScalarProperty Name="GoodsId" ColumnName="GoodsId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BS_Service">
+            <EntityTypeMapping TypeName="BeautySalonModel.BS_Service">
+              <MappingFragment StoreEntitySet="BS_Service">
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+                <ScalarProperty Name="ServerPic" ColumnName="ServerPic" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

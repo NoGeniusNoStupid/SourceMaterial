@@ -138,11 +138,17 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminBaseController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\FrontBaseController.cs" />
+    <Compile Include="Controllers\GoodsCarController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\RegisterController.cs" />
+    <Compile Include="Controllers\ServiceController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -164,7 +170,25 @@
     <Compile Include="Models\BS_Admin.cs">
       <DependentUpon>BeautySalon.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BS_Appointment.cs">
+      <DependentUpon>BeautySalon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BS_Contact.cs">
+      <DependentUpon>BeautySalon.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\BS_Goods.cs">
+      <DependentUpon>BeautySalon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BS_GoodsCar.cs">
+      <DependentUpon>BeautySalon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BS_Order.cs">
+      <DependentUpon>BeautySalon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BS_OrderDetail.cs">
+      <DependentUpon>BeautySalon.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\BS_Service.cs">
       <DependentUpon>BeautySalon.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\BS_UserInfo.cs">
@@ -879,6 +903,9 @@
     <Content Include="Views\Goods\Create.cshtml" />
     <Content Include="Views\Goods\Index.cshtml" />
     <Content Include="Views\Goods\Edit.cshtml" />
+    <Content Include="Views\Service\Index.cshtml" />
+    <Content Include="Views\Service\Create.cshtml" />
+    <Content Include="Views\Service\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

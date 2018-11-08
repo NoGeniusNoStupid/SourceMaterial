@@ -28,5 +28,11 @@ namespace BeautySalonWebApp.Models
         public DbSet<BS_UserInfo> BS_UserInfo { get; set; }
         public DbSet<BS_Admin> BS_Admin { get; set; }
         public DbSet<BS_Goods> BS_Goods { get; set; }
+        public DbSet<BS_Appointment> BS_Appointment { get; set; }
+        public DbSet<BS_Contact> BS_Contact { get; set; }
+        public DbSet<BS_GoodsCar> BS_GoodsCar { get; set; }
+        public DbSet<BS_Order> BS_Order { get; set; }
+        public DbSet<BS_OrderDetail> BS_OrderDetail { get; set; }
+        public DbSet<BS_Service> BS_Service { get; set; }
     }
 }
