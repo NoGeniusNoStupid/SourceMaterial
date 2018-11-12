@@ -19,6 +19,6 @@ namespace BeautySalonWebApp.Models
         public string Price { get; set; }
         public string Detail { get; set; }
         public string ServerPic { get; set; }
-        public string AddTime { get; set; }
+        public Nullable<System.DateTime> AddTime { get; set; }
     }
 }

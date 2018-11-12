@@ -71,10 +71,8 @@ namespace BeautySalonWebApp.Controllers
                 }
                 //保存对象
                 db.BS_Goods.Add(goodsIndo);
-                db.SaveChanges();
-
                 //跳转到管理界面
-                return RedirectToAction("Index");
+                return RedirectDialogToAction("Index", "Goods", db.SaveChanges());
             }
             catch
             {
