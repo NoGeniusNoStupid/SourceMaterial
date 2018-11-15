@@ -181,6 +181,7 @@ namespace BeautySalonWebApp.Controllers
             return RedirectDialogToAction("AdminManage", "Admin", db.SaveChanges());
         }
         #endregion
+
         #endregion
     }
 }

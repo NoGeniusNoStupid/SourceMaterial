@@ -14,10 +14,8 @@ namespace BeautySalonWebApp.Controllers
     public class GoodsController : BaseController
     {
         BeautySalonEntities db = (BeautySalonEntities)DBContextFactory.CreateDbContext();
-
         //
         // GET: /Goods/
-
         public ActionResult Index(string search)
         {
             //分页设置
@@ -35,14 +33,13 @@ namespace BeautySalonWebApp.Controllers
             }
             int listCount = db.BS_Goods.Where(a => true).Count();
             //生成导航条
-            string strBar = PageBarHelper.GetPagaBar(pageIndex, listCount, pageSize);
+            string strBar = PageBarHelper.GetGoodsBar(pageIndex, listCount, pageSize);
 
             ViewData["List"] = mlist;
             ViewData["Bar"] = strBar;
 
             return View();
         }
-
         /// <summary>
         /// 添加商品页面展示
         /// </summary>

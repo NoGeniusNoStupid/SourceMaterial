@@ -95,5 +95,37 @@ namespace BeautySalonWebApp.Public
           
            return sb.ToString();
        }
+
+       public static string GetGoodsBar(int pageIndex, int listCount, int pageSize = 10)
+       {
+           //空记录
+           if (listCount == 0)
+           {
+               return string.Empty;
+           }
+           //求页面数
+           int pageCount = Convert.ToInt32(Math.Ceiling(listCount * 1.0 / pageSize));
+
+           if (pageCount == 1)
+           {
+               return string.Empty;
+           }
+           StringBuilder sb = new StringBuilder();
+           //sb.AppendFormat("共 {0} 条数据   当前 {1}/{2} 页 &nbsp;&nbsp;&nbsp;&nbsp;", listCount, pageIndex, pageCount);
+           //首页
+           if (pageIndex > 1)
+           {
+               //sb.AppendFormat("<a href='?pageIndex={0}' target='mainFrame' onfocus='this.blur()' >首页</a>&nbsp;&nbsp;", 1);
+               sb.AppendFormat("<a href='?pageIndex={0}' target='mainFrame' onfocus='this.blur()' >上一页</a>&nbsp;&nbsp;", pageIndex - 1);
+           }
+           //下一页
+           if (pageIndex < pageCount)
+           {
+               sb.AppendFormat("<a href='?pageIndex={0}' target='mainFrame' onfocus='this.blur()'>下一页</a>&nbsp;&nbsp;&nbsp;&nbsp;", pageIndex + 1);
+               sb.AppendFormat("<a href='?pageIndex={0}' target='mainFrame' onfocus='this.blur()'>尾页</a>&nbsp;&nbsp;&nbsp;&nbsp;", pageCount);
+           }
+
+           return sb.ToString();
+       }
     }
 }

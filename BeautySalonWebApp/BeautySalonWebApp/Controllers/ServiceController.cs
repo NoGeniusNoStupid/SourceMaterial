@@ -1,4 +1,5 @@
 ﻿using BeautySalonWebApp.Models;
+using BeautySalonWebApp.Public;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -15,8 +16,28 @@ namespace BeautySalonWebApp.Controllers
         //
         // GET: /Service/
 
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
+            //分页设置
+            int pageIndex = Request.QueryString["pageIndex"] != null ? int.Parse(Request.QueryString["pageIndex"]) : 1;
+            int pageSize = 10;//页面记录数
+            List<BS_Service> mlist = new List<BS_Service>();
+            //查询记录
+            if (string.IsNullOrEmpty(search))
+            {
+                mlist = db.BS_Service.Where(a => true).OrderByDescending(a => a.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList<BS_Service>();
+            }
+            else
+            {
+                mlist = db.BS_Service.Where(a => a.Title.Contains(search)).OrderByDescending(a => a.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList<BS_Service>();
+            }
+            int listCount = db.BS_Service.Where(a => true).Count();
+            //生成导航条
+            string strBar = PageBarHelper.GetPagaBar(pageIndex, listCount, pageSize);
+
+            ViewData["List"] = mlist;
+            ViewData["Bar"] = strBar;
+
             return View();
         }
 
@@ -104,15 +125,6 @@ namespace BeautySalonWebApp.Controllers
 
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        //
-        // POST: /Service/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
             try
             {
                 var Info = db.BS_Service.FirstOrDefault(a => a.Id == id);
@@ -127,8 +139,6 @@ namespace BeautySalonWebApp.Controllers
                 return View();
             }
         }
-
-
         public string SaveImage(HttpPostedFileBase postFile)
         {
             string result = "";

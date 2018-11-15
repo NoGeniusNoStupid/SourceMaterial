@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BeautySalonWebApp.Models.BS_Service
+@{
     Layout = null;
 }
 
@@ -6,12 +7,117 @@
 
 <html>
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Edit</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <title>主要内容区main</title>
+    <link href="~/Content/Admin/css/css.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Admin/css/main.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/css/addPage.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="~/Content/Admin/images/main/favicon.ico" />
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript">
+        function addform() {
+            //验证
+            var myform = document.getElementById("addForm");
+            var ServiceName = $("#Title").val();
+            var price = $("#Price").val();
+            var image = $("#ServicePic").val();
+
+            if (ServiceName == "") {
+                alert("请输入服务名称");
+                return false;
+            }
+            if (price == "") {
+                alert("请输入服务价格");
+                return false;
+            }
+            var ival = parseInt(price);//如果变量val是字符类型的数则转换为int类型 如果不是则ival为NaN
+            if (isNaN(ival)) {
+                alert(price + "不是数字");
+                return false;
+            }
+            $("#addForm").submit();
+        }
+
+        function startRead() {
+            var fileDom = document.getElementById("ServicePic");
+            var img = document.getElementById("imgContent");
+            if (fileDom && img) {
+                flieHandle(fileDom, img)
+            }
+        }
+        function flieHandle(fileDom, img) {
+            //读取计算机文件
+            var file = fileDom.files[0];
+            var reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadstart = function () {
+                console.log('文件上传处理......');
+            };
+            //操作完成
+            reader.onload = function (e) {
+                //flie 对象的属性
+                img.setAttribute('src', reader.result); 
+            };
+        }
+    </script>
 </head>
 <body>
-    <div>
-        
-    </div>
+    <!--main_top-->
+    <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
+        <tr>
+            <td width="99%" align="left" valign="top">您的位置：<a href="/Service/Index">服务管理</a>&nbsp;&nbsp;>&nbsp;&nbsp;添加服务</td>
+        </tr>
+        <tr>
+            <td align="left" valign="top" id="addinfo">
+                <a href="/Service/Index" target="mainFrame" onfocus="this.blur()" class="add">返回上一级</a>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">
+                <form id="addForm" method="post" action="/Service/Edit" enctype="multipart/form-data">
+                    <input name="Id" type="hidden" value="@Model.Id" />
+                    <input name="AddTime" type="hidden" value="@Model.AddTime" />
+                    <input name="oldPic" type="hidden" value="@Model.ServerPic" />
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">标题：</td>
+                            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                                <input type="text" id="Title" name="Title" value="@Model.Title" class="text-word">
+                            </td>
+                        </tr>
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">图片：</td>
+                            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                                <img id="imgContent" width="120" height="120" src="@Model.ServerPic" />
+                                <input type="file" id="ServicePic" name="ServicePic" onchange="startRead()">
+                            </td>
+                        </tr>
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">价格：</td>
+                            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                                <input type="text" id="Price" name="Price" value="@Model.Price" class="text-word">元/次 *请输入数字
+                            </td>
+                        </tr>
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">详细介绍：</td>
+                            <td align="left" height="200px" valign="middle" class="borderright borderbottom main-for">
+                                <textarea rows="10" cols="60" name="Detail" class="text">@Model.Detail</textarea>
+                            </td>
+                        </tr>
+
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">&nbsp;</td>
+                            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                                <input name="" type="button" value="提交" onclick="addform()" class="text-but">
+                                <input name="" type="reset" value="重置" class="text-but">
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
+

@@ -67,18 +67,18 @@
                                @power
                            </td>
                            <td align="center" valign="middle" class="borderbottom">
-                               <a href="~/Admin/AdminUpdatePwd/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">密码重置</a>
+                               <a href="/Admin/AdminUpdatePwd/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">密码重置</a>
                                <span class="gray">&nbsp;|&nbsp;</span>
-                               <a href="~/Admin/AdminLock/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">
+                               <a href="/Admin/AdminLock/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">
                                    @if (item.Lock == "0")
                                    { @Html.Raw("锁定")}
                                    else
                                    { @Html.Raw("解锁")}
                                </a>
                                <span class="gray">&nbsp;|&nbsp;</span>
-                               <a href="~/Admin/EditInfo/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">编辑</a>
+                               <a href="/Admin/EditInfo/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">编辑</a>
                                <span class="gray">&nbsp;|&nbsp;</span>
-                               <a href="~/Admin/DeleteInfo/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
+                               <a href="/Admin/DeleteInfo/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
                                
                            </td>
                            </tr>            

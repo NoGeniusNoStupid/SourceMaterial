@@ -41,7 +41,7 @@ namespace BeautySalonWebApp
                         if (ex != null)
                         {
                             ILog logger = LogManager.GetLogger("errorMsg");
-                            logger.Error(ex.Message);
+                            logger.Error(ex);
                         }
                         else
                         {

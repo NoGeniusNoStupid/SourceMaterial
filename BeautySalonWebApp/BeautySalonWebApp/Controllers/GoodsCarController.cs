@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeautySalonWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,8 +7,9 @@ using System.Web.Mvc;
 
 namespace BeautySalonWebApp.Controllers
 {
-    public class GoodsCarController : Controller
+    public class GoodsCarController : FrontBaseController
     {
+        BeautySalonEntities db = (BeautySalonEntities)DBContextFactory.CreateDbContext();
         //
         // GET: /GoodsCar/
 
@@ -16,24 +18,21 @@ namespace BeautySalonWebApp.Controllers
             return View();
         }
 
-        //
-        // GET: /GoodsCar/Details/5
-
         public ActionResult Details(int id)
         {
+
+
             return View();
         }
-
-        //
-        // GET: /GoodsCar/Create
-
+       
+        //加入购物车
         public ActionResult Create()
         {
-            return View();
-        }
+           
+            //提示
 
-        //
-        // POST: /GoodsCar/Create
+            return Content("ok");
+        }
 
         [HttpPost]
         public ActionResult Create(FormCollection collection)
@@ -50,16 +49,10 @@ namespace BeautySalonWebApp.Controllers
             }
         }
 
-        //
-        // GET: /GoodsCar/Edit/5
-
         public ActionResult Edit(int id)
         {
             return View();
         }
-
-        //
-        // POST: /GoodsCar/Edit/5
 
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
@@ -76,16 +69,10 @@ namespace BeautySalonWebApp.Controllers
             }
         }
 
-        //
-        // GET: /GoodsCar/Delete/5
-
         public ActionResult Delete(int id)
         {
             return View();
         }
-
-        //
-        // POST: /GoodsCar/Delete/5
 
         [HttpPost]
         public ActionResult Delete(int id, FormCollection collection)

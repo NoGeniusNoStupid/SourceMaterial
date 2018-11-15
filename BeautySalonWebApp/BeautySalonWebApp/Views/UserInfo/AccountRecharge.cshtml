@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BeautySalonWebApp.Models.BS_UserInfo
+@{
     Layout = null;
 }
 
@@ -17,26 +18,15 @@
     <script type="text/javascript">
         function addform() {
             //验证
-            var myform = document.getElementById("addForm");
-            var title = $("#Title").val();
-            var price = $("#Price").val();
-            var image = $("#ServicePic").val();
-
-            if (title == "") {
-                alert("请输入标题内容");
+            var money = $("#money").val();
+           
+            if (money == "") {
+                alert("请输入价格");
                 return false;
             }
-            if (image == "") {
-                alert("请上传图片");
-                return false;
-            }
-            if (price == "") {
-                alert("请输入服务价格");
-                return false;
-            }
-            var ival = parseInt(price);//如果变量val是字符类型的数则转换为int类型 如果不是则ival为NaN
+            var ival = parseInt(money);//如果变量val是字符类型的数则转换为int类型 如果不是则ival为NaN
             if (isNaN(ival)) {
-                alert(price + "不是数字");
+                alert(money + "不是数字");
                 return false;
             }
             $("#addForm").submit();
@@ -47,39 +37,34 @@
     <!--main_top-->
     <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
         <tr>
-            <td width="99%" align="left" valign="top">您的位置：<a href="/Service/Index">服务管理</a>&nbsp;&nbsp;>&nbsp;&nbsp;添加服务</td>
+            <td width="99%" align="left" valign="top">您的位置：<a href="/UserInfo/Index">会员管理</a>&nbsp;&nbsp;>&nbsp;&nbsp;在线充值</td>
         </tr>
         <tr>
             <td align="left" valign="top" id="addinfo">
-                <a href="/Service/Index" target="mainFrame" onfocus="this.blur()" class="add">返回上一级</a>
+                <a href="/UserInfo/Index" target="mainFrame" onfocus="this.blur()" class="add">返回上一级</a>
             </td>
         </tr>
         <tr>
             <td align="left" valign="top">
-                <form id="addForm" method="post" action="/Service/Create" enctype="multipart/form-data">
+                <form id="addForm" method="post" action="/UserInfo/AccountRecharge" enctype="multipart/form-data">
+                    <input name="Id" type="hidden" value="@Model.Id" />
                     <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
                         <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
-                            <td align="right" valign="middle" class="borderright borderbottom bggray">标题：</td>
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">用户名：</td>
                             <td align="left" valign="middle" class="borderright borderbottom main-for">
-                                <input type="text" id="Title" name="Title" class="text-word">
+                                <input type="text" readonly value="@Model.UserName" class="text-word">
                             </td>
                         </tr>
                         <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
-                            <td align="right" valign="middle" class="borderright borderbottom bggray">价格：</td>
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">姓名：</td>
                             <td align="left" valign="middle" class="borderright borderbottom main-for">
-                                <input type="text" id="Price" name="Price" class="text-word">元/次
+                                <input type="text" readonly value="@Model.RealName" class="text-word">
                             </td>
                         </tr>
                         <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
-                            <td align="right" valign="middle" class="borderright borderbottom bggray">图片：</td>
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">充值：</td>
                             <td align="left" valign="middle" class="borderright borderbottom main-for">
-                                <input type="file" id="ServicePic" name="ServicePic">
-                            </td>
-                        </tr>
-                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
-                            <td align="right" valign="middle" class="borderright borderbottom bggray">详细介绍：</td>
-                            <td align="left" height="200px" valign="middle" class="borderright borderbottom main-for">
-                                <textarea rows="10" cols="60" name="Detail" class="text"></textarea>
+                                <input type="text" id="money" name="money" value="" class="text-word">元  *请输入数字
                             </td>
                         </tr>
                         <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">

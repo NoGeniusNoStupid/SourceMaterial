@@ -7,6 +7,18 @@
 
 <script src="~/Content/js/jquery.elastislide.js"></script>
 <script src="~/Content/js/jquery.fancybox.pack.js"></script>
+    <style>
+        .menu a {
+            color: #b3adad;
+            font-size: 18px;
+            line-height: 20px;
+            display: block;
+            position: relative;
+            text-decoration: none !important;
+            padding: 7px 12px 9px;
+            font-family: 'Noto Sans', sans-serif;
+        }
+    </style>
 <script>
     $(document).ready(function () {
         //  Initialize Backgound Stretcher
@@ -25,41 +37,64 @@
         function () { $(this).find("img").stop().animate({ opacity: 1 }, "normal") })
     })
 
+    function submit(id) {
+        var json = { gid: id };
+        $.post("/Handel/GoodsCarHandler.ashx", json, function (data) {
+            if (data == "ok")
+                alert("添加成功");
+            else
+                alert(data);
+        })
+    }
 </script>
     }
 
 <div class="main-block">
     <div class="main">
-        <h3>Our Gallery</h3>
+        <h3>我们的商品</h3>
 
         <div id="carousel" class="es-carousel-wrapper ">
+
             <div class="es-carousel">
+               
                 <ul>
-                   
-                    <li>
-                        <figure class="img-rounded"><a class="view magnifier" data-fancybox-group="gallery" href="~/Content/images/image-blank.png" title=""><img src="~/Content/images/page4-img1.jpg" alt="" /><span></span></a> </figure>
-                        <figure class="img-rounded"><a class="view magnifier" data-fancybox-group="gallery" href="~/Content/images/image-blank.png" title=""><img src="~/Content/images/page4-img4.jpg" alt="" /><span></span></a></figure>
-                    </li>
-
-                    <li>
-                        <figure class="img-rounded"><a class="view magnifier" data-fancybox-group="gallery" href="~/Content/images/image-blank.png" title=""><img src="~/Content/images/page4-img2.jpg" alt="" /><span></span></a> </figure>
-                        <figure class="img-rounded"><a class="view magnifier" data-fancybox-group="gallery" href="~/Content/images/image-blank.png" title=""><img src="~/Content/images/page4-img5.jpg" alt="" /><span></span></a> </figure>
-                    </li>
-
-                    <li>
-                        <figure class="img-rounded"><a class="view magnifier" data-fancybox-group="gallery" href="~/Content/images/image-blank.png" title=""><img src="~/Content/images/page4-img3.jpg" alt="" /><span></span></a> </figure>
-                        <figure class="img-rounded"><a class="view magnifier" data-fancybox-group="gallery" href="~/Content/images/image-blank.png" title=""><img src="~/Content/images/page4-img6.jpg" alt="" /><span></span></a> </figure>
-                    </li>
-                    <li>
-                        <figure class="img-rounded"><a class="view magnifier" data-fancybox-group="gallery" href="~/Content/images/image-blank.png" title=""><img src="~/Content/images/page4-img1.jpg" alt="" /><span></span></a> </figure>
-                        <figure class="img-rounded"><a class="view magnifier" data-fancybox-group="gallery" href="~/Content/images/image-blank.png" title=""><img src="~/Content/images/page4-img4.jpg" alt="" /><span></span> </a></figure>
-                    </li>
-
-                    <li>
-                        <figure class="img-rounded"><a class="view magnifier" data-fancybox-group="gallery" href="~/Content/images/image-blank.png" title=""><img src="~/Content/images/page4-img2.jpg" alt="" /><span></span></a> </figure>
-                        <figure class="img-rounded"><a class="view magnifier" data-fancybox-group="gallery" href="~/Content/images/image-blank.png" title=""><img src="~/Content/images/page4-img5.jpg" alt="" /><span></span></a> </figure>
-                    </li>
+                   @{
+                     List<BeautySalonWebApp.Models.BS_Goods> mlist = (List<BeautySalonWebApp.Models.BS_Goods>)ViewData["List"];
+                     for (int i = 0; i < mlist.Count; i++)
+                     {
+                         <li>
+                         <figure class="img-rounded">
+                             <a class="view magnifier" data-fancybox-group="gallery" href="/Home/GoodsDetails/@mlist[i].Id" title="">
+                                 <img src="@mlist[i].GoodsPic" width="300" height="190" alt="" />
+                             </a> 
+                         </figure>
+                             <span style="float: left; margin-top: -10px">价格：@mlist[i].GoodsPrice 元</span>
+                             <span class="menu" style="float: right;margin-top:-20px">
+                                 <a href="" onclick="submit(@mlist[i].Id)">加入购物车</a>   
+                             </span>
+                             <br />
+                             @{
+                         if (i < mlist.Count-1)
+                         { 
+                             i = i + 1; 
+                             <figure class="img-rounded">
+                                 <a class="view magnifier" data-fancybox-group="gallery" href="/GoodsCar/GoodsDetails/@mlist[i].Id" title="">
+                                     <img src="@mlist[i].GoodsPic" width="300" height="190" alt="" />
+                                 </a> 
+                             </figure>
+                            
+                             <span style="float: left; margin-top: -10px">价格：@mlist[i].GoodsPrice 元</span>
+                             <span class="menu" style="float: right;margin-top:-20px">
+                                 <a href="" onclick="submit(@mlist[i].Id)">加入购物车</a>   
+                             </span>
+                             <br />
+                         }
+                         }                        
+                         </li>
+                     }
+                     }
                 </ul>
+              
             </div>
         </div>
     </div>

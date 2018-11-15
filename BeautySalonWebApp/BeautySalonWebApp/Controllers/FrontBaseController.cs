@@ -15,7 +15,7 @@ namespace BeautySalonWebApp.Controllers
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             base.OnActionExecuted(filterContext);
-            if (Session["userInfo"] == null)
+            if (Session["Id"] == null)
             {
                 filterContext.Result = Redirect("/Login/Index");
             }
