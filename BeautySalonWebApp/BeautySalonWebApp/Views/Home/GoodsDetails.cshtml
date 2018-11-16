@@ -1,72 +1,53 @@
-﻿@{
+﻿@model BeautySalonWebApp.Models.BS_Goods
+@{
     ViewBag.Title = "GoodsDetails";
     Layout = "~/Views/master.cshtml";
 }
-
+@section scripts{
+    <script>
+     function submit(id) {
+        var json = { gid: id };
+        $.post("/Handel/GoodsCarHandler.ashx", json, function (data) {
+            if (data == "ok")
+                alert("添加成功");
+            else
+                alert(data);
+        })
+     }
+     </script>
+}
 <!--==============================content=================================-->
 
-<section id="content">
+
     <div class="main-block">
         <div class="container_12">
             <div class="wrapper border-vert">
                 <article class="grid_5">
-                    <h3>Postal Address</h3>
+                    <h3>@Model.GoodsName</h3>
                     <div class="map">
-
+                        <img src="@Model.GoodsPic" width="300" height="200" />
                     </div>
-
-                    <dl class="address">
-                        <dt>
-                            The Company Name Inc.<br>
-                            8901 Marmora Road,<br>
-                            Glasgow, D04 89GR.
-                        </dt>
-                        <dd> <span>Freephone:</span> +1 800 559 6580 </dd>
-                        <dd> <span>Telephone:</span> +1 800 603 6035 </dd>
-                        <dd> <span>FAX:</span> +1 800 889 9898 </dd>
-                    </dl>
-
                 </article>
                 <article class="grid_5 prefix_2">
-                    <h3>Contact Form</h3>
+                    <h3>商品详情</h3>
+                    <dl class="address">
+                        <dd> <span>品牌:</span>@Model.Blank <br /><br /></dd>
 
-                    <form id="contact-form">
-                        <div class="success"> Contact form submitted! <strong>We will be in touch soon.</strong> </div>
-                        <fieldset>
-                            <div>
-                                <label class="name">
-                                    <input type="text" value="Name:">
-                                    <br>
-                                    <span class="error">*This is not a valid name.</span> <span class="empty">*This field is required.</span>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="email">
-                                    <input type="email" value="E-mail:">
-                                    <br>
-                                    <span class="error">*This is not a valid email address.</span> <span class="empty">*This field is required.</span>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="phone">
-                                    <input type="tel" value="Phone:">
-                                    <br>
-                                    <span class="error">*This is not a valid phone number.</span> <span class="empty">*This field is required.</span>
-                                </label>
-                            </div>
-                            <div>
-                                <label class="message">
-                                    <textarea>Message:</textarea>
-                                    <br>
-                                    <span class="error">*The message is too short.</span> <span class="empty">*This field is required.</span>
-                                </label>
-                            </div>
-                            <div class="buttons-wrapper"><a class="button" data-type="reset">Clear</a><a class="button" data-type="submit">Send</a></div>
-                        </fieldset>
-                    </form>
+                        <dd> <span>商品类型:</span>@Model.GoodsType <br /><br /></dd>
+                      
+                        <dd> <span>商品价格:</span> @Model.GoodsPrice 元 <br /><br /></dd>
+
+                        <dt>
+                            <span>商品描述:</span>@Model.Detail <br /><br />
+                        </dt>
+                    </dl>
+                    <div class="buttons-wrapper">
+                     
+                         <a class="button" data-type="submit" onclick="submit(@Model.Id)">加入购物车</a>
+                    </div>
 
                 </article>
             </div>
         </div>
     </div>
-</section>
+

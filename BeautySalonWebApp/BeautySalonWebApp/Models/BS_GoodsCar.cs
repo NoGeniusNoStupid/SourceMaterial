@@ -19,5 +19,7 @@ namespace BeautySalonWebApp.Models
         public Nullable<int> UserId { get; set; }
         public Nullable<int> SeqNo { get; set; }
         public Nullable<System.DateTime> AddTime { get; set; }
+    
+        public virtual BS_Goods BS_Goods { get; set; }
     }
 }

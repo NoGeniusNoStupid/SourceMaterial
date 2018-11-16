@@ -42,6 +42,7 @@
                     <tr>
                         <th align="center" valign="middle" class="borderright">编号</th>
                         <th align="center" valign="middle" class="borderright">商品名称</th>
+                        <th align="center" valign="middle" class="borderright">品牌</th>
                         <th align="center" valign="middle" class="borderright">商品类别</th>
                         <th align="center" valign="middle" class="borderright">商品图片</th>
                         <th align="center" valign="middle" class="borderright">商品价格</th>
@@ -56,9 +57,10 @@
                             <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
                                 <td align="center" valign="middle" class="borderright borderbottom">@item.Id</td>
                                 <td align="center" valign="middle" class="borderright borderbottom">@item.GoodsName</td>
+                                <td align="center" valign="middle" class="borderright borderbottom">@item.Blank</td>
                                 <td align="center" valign="middle" class="borderright borderbottom">@item.GoodsType</td>
                                 <td align="center" valign="middle" class="borderright borderbottom"><img width="80" height="80" src="@item.GoodsPic" /></td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.GoodsPrice</td>
+                                <td align="center" valign="middle" class="borderright borderbottom">@item.GoodsPrice 元</td>
                                 <td align="center" valign="middle" class="borderright borderbottom">@item.AddTime</td>
                                 <td align="center" valign="middle" class="borderbottom">
                                    

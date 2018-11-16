@@ -20,7 +20,7 @@ namespace BeautySalonWebApp.Controllers
         {
             //分页设置
             int pageIndex = Request.QueryString["pageIndex"] != null ? int.Parse(Request.QueryString["pageIndex"]) : 1;
-            int pageSize = 10;//页面记录数
+            int pageSize = 6;//页面记录数
             List<BS_Goods> mlist = new List<BS_Goods>();
             //查询记录
             if (string.IsNullOrEmpty(search))

@@ -14,6 +14,12 @@ namespace BeautySalonWebApp.Models
     
     public partial class BS_Goods
     {
+        public BS_Goods()
+        {
+            this.BS_GoodsCar = new HashSet<BS_GoodsCar>();
+            this.BS_OrderDetail = new HashSet<BS_OrderDetail>();
+        }
+    
         public int Id { get; set; }
         public string GoodsName { get; set; }
         public string GoodsType { get; set; }
@@ -21,5 +27,9 @@ namespace BeautySalonWebApp.Models
         public string GoodsPrice { get; set; }
         public string Detail { get; set; }
         public Nullable<System.DateTime> AddTime { get; set; }
+        public string Blank { get; set; }
+    
+        public virtual ICollection<BS_GoodsCar> BS_GoodsCar { get; set; }
+        public virtual ICollection<BS_OrderDetail> BS_OrderDetail { get; set; }
     }
 }

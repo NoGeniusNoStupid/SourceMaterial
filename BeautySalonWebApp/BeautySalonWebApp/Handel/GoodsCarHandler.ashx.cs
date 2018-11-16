@@ -1,6 +1,7 @@
 ﻿using BeautySalonWebApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.SessionState;
@@ -27,11 +28,23 @@ namespace BeautySalonWebApp.Handel
 
             //获取用户登录信息
             int userId = Convert.ToInt32(context.Session["Id"]);
-            BS_GoodsCar goodsCarInfo = new BS_GoodsCar();
-            goodsCarInfo.UserId = userId;
-            goodsCarInfo.GoodsId = id;
-            goodsCarInfo.AddTime = DateTime.Now;
-            db.BS_GoodsCar.Add(goodsCarInfo);
+
+            //判断是否存在改商品
+            var tempInfn = db.BS_GoodsCar.FirstOrDefault(a => a.GoodsId == id && a.UserId == userId);
+            if (tempInfn == null)
+            {
+                BS_GoodsCar goodsCarInfo = new BS_GoodsCar();
+                goodsCarInfo.UserId = userId;
+                goodsCarInfo.GoodsId = id;
+                goodsCarInfo.SeqNo = 1;
+                goodsCarInfo.AddTime = DateTime.Now;
+                db.BS_GoodsCar.Add(goodsCarInfo);            
+            }
+            else
+            {
+                tempInfn.SeqNo += 1;
+                db.Entry(tempInfn).State = EntityState.Modified;
+            }
             db.SaveChanges();
             context.Response.Write("ok");
         }

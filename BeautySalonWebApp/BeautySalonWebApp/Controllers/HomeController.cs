@@ -58,9 +58,9 @@ namespace BeautySalonWebApp.Controllers
         /// <returns></returns>
         public ActionResult GoodsDetails(int id)
         {
+            var goodsInfo = db.BS_Goods.FirstOrDefault(a => a.Id == id);
 
-
-            return View();
+            return View(goodsInfo);
         }
         public ActionResult VIPCentral()
         {

@@ -63,12 +63,14 @@
                      for (int i = 0; i < mlist.Count; i++)
                      {
                          <li>
+                             <span>品牌：@mlist[i].Blank</span>
                          <figure class="img-rounded">
                              <a class="view magnifier" data-fancybox-group="gallery" href="/Home/GoodsDetails/@mlist[i].Id" title="">
                                  <img src="@mlist[i].GoodsPic" width="300" height="190" alt="" />
                              </a> 
                          </figure>
-                             <span style="float: left; margin-top: -10px">价格：@mlist[i].GoodsPrice 元</span>
+                             <span style="float: left; margin-top: -10px">价格：@mlist[i].GoodsPrice 元 &nbsp;&nbsp;</span>
+                            
                              <span class="menu" style="float: right;margin-top:-20px">
                                  <a href="" onclick="submit(@mlist[i].Id)">加入购物车</a>   
                              </span>
@@ -77,13 +79,15 @@
                          if (i < mlist.Count-1)
                          { 
                              i = i + 1; 
+                             <span>品牌：@mlist[i].Blank</span>
                              <figure class="img-rounded">
                                  <a class="view magnifier" data-fancybox-group="gallery" href="/GoodsCar/GoodsDetails/@mlist[i].Id" title="">
                                      <img src="@mlist[i].GoodsPic" width="300" height="190" alt="" />
                                  </a> 
                              </figure>
                             
-                             <span style="float: left; margin-top: -10px">价格：@mlist[i].GoodsPrice 元</span>
+                             <span style="float: left; margin-top: -10px">价格：@mlist[i].GoodsPrice 元 &nbsp;&nbsp;</span>
+                            
                              <span class="menu" style="float: right;margin-top:-20px">
                                  <a href="" onclick="submit(@mlist[i].Id)">加入购物车</a>   
                              </span>

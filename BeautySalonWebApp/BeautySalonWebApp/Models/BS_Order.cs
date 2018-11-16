@@ -14,10 +14,19 @@ namespace BeautySalonWebApp.Models
     
     public partial class BS_Order
     {
-        public int Id { get; set; }
+        public BS_Order()
+        {
+            this.BS_OrderDetail = new HashSet<BS_OrderDetail>();
+        }
+    
+        public string Id { get; set; }
         public Nullable<int> UserId { get; set; }
         public string PayType { get; set; }
         public string Money { get; set; }
         public Nullable<System.DateTime> OperTime { get; set; }
+        public string Tel { get; set; }
+        public string Address { get; set; }
+    
+        public virtual ICollection<BS_OrderDetail> BS_OrderDetail { get; set; }
     }
 }

@@ -1,0 +1,117 @@
+﻿@model BeautySalonWebApp.Models.BS_UserInfo
+@{
+    ViewBag.Title = "SubmitOrder";
+    Layout = "~/Views/master.cshtml";
+}
+@section scripts{
+    <style>
+        #main-tab {
+            border: 1px solid #eaeaea;
+            background: #FFF;
+            font-size: 12px;
+        }
+
+            #main-tab th {
+                font-size: 12px;
+                background: url(/Content/Admin/images/main/list_bg.jpg) repeat-x;
+                height: 32px;
+                line-height: 32px;
+            }
+
+            #main-tab td {
+                font-size: 12px;
+                line-height: 40px;
+            }
+
+                #main-tab td a {
+                    font-size: 12px;
+                    color: #548fc9;
+                }
+
+                    #main-tab td a:hover {
+                        color: #565656;
+                        text-decoration: underline;
+                    }
+
+        td.fenye {
+            padding: 10px 0 0 0;
+            text-align: right;
+        }
+    </style>
+
+    <script>
+        function submit() {
+        
+            var address = $("#Address").val();
+            var tel = $("#Tel").val();
+
+            if (address == "") {
+                alert("请输入地址");
+                return false;
+            }
+            if (!validatemobile(tel)) {
+                return false;
+            }
+            $("#form1").submit();
+        }
+        function validatemobile(mobile) {
+            if (mobile.length == 0) {
+                alert('手机号码不能为空！');
+                return false;
+            }
+            if (mobile.length != 11) {
+                alert('请输入有效的手机号码，需是11位！');
+                return false;
+            }
+            var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            if (!myreg.test(mobile)) {
+                alert('请输入有效的手机号码！');
+                return false;
+            }
+            return true;
+        }
+    </script>
+}
+
+<div class="main-block">
+    <div class="container_12">
+        <div class="wrapper">
+
+
+            <h3>收货方式</h3>
+            <form id="form1" method="post" action="/GoodsCar/ConfirmOrder">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
+                    <tr>
+                        <td>
+                            <span>收货地址：</span><input type="text" name="Address" id="Address" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>联系电话：</span><input type="text" name="Tel" id="Tel" value="@Model.Tel" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <span>实付金额：</span>@ViewData["countPrice"] 元
+                         
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            支付方式:
+                            货到付款<input type="radio" checked="checked" value="货到付款" name="payType" />
+                            余额支付<input type="radio" value="余额支付" name="payType" />
+                            所剩余额：@Model.Money 元
+                            @*<a href="#" class="button" >充值</a>*@
+                            <input type="hidden" value="@Model.Money" name="money" />
+                        </td>
+                    </tr>
+                </table>
+                <a href="#" style="float:right" class="button" onclick="submit()">确认</a>
+            </form>
+
+
+        </div>
+    </div>
+</div>

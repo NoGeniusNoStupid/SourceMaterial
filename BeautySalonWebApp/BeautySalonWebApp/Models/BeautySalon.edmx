@@ -53,6 +53,7 @@
           <Property Name="GoodsPrice" Type="varchar" MaxLength="50" />
           <Property Name="Detail" Type="varchar" MaxLength="250" />
           <Property Name="AddTime" Type="datetime" />
+          <Property Name="Blank" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="BS_GoodsCar">
           <Key>
@@ -68,11 +69,13 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="UserId" Type="int" />
           <Property Name="PayType" Type="varchar" MaxLength="50" />
           <Property Name="Money" Type="varchar" MaxLength="50" />
           <Property Name="OperTime" Type="datetime" />
+          <Property Name="Tel" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="BS_OrderDetail">
           <Key>
@@ -80,7 +83,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GoodsId" Type="int" />
-          <Property Name="OrderId" Type="int" />
+          <Property Name="OrderId" Type="varchar" MaxLength="50" />
+          <Property Name="AddTime" Type="datetime" />
+          <Property Name="Num" Type="int" />
         </EntityType>
         <EntityType Name="BS_Service">
           <Key>
@@ -110,6 +115,42 @@
           <Property Name="Lock" Type="varchar" MaxLength="1" />
           <Property Name="Money" Type="varchar" MaxLength="20" />
         </EntityType>
+        <Association Name="FK_BS_GoodsCar_BS_Goods">
+          <End Role="BS_Goods" Type="Self.BS_Goods" Multiplicity="0..1" />
+          <End Role="BS_GoodsCar" Type="Self.BS_GoodsCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_Goods">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_GoodsCar">
+              <PropertyRef Name="GoodsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BS_OrderDetail_BS_Goods">
+          <End Role="BS_Goods" Type="Self.BS_Goods" Multiplicity="0..1" />
+          <End Role="BS_OrderDetail" Type="Self.BS_OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_Goods">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_OrderDetail">
+              <PropertyRef Name="GoodsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BS_OrderDetail_BS_Order">
+          <End Role="BS_Order" Type="Self.BS_Order" Multiplicity="0..1" />
+          <End Role="BS_OrderDetail" Type="Self.BS_OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_OrderDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BeautySalonModelStoreContainer">
           <EntitySet Name="BS_Admin" EntityType="Self.BS_Admin" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BS_Appointment" EntityType="Self.BS_Appointment" Schema="dbo" store:Type="Tables" />
@@ -120,6 +161,18 @@
           <EntitySet Name="BS_OrderDetail" EntityType="Self.BS_OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BS_Service" EntityType="Self.BS_Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BS_UserInfo" EntityType="Self.BS_UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BS_GoodsCar_BS_Goods" Association="Self.FK_BS_GoodsCar_BS_Goods">
+            <End Role="BS_Goods" EntitySet="BS_Goods" />
+            <End Role="BS_GoodsCar" EntitySet="BS_GoodsCar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BS_OrderDetail_BS_Goods" Association="Self.FK_BS_OrderDetail_BS_Goods">
+            <End Role="BS_Goods" EntitySet="BS_Goods" />
+            <End Role="BS_OrderDetail" EntitySet="BS_OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BS_OrderDetail_BS_Order" Association="Self.FK_BS_OrderDetail_BS_Order">
+            <End Role="BS_Order" EntitySet="BS_Order" />
+            <End Role="BS_OrderDetail" EntitySet="BS_OrderDetail" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -149,10 +202,22 @@
           <EntitySet Name="BS_Appointment" EntityType="BeautySalonModel.BS_Appointment" />
           <EntitySet Name="BS_Contact" EntityType="BeautySalonModel.BS_Contact" />
           <EntitySet Name="BS_GoodsCar" EntityType="BeautySalonModel.BS_GoodsCar" />
+          <EntitySet Name="BS_Service" EntityType="BeautySalonModel.BS_Service" />
+          <AssociationSet Name="FK_BS_GoodsCar_BS_Goods" Association="BeautySalonModel.FK_BS_GoodsCar_BS_Goods">
+            <End Role="BS_Goods" EntitySet="BS_Goods" />
+            <End Role="BS_GoodsCar" EntitySet="BS_GoodsCar" />
+          </AssociationSet>
           <EntitySet Name="BS_Order" EntityType="BeautySalonModel.BS_Order" />
           <EntitySet Name="BS_OrderDetail" EntityType="BeautySalonModel.BS_OrderDetail" />
-          <EntitySet Name="BS_Service" EntityType="BeautySalonModel.BS_Service" />
-        </EntityContainer>
+          <AssociationSet Name="FK_BS_OrderDetail_BS_Goods" Association="BeautySalonModel.FK_BS_OrderDetail_BS_Goods">
+            <End Role="BS_Goods" EntitySet="BS_Goods" />
+            <End Role="BS_OrderDetail" EntitySet="BS_OrderDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BS_OrderDetail_BS_Order" Association="BeautySalonModel.FK_BS_OrderDetail_BS_Order">
+            <End Role="BS_Order" EntitySet="BS_Order" />
+            <End Role="BS_OrderDetail" EntitySet="BS_OrderDetail" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="BS_Admin">
           <Key>
             <PropertyRef Name="Id" />
@@ -176,6 +241,9 @@
           <Property Name="GoodsPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Detail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <Property Name="Blank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BS_GoodsCar" Relationship="BeautySalonModel.FK_BS_GoodsCar_BS_Goods" FromRole="BS_Goods" ToRole="BS_GoodsCar" />
+          <NavigationProperty Name="BS_OrderDetail" Relationship="BeautySalonModel.FK_BS_OrderDetail_BS_Goods" FromRole="BS_Goods" ToRole="BS_OrderDetail" />
         </EntityType>
         <EntityType Name="BS_Appointment">
           <Key>
@@ -211,24 +279,7 @@
           <Property Name="UserId" Type="Int32" />
           <Property Name="SeqNo" Type="Int32" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="BS_Order">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UserId" Type="Int32" />
-          <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Money" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="OperTime" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="BS_OrderDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GoodsId" Type="Int32" />
-          <Property Name="OrderId" Type="Int32" />
+          <NavigationProperty Name="BS_Goods" Relationship="BeautySalonModel.FK_BS_GoodsCar_BS_Goods" FromRole="BS_GoodsCar" ToRole="BS_Goods" />
         </EntityType>
         <EntityType Name="BS_Service">
           <Key>
@@ -241,7 +292,68 @@
           <Property Name="ServerPic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
         </EntityType>
-      </Schema>
+        <Association Name="FK_BS_GoodsCar_BS_Goods">
+          <End Type="BeautySalonModel.BS_Goods" Role="BS_Goods" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.BS_GoodsCar" Role="BS_GoodsCar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_Goods">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_GoodsCar">
+              <PropertyRef Name="GoodsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BS_Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="PayType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Money" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="OperTime" Type="DateTime" Precision="3" />
+          <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BS_OrderDetail" Relationship="BeautySalonModel.FK_BS_OrderDetail_BS_Order" FromRole="BS_Order" ToRole="BS_OrderDetail" />
+        </EntityType>
+        <EntityType Name="BS_OrderDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoodsId" Type="Int32" />
+          <Property Name="OrderId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BS_Goods" Relationship="BeautySalonModel.FK_BS_OrderDetail_BS_Goods" FromRole="BS_OrderDetail" ToRole="BS_Goods" />
+          <NavigationProperty Name="BS_Order" Relationship="BeautySalonModel.FK_BS_OrderDetail_BS_Order" FromRole="BS_OrderDetail" ToRole="BS_Order" />
+          <Property Name="Num" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_BS_OrderDetail_BS_Goods">
+          <End Type="BeautySalonModel.BS_Goods" Role="BS_Goods" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.BS_OrderDetail" Role="BS_OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_Goods">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_OrderDetail">
+              <PropertyRef Name="GoodsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BS_OrderDetail_BS_Order">
+          <End Type="BeautySalonModel.BS_Order" Role="BS_Order" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.BS_OrderDetail" Role="BS_OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_OrderDetail">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -281,6 +393,7 @@
           <EntitySetMapping Name="BS_Goods">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_Goods">
               <MappingFragment StoreEntitySet="BS_Goods">
+                <ScalarProperty Name="Blank" ColumnName="Blank" />
                 <ScalarProperty Name="AddTime" ColumnName="AddTime" />
                 <ScalarProperty Name="Detail" ColumnName="Detail" />
                 <ScalarProperty Name="GoodsPrice" ColumnName="GoodsPrice" />
@@ -329,9 +442,23 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="BS_Service">
+            <EntityTypeMapping TypeName="BeautySalonModel.BS_Service">
+              <MappingFragment StoreEntitySet="BS_Service">
+                <ScalarProperty Name="ServerPic" ColumnName="ServerPic" />
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="BS_Order">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_Order">
               <MappingFragment StoreEntitySet="BS_Order">
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
                 <ScalarProperty Name="OperTime" ColumnName="OperTime" />
                 <ScalarProperty Name="Money" ColumnName="Money" />
                 <ScalarProperty Name="PayType" ColumnName="PayType" />
@@ -343,21 +470,11 @@
           <EntitySetMapping Name="BS_OrderDetail">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_OrderDetail">
               <MappingFragment StoreEntitySet="BS_OrderDetail">
+                <ScalarProperty Name="Num" ColumnName="Num" />
+                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="GoodsId" ColumnName="GoodsId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="BS_Service">
-            <EntityTypeMapping TypeName="BeautySalonModel.BS_Service">
-              <MappingFragment StoreEntitySet="BS_Service">
-                <ScalarProperty Name="ServerPic" ColumnName="ServerPic" />
-                <ScalarProperty Name="Detail" ColumnName="Detail" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="AddTime" ColumnName="AddTime" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

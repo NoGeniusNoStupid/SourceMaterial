@@ -1,0 +1,116 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/master.cshtml";
+}
+@section scripts{
+    <style>
+       #main-tab {
+            border: 1px solid #eaeaea;
+            background: #FFF;
+            font-size: 12px;
+        }
+
+       #main-tab th {
+                font-size: 12px;
+                background: url(/Content/Admin/images/main/list_bg.jpg) repeat-x;
+                height: 32px;
+                line-height: 32px;
+            }
+
+       #main-tab td {
+                font-size: 12px;
+                line-height: 40px;
+            }
+
+       #main-tab td a {
+                    font-size: 12px;
+                    color: #548fc9;
+                }
+
+       #main-tab td a:hover {
+                        color: #565656;
+                        text-decoration: underline;
+                    }
+
+        td.fenye {
+            padding: 10px 0 0 0;
+            text-align: right;
+        }
+    </style>
+}
+<div class="main-block">
+    <div class="container_12">
+        <div class="wrapper" >
+
+            
+         <h3>购物车</h3>
+
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
+                <tr>
+                    <th align="center" valign="middle" class="borderright">编号</th>
+                    <th align="center" valign="middle" class="borderright">商品名称</th>
+                    <th align="center" valign="middle" class="borderright">品牌</th>
+                    <th align="center" valign="middle" class="borderright">商品类别</th>
+                    <th align="center" valign="middle" class="borderright">商品图片</th>
+                    <th align="center" valign="middle" class="borderright">商品价格</th>
+                    <th align="center" valign="middle" class="borderright">数量</th>
+                    <th align="center" valign="middle">操作</th>
+                </tr>
+                @{
+                    List<BeautySalonWebApp.Models.BS_GoodsCar> mlist = (List<BeautySalonWebApp.Models.BS_GoodsCar>)ViewData["List"];
+
+                    foreach (var item in mlist)
+                    {
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="center" valign="middle" class="borderright borderbottom">@item.GoodsId</td>
+                            <td align="center" valign="middle" class="borderright borderbottom">@item.BS_Goods.GoodsName</td>
+                            <td align="center" valign="middle" class="borderright borderbottom">@item.BS_Goods.Blank</td>
+                            <td align="center" valign="middle" class="borderright borderbottom">@item.BS_Goods.GoodsType</td>
+                            <td align="center" valign="middle" class="borderright borderbottom"><img width="80" height="80" src="@item.BS_Goods.GoodsPic" /></td>
+                            <td align="center" valign="middle" class="borderright borderbottom">@item.BS_Goods.GoodsPrice 元</td>
+                            <td align="center" valign="middle" class="borderright borderbottom">@item.SeqNo 件</td>
+                            <td align="center" valign="middle" class="borderbottom">
+                                <a href="/GoodsCar/Add/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">添加</a>
+                                <span class="gray">&nbsp;|&nbsp;</span>
+                                <a href="/GoodsCar/Remove/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">减少</a>
+                                <span class="gray">&nbsp;|&nbsp;</span>
+                                <a href="/GoodsCar/Delete/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
+                            </td>
+                        </tr>
+                    }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td align="left" style="float:right" valign="top" class="fenye">
+                                @Html.Raw(ViewData["Bar"])
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td align="left" valign="top" class="fenye">
+                                总价：@ViewData["countPrice"] 元
+                              
+                            </td>
+                        </tr>
+                      
+                }
+
+            </table>
+            <a href="/GoodsCar/SubmitOrder" style="float:right" class="button" onclick="confirm('确定要提交吗?')">提交订单</a>
+            <form id="contact-form"></form>
+
+
+</div>
+    </div>
+</div>

@@ -22,9 +22,13 @@
             var goodsName = $("#GoodsName").val();
             var price = $("#GoodsPrice").val();
             var image = $("#GoodsPic").val();
-
+            var blank = $("#Blank").val();
             if (goodsName == "") {
                 alert("请输入商品名称");
+                return false;
+            }
+            if (blank == "") {
+                alert("请输入品牌");
                 return false;
             }
            
@@ -86,6 +90,12 @@
                             <td align="right" valign="middle" class="borderright borderbottom bggray">名称：</td>
                             <td align="left" valign="middle" class="borderright borderbottom main-for">
                                 <input type="text" id="GoodsName" name="GoodsName" value="@Model.GoodsName" class="text-word">
+                            </td>
+                        </tr>
+                        <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                            <td align="right" valign="middle" class="borderright borderbottom bggray">品牌：</td>
+                            <td align="left" valign="middle" class="borderright borderbottom main-for">
+                                <input type="text" id="Blank" name="Blank" value="@Model.Blank" class="text-word">
                             </td>
                         </tr>
                         <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
