@@ -11,8 +11,7 @@ namespace BeautySalonWebApp.Controllers
 {
     public class UserInfoController : AdminBaseController
     {
-        BeautySalonEntities db = (BeautySalonEntities)DBContextFactory.CreateDbContext();
-
+      
         //
         // GET: /UserInfo/
 

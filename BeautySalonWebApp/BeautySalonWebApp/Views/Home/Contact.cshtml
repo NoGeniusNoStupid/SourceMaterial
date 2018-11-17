@@ -1,50 +1,118 @@
-﻿@{
+﻿@model BeautySalonWebApp.Models.BS_UserInfo
+@{
     ViewBag.Title = "Contact";
     Layout = "~/Views/master.cshtml";
 }
 
-<!--==============================content=================================-->
+@section scripts{
+    <script>
+        function submit() {
+            var name = $("#Name").val();
+            if (name == "") {
+                alert("请输入姓名");
+                return false;
+            }
+            if (!isChinese(name)) {
+                return false;
+            }
+            var email = $("#Email").val();
+            if (!CheckEmail(email)) {
+                return false;
+            }
+            var phone = $("#Phone").val();
+            if (!validatemobile(phone)) {
+                return false;
+            }
+            var message = $("#Message").val();
+            if (message == "") {
+                alert("请输入内容");
+                return false;
+            }
+            $("#contact-form").submit();
+        }
+        //输入中文
+        function isChinese(obj) {
+            var reg = /^[\u0391-\uFFE5]+$/;
+            if (obj != "" && !reg.test(obj)) {
+                alert('必须输入中文！');
+                return false;
+            }
+            return true;
+        }
+        //邮箱校验
+        function CheckEmail(obj) {
+            //对电子邮件的验证
+            var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+            if (!myreg.test(obj)) {
+                alert('请输入有效的邮箱！');
+                return false;
+            }
+            return true;
 
+        }
+        //手机校验
+        function validatemobile(mobile) {
+            if (mobile.length == 0) {
+                alert('手机号码不能为空！');
+                return false;
+            }
+            if (mobile.length != 11) {
+                alert('请输入有效的手机号码，需是11位！');
+                return false;
+            }
+            var myreg = /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
+            if (!myreg.test(mobile)) {
+                alert('请输入有效的手机号码！');
+                return false;
+            }
+            return true;
+        }
+    </script>
+    }
+<!--==============================content=================================-->
 
     <div class="main-block" >
         <div class="container_12">
             <div class="wrapper" style="width:600px;margin-left:auto;margin-right:auto">
 
                 <article class="grid_5 prefix_2">
-                    <h3>Contact Form</h3>
+                    <h3>联系我们</h3>
 
-                    <form id="contact-form">
-                        <div class="success"> Contact form submitted! <strong>We will be in touch soon.</strong> </div>
+                    <form id="contact-form" method="post" action="/Home/Contact">
                         <fieldset>
                             <div>
+                                <span>姓名:</span>
                                 <label class="name">
-                                    <input type="text" value="Name:">
+                                   <input type="text" value="@Model.RealName" id="Name" name="Name">
                                     <br>
-                                    <span class="error">*This is not a valid name.</span> <span class="empty">*This field is required.</span>
+
                                 </label>
                             </div>
                             <div>
+                                <span>邮箱:</span>
                                 <label class="email">
-                                    <input type="email" value="E-mail:">
+                                    <input type="email" value="@Model.Email" id="Email" name="Email">
                                     <br>
-                                    <span class="error">*This is not a valid email address.</span> <span class="empty">*This field is required.</span>
+
                                 </label>
                             </div>
                             <div>
+                                <span>电话:</span>
                                 <label class="phone">
-                                    <input type="tel" value="Phone:">
+                                    <input type="tel" value="@Model.Tel" id="Phone" name="Phone">
                                     <br>
-                                    <span class="error">*This is not a valid phone number.</span> <span class="empty">*This field is required.</span>
                                 </label>
                             </div>
                             <div>
+                                <span>内容:</span>
                                 <label class="message">
-                                    <textarea>Message:</textarea>
+                                    <textarea name="Message" id="Message"></textarea>
                                     <br>
-                                    <span class="error">*The message is too short.</span> <span class="empty">*This field is required.</span>
                                 </label>
                             </div>
-                            <div class="buttons-wrapper"><a class="button" data-type="reset">Clear</a><a class="button" data-type="submit">Send</a></div>
+                            <div class="buttons-wrapper">
+                                <a href="#" onclick="submit()" class="button" data-type="submit">提交</a>
+                            </div>
                         </fieldset>
                     </form>
 

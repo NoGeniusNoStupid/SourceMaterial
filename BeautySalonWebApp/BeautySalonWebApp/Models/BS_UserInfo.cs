@@ -14,6 +14,11 @@ namespace BeautySalonWebApp.Models
     
     public partial class BS_UserInfo
     {
+        public BS_UserInfo()
+        {
+            this.BS_Appointment = new HashSet<BS_Appointment>();
+        }
+    
         public int Id { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
@@ -26,5 +31,7 @@ namespace BeautySalonWebApp.Models
         public System.DateTime regTime { get; set; }
         public string Lock { get; set; }
         public string Money { get; set; }
+    
+        public virtual ICollection<BS_Appointment> BS_Appointment { get; set; }
     }
 }

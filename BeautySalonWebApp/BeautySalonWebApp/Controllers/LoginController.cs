@@ -13,9 +13,7 @@ namespace BeautySalonWebApp.Controllers
     /// </summary>
     public class LoginController : BaseController
     {
-        //
-        // GET: /Login/
-        BeautySalonEntities db = (BeautySalonEntities)DBContextFactory.CreateDbContext();
+     
 
         #region 前台登陆功能
         public ActionResult Index()

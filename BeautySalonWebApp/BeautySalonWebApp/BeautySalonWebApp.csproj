@@ -142,6 +142,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\FrontBaseController.cs" />
+    <Compile Include="Controllers\FrontVIPController.cs" />
     <Compile Include="Controllers\GoodsCarController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -916,6 +917,7 @@
     <Content Include="Views\Home\GoodsDetails.cshtml" />
     <Content Include="Views\GoodsCar\Index.cshtml" />
     <Content Include="Views\GoodsCar\SubmitOrder.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

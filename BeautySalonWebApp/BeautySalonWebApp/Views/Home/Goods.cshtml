@@ -7,7 +7,7 @@
 
 <script src="~/Content/js/jquery.elastislide.js"></script>
 <script src="~/Content/js/jquery.fancybox.pack.js"></script>
-    <style>
+<style>
         .menu a {
             color: #b3adad;
             font-size: 18px;
@@ -21,13 +21,6 @@
     </style>
 <script>
     $(document).ready(function () {
-        //  Initialize Backgound Stretcher
-        $('BODY').bgStretcher({
-            images: ['~/Content/images/slide-1.jpg'],
-            imageWidth: 1600,
-            imageHeight: 964,
-            resizeProportionally: true
-        });
         $('#carousel').elastislide({ imageW: 300, margin: 20, minItems: 3 });
         $('.magnifier').fancybox();
 
@@ -35,7 +28,7 @@
         $(".view").hover(
         function () { $(this).find("img").stop().animate({ opacity: 0.5 }, "normal") },
         function () { $(this).find("img").stop().animate({ opacity: 1 }, "normal") })
-    })
+    });
 
     function submit(id) {
         var json = { gid: id };
@@ -44,8 +37,9 @@
                 alert("添加成功");
             else
                 alert(data);
-        })
+        });
     }
+
 </script>
     }
 

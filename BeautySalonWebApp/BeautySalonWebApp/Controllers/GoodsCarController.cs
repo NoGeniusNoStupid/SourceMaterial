@@ -11,7 +11,7 @@ namespace BeautySalonWebApp.Controllers
 {
     public class GoodsCarController : FrontBaseController
     {
-        BeautySalonEntities db = (BeautySalonEntities)DBContextFactory.CreateDbContext();
+       
         //
         // GET: /GoodsCar/
 
@@ -101,10 +101,8 @@ namespace BeautySalonWebApp.Controllers
             return View(userInfo);
         }
         //确认订单
-        public ActionResult ConfirmOrder(string Tel, string Address, string payType, string money)
+        public ActionResult ConfirmOrder(string Tel, string Address, string payType)
         {
-           
-
             int userId = Convert.ToInt32(Session["Id"]);
             //获取购物车对象
             var allGoodsCar = db.BS_GoodsCar.Where(a => a.UserId == userId);
@@ -113,11 +111,7 @@ namespace BeautySalonWebApp.Controllers
             {
                 countPrice += Convert.ToDouble(Convert.ToDouble(item.BS_Goods.GoodsPrice) * item.SeqNo);
             }
-            if (payType == "余额支付")
-            {
-                if (Convert.ToDouble(money) < countPrice)
-                    return RedirectDialogToAction("余额不足，请联系管理员进行充值");
-            }
+            //创建订单对象
             BS_Order orderInfo = new BS_Order();
             orderInfo.Id = Guid.NewGuid().ToString("N");
             orderInfo.UserId = userId;
@@ -126,7 +120,7 @@ namespace BeautySalonWebApp.Controllers
             orderInfo.OperTime = DateTime.Now;
             orderInfo.Tel = Tel;
             orderInfo.Address = Address;
-
+            //创建订单详细集合
             List<BS_OrderDetail> detailList = new List<BS_OrderDetail>();
             foreach (var item in allGoodsCar)
             {
@@ -134,10 +128,16 @@ namespace BeautySalonWebApp.Controllers
                 detailInfo.OrderId = orderInfo.Id;
                 detailInfo.GoodsId = item.GoodsId;
                 detailInfo.AddTime = item.AddTime;
+                detailInfo.Num = item.SeqNo;
                 detailList.Add(detailInfo);
             }
             orderInfo.BS_OrderDetail = detailList;
             db.BS_Order.Add(orderInfo);
+            //清空购物车
+            foreach (var item in allGoodsCar)
+            {
+                db.Entry(item).State = EntityState.Deleted;
+            }
             string msg = string.Format("操作成功，您的订单号为：{0}", orderInfo.Id);
             return RedirectDialogToAction("Goods", "Home", db.SaveChanges(), msg, "");
         }

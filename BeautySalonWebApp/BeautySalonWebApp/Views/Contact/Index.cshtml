@@ -16,7 +16,7 @@
     <!--main_top-->
     <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
         <tr>
-            <td width="99%" align="left" valign="top">您的位置：商品管理</td>
+            <td width="99%" align="left" valign="top">您的位置：留言管理</td>
         </tr>
         <tr>
             <td align="left" valign="top">
@@ -24,14 +24,14 @@
                     <tr>
                         <td width="90%" align="left" valign="middle">
                             <form method="post" action="~/Goods/Index">
-                                <span>商品名称：</span>
+                                <span>姓名/电话：</span>
                                 <input type="text" name="search" class="text-word">
                                 <input type="submit" class="text-but" value="查询">
                             </form>
                         </td>
-                        <td width="10%" align="center" valign="middle" style="text-align:right; width:150px;">
-                            <a href="~/Goods/Create" target="mainFrame" onfocus="  this.blur()" class="add">新增商品</a>
-                        </td>
+                        @*<td width="10%" align="center" valign="middle" style="text-align:right; width:150px;">
+                                <a href="~/Goods/Create" target="mainFrame" onfocus="  this.blur()" class="add">新增留言</a>
+                            </td>*@
                     </tr>
                 </table>
             </td>
@@ -41,32 +41,38 @@
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
                     <tr>
                         <th align="center" valign="middle" class="borderright">编号</th>
-                        <th align="center" valign="middle" class="borderright">商品名称</th>
-                        <th align="center" valign="middle" class="borderright">品牌</th>
-                        <th align="center" valign="middle" class="borderright">商品类别</th>
-                        <th align="center" valign="middle" class="borderright">商品图片</th>
-                        <th align="center" valign="middle" class="borderright">商品价格</th>
-                        <th align="center" valign="middle" class="borderright">发布时间</th>
+                        <th align="center" valign="middle" class="borderright">姓名</th>
+                        <th align="center" valign="middle" class="borderright">邮箱</th>
+                        <th align="center" valign="middle" class="borderright">电话</th>
+                        <th align="center" valign="middle" class="borderright">留言内容</th>
+                        <th align="center" valign="middle" class="borderright">留言时间</th>
+                        <th align="center" valign="middle" class="borderright">是否处理</th>
+                        <th align="center" valign="middle" class="borderright">处理时间</th>
                         <th align="center" valign="middle">操作</th>
                     </tr>
                     @{
-                        List<BeautySalonWebApp.Models.BS_Goods> mlist = (List<BeautySalonWebApp.Models.BS_Goods>)ViewData["List"];
+                        List<BeautySalonWebApp.Models.BS_Contact> mlist = (List<BeautySalonWebApp.Models.BS_Contact>)ViewData["List"];
 
                         foreach (var item in mlist)
                         {
                             <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
                                 <td align="center" valign="middle" class="borderright borderbottom">@item.Id</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.GoodsName</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.Blank</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.GoodsType</td>
-                                <td align="center" valign="middle" class="borderright borderbottom"><img width="80" height="80" src="@item.GoodsPic" /></td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.GoodsPrice 元</td>
+                                <td align="center" valign="middle" class="borderright borderbottom">@item.Name</td>
+                                <td align="center" valign="middle" class="borderright borderbottom">@item.Email</td>
+                                <td align="center" valign="middle" class="borderright borderbottom">@item.Phone</td>
+                                <td align="center" valign="middle" class="borderright borderbottom">@item.Message</td>
                                 <td align="center" valign="middle" class="borderright borderbottom">@item.AddTime</td>
+                                <td align="center" valign="middle" class="borderright borderbottom">@item.Reply</td>
+                                <td align="center" valign="middle" class="borderright borderbottom">@item.ReplyTime</td>
                                 <td align="center" valign="middle" class="borderbottom">
-
-                                    <a href="/Goods/Edit/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">编辑</a>
+                                    <a href="/Contact/ContactDone/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">
+                                        @if (item.Reply == "未处理")
+                                        { @Html.Raw("已处理")}
+                                        else
+                                        { @Html.Raw("撤销")}
+                                    </a>
                                     <span class="gray">&nbsp;|&nbsp;</span>
-                                    <a href="/Goods/Delete/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
+                                    <a href="/Contact/Delete/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
                                 </td>
                             </tr>
                         }

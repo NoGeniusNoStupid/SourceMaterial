@@ -52,6 +52,15 @@
             if (!validatemobile(tel)) {
                 return false;
             }
+            var money = $("#money").val();
+            var surePrice = $("#SurePrice").val();
+            var payType = $('input:radio[name="payType"]:checked').val(); 
+            if (payType == "余额支付"&&money<surePrice)
+            {
+                alert("余额不足，请联系管理员进行充值");
+                return false;
+            }
+
             $("#form1").submit();
         }
         function validatemobile(mobile) {
@@ -94,17 +103,17 @@
                     <tr>
                         <td>
                             <span>实付金额：</span>@ViewData["countPrice"] 元
-                         
+                            <input type="hidden" value="@ViewData["countPrice"]"  id="SurePrice"/>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             支付方式:
-                            货到付款<input type="radio" checked="checked" value="货到付款" name="payType" />
-                            余额支付<input type="radio" value="余额支付" name="payType" />
-                            所剩余额：@Model.Money 元
+                            <input type="radio" checked="checked" value="货到付款" id="payType" name="payType" />货到付款 &nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="radio" value="余额支付" name="payType" />余额支付
+                            &nbsp;&nbsp;所剩余额：@Model.Money 元
                             @*<a href="#" class="button" >充值</a>*@
-                            <input type="hidden" value="@Model.Money" name="money" />
+                            <input type="hidden" value="@Model.Money" id="money" name="money" />
                         </td>
                     </tr>
                 </table>

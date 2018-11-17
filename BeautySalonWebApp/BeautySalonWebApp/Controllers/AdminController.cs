@@ -14,7 +14,7 @@ namespace BeautySalonWebApp.Controllers
     /// </summary>
     public class AdminController : AdminBaseController
     {
-        BeautySalonEntities db = (BeautySalonEntities)DBContextFactory.CreateDbContext();
+    
 
         #region 登陆后页面展示
         public ActionResult Index()

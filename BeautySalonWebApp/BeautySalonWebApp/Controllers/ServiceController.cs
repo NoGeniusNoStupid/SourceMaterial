@@ -12,7 +12,7 @@ namespace BeautySalonWebApp.Controllers
 {
     public class ServiceController : AdminBaseController
     {
-        BeautySalonEntities db = (BeautySalonEntities)DBContextFactory.CreateDbContext();
+      
         //
         // GET: /Service/
 

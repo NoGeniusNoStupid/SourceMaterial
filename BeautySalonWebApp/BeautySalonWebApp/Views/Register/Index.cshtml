@@ -84,6 +84,7 @@
             }
             return true;
         }
+        //邮箱校验
         function CheckEmail(obj) {
             //对电子邮件的验证
             var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
@@ -94,6 +95,7 @@
             return true;
 
         }
+        //手机校验
         function validatemobile(mobile) {
             if (mobile.length == 0) {
                 alert('手机号码不能为空！');

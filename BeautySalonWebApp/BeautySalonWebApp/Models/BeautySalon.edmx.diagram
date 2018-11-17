@@ -11,12 +11,14 @@
         <EntityTypeShape EntityType="BeautySalonModel.BS_Appointment" Width="1.5" PointX="0.75" PointY="4.75" />
         <EntityTypeShape EntityType="BeautySalonModel.BS_Contact" Width="1.5" PointX="2.75" PointY="4.75" />
         <EntityTypeShape EntityType="BeautySalonModel.BS_GoodsCar" Width="1.5" PointX="9.25" PointY="1.375" />
-        <EntityTypeShape EntityType="BeautySalonModel.BS_Service" Width="1.5" PointX="6.75" PointY="8.25" />
+        <EntityTypeShape EntityType="BeautySalonModel.BS_Service" Width="1.5" PointX="3.875" PointY="7.875" />
         <AssociationConnector Association="BeautySalonModel.FK_BS_GoodsCar_BS_Goods" />
         <EntityTypeShape EntityType="BeautySalonModel.BS_Order" Width="1.5" PointX="9" PointY="4.5" />
         <EntityTypeShape EntityType="BeautySalonModel.BS_OrderDetail" Width="1.5" PointX="6.5" PointY="5.875" />
         <AssociationConnector Association="BeautySalonModel.FK_BS_OrderDetail_BS_Goods" />
         <AssociationConnector Association="BeautySalonModel.FK_BS_OrderDetail_BS_Order" />
+        <AssociationConnector Association="BeautySalonModel.FK_BS_Appointment_BS_Service" />
+        <AssociationConnector Association="BeautySalonModel.FK_BS_Appointment_BS_UserInfo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

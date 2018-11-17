@@ -37,7 +37,7 @@
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Phone" Type="varchar" MaxLength="50" />
-          <Property Name="Message" Type="varchar" MaxLength="50" />
+          <Property Name="Message" Type="varchar" MaxLength="250" />
           <Property Name="Reply" Type="varchar" MaxLength="50" />
           <Property Name="AddTime" Type="datetime" />
           <Property Name="ReplyTime" Type="datetime" />
@@ -51,7 +51,7 @@
           <Property Name="GoodsType" Type="nchar" MaxLength="10" />
           <Property Name="GoodsPic" Type="varchar" MaxLength="50" />
           <Property Name="GoodsPrice" Type="varchar" MaxLength="50" />
-          <Property Name="Detail" Type="varchar" MaxLength="250" />
+          <Property Name="Detail" Type="varchar" MaxLength="500" />
           <Property Name="AddTime" Type="datetime" />
           <Property Name="Blank" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -94,7 +94,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="varchar" MaxLength="50" />
           <Property Name="Price" Type="varchar" MaxLength="50" />
-          <Property Name="Detail" Type="varchar" MaxLength="50" />
+          <Property Name="Detail" Type="varchar" MaxLength="500" />
           <Property Name="ServerPic" Type="varchar" MaxLength="50" />
           <Property Name="AddTime" Type="datetime" />
         </EntityType>
@@ -115,6 +115,30 @@
           <Property Name="Lock" Type="varchar" MaxLength="1" />
           <Property Name="Money" Type="varchar" MaxLength="20" />
         </EntityType>
+        <Association Name="FK_BS_Appointment_BS_Service">
+          <End Role="BS_Service" Type="Self.BS_Service" Multiplicity="0..1" />
+          <End Role="BS_Appointment" Type="Self.BS_Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_Appointment">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BS_Appointment_BS_UserInfo">
+          <End Role="BS_UserInfo" Type="Self.BS_UserInfo" Multiplicity="0..1" />
+          <End Role="BS_Appointment" Type="Self.BS_Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_Appointment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BS_GoodsCar_BS_Goods">
           <End Role="BS_Goods" Type="Self.BS_Goods" Multiplicity="0..1" />
           <End Role="BS_GoodsCar" Type="Self.BS_GoodsCar" Multiplicity="*" />
@@ -161,6 +185,14 @@
           <EntitySet Name="BS_OrderDetail" EntityType="Self.BS_OrderDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BS_Service" EntityType="Self.BS_Service" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BS_UserInfo" EntityType="Self.BS_UserInfo" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_BS_Appointment_BS_Service" Association="Self.FK_BS_Appointment_BS_Service">
+            <End Role="BS_Service" EntitySet="BS_Service" />
+            <End Role="BS_Appointment" EntitySet="BS_Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BS_Appointment_BS_UserInfo" Association="Self.FK_BS_Appointment_BS_UserInfo">
+            <End Role="BS_UserInfo" EntitySet="BS_UserInfo" />
+            <End Role="BS_Appointment" EntitySet="BS_Appointment" />
+          </AssociationSet>
           <AssociationSet Name="FK_BS_GoodsCar_BS_Goods" Association="Self.FK_BS_GoodsCar_BS_Goods">
             <End Role="BS_Goods" EntitySet="BS_Goods" />
             <End Role="BS_GoodsCar" EntitySet="BS_GoodsCar" />
@@ -194,6 +226,7 @@
           <Property Name="regTime" Type="DateTime" Precision="3" Nullable="false" />
           <Property Name="Lock" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Money" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BS_Appointment" Relationship="BeautySalonModel.FK_BS_Appointment_BS_UserInfo" FromRole="BS_UserInfo" ToRole="BS_Appointment" />
         </EntityType>
         <EntityContainer Name="BeautySalonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BS_UserInfo" EntityType="Self.BS_UserInfo" />
@@ -217,6 +250,14 @@
             <End Role="BS_Order" EntitySet="BS_Order" />
             <End Role="BS_OrderDetail" EntitySet="BS_OrderDetail" />
           </AssociationSet>
+          <AssociationSet Name="FK_BS_Appointment_BS_Service" Association="BeautySalonModel.FK_BS_Appointment_BS_Service">
+            <End Role="BS_Service" EntitySet="BS_Service" />
+            <End Role="BS_Appointment" EntitySet="BS_Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BS_Appointment_BS_UserInfo" Association="BeautySalonModel.FK_BS_Appointment_BS_UserInfo">
+            <End Role="BS_UserInfo" EntitySet="BS_UserInfo" />
+            <End Role="BS_Appointment" EntitySet="BS_Appointment" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="BS_Admin">
           <Key>
@@ -239,7 +280,7 @@
           <Property Name="GoodsType" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="GoodsPic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="GoodsPrice" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Detail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Detail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
           <Property Name="Blank" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BS_GoodsCar" Relationship="BeautySalonModel.FK_BS_GoodsCar_BS_Goods" FromRole="BS_Goods" ToRole="BS_GoodsCar" />
@@ -256,6 +297,8 @@
           <Property Name="TimeSlot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
           <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BS_Service" Relationship="BeautySalonModel.FK_BS_Appointment_BS_Service" FromRole="BS_Appointment" ToRole="BS_Service" />
+          <NavigationProperty Name="BS_UserInfo" Relationship="BeautySalonModel.FK_BS_Appointment_BS_UserInfo" FromRole="BS_Appointment" ToRole="BS_UserInfo" />
         </EntityType>
         <EntityType Name="BS_Contact">
           <Key>
@@ -265,7 +308,7 @@
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Message" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Message" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Reply" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
           <Property Name="ReplyTime" Type="DateTime" Precision="3" />
@@ -288,9 +331,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Detail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Detail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="ServerPic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="BS_Appointment" Relationship="BeautySalonModel.FK_BS_Appointment_BS_Service" FromRole="BS_Service" ToRole="BS_Appointment" />
         </EntityType>
         <Association Name="FK_BS_GoodsCar_BS_Goods">
           <End Type="BeautySalonModel.BS_Goods" Role="BS_Goods" Multiplicity="0..1" />
@@ -350,6 +394,30 @@
             </Principal>
             <Dependent Role="BS_OrderDetail">
               <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BS_Appointment_BS_Service">
+          <End Type="BeautySalonModel.BS_Service" Role="BS_Service" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.BS_Appointment" Role="BS_Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_Appointment">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BS_Appointment_BS_UserInfo">
+          <End Type="BeautySalonModel.BS_UserInfo" Role="BS_UserInfo" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.BS_Appointment" Role="BS_Appointment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_Appointment">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

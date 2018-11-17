@@ -13,7 +13,7 @@ namespace BeautySalonWebApp.Controllers
 {
     public class GoodsController : BaseController
     {
-        BeautySalonEntities db = (BeautySalonEntities)DBContextFactory.CreateDbContext();
+        
         //
         // GET: /Goods/
         public ActionResult Index(string search)

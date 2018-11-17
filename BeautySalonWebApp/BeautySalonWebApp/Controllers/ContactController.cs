@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BeautySalonWebApp.Models;
+using BeautySalonWebApp.Public;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,98 +10,55 @@ namespace BeautySalonWebApp.Controllers
 {
     public class ContactController : AdminBaseController
     {
+     
         //
         // GET: /Contact/
-
-        public ActionResult Index()
+        //加载页面
+        public ActionResult Index(string search)
         {
+            //分页设置
+            int pageIndex = Request.QueryString["pageIndex"] != null ? int.Parse(Request.QueryString["pageIndex"]) : 1;
+            int pageSize = 6;//页面记录数
+            List<BS_Contact> mlist = new List<BS_Contact>();
+            //查询记录
+            if (string.IsNullOrEmpty(search))
+            {
+                mlist = db.BS_Contact.Where(a => true).OrderByDescending(a => a.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList<BS_Contact>();
+            }
+            else
+            {
+                mlist = db.BS_Contact.Where(a => a.Phone.Contains(search) && a.Name.Contains(search)).OrderByDescending(a => a.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList<BS_Contact>();
+            }
+            int listCount = db.BS_Contact.Where(a => true).Count();
+            //生成导航条
+            string strBar = PageBarHelper.GetGoodsBar(pageIndex, listCount, pageSize);
+
+            ViewData["List"] = mlist;
+            ViewData["Bar"] = strBar;
+
             return View();
         }
-
-        //
-        // GET: /Contact/Details/5
-
-        public ActionResult Details(int id)
+        //处理回访
+        public ActionResult ContactDone(int id)
         {
-            return View();
+            var Info = db.BS_Contact.FirstOrDefault(a => a.Id == id);
+
+            if (Info.Reply == "未处理")
+                Info.Reply = "已回访";
+            else
+                Info.Reply = "未处理";
+            Info.ReplyTime = DateTime.Now;
+            db.Entry(Info).State = System.Data.EntityState.Modified;
+
+            return RedirectDialogToAction("Index", "Contact", db.SaveChanges());
         }
-
-        //
-        // GET: /Contact/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Contact/Create
-
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Contact/Edit/5
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Contact/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        //
-        // GET: /Contact/Delete/5
-
         public ActionResult Delete(int id)
         {
-            return View();
-        }
+            var Info = db.BS_Contact.FirstOrDefault(a => a.Id == id);
+            //删除操作
+            db.Entry(Info).State = System.Data.EntityState.Deleted;
 
-        //
-        // POST: /Contact/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectDialogToAction("Index", "Contact", db.SaveChanges());
         }
     }
 }

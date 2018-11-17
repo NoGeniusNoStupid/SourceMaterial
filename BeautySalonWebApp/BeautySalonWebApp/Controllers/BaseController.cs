@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BeautySalonWebApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,8 +12,14 @@ namespace BeautySalonWebApp.Controllers
     /// </summary>
     public class BaseController : Controller
     {
-
-      
+        //数据库操作对象
+        public BeautySalonEntities db
+        {
+            get
+            {
+                return (BeautySalonEntities)DBContextFactory.CreateDbContext();
+            }
+        }
         /// <summary>
         /// 返回JS提示信息并跳转ViewResult
         /// </summary>
@@ -43,7 +50,6 @@ namespace BeautySalonWebApp.Controllers
             Response.Write(strTip);
             return null;
         }
-
 
         protected ActionResult RedirectDialogToAction(string msg)
         {

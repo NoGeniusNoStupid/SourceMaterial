@@ -14,11 +14,18 @@ namespace BeautySalonWebApp.Models
     
     public partial class BS_Service
     {
+        public BS_Service()
+        {
+            this.BS_Appointment = new HashSet<BS_Appointment>();
+        }
+    
         public int Id { get; set; }
         public string Title { get; set; }
         public string Price { get; set; }
         public string Detail { get; set; }
         public string ServerPic { get; set; }
         public Nullable<System.DateTime> AddTime { get; set; }
+    
+        public virtual ICollection<BS_Appointment> BS_Appointment { get; set; }
     }
 }

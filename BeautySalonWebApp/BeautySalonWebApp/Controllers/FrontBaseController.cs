@@ -17,7 +17,8 @@ namespace BeautySalonWebApp.Controllers
             base.OnActionExecuted(filterContext);
             if (Session["Id"] == null)
             {
-                filterContext.Result = Redirect("/Login/Index");
+                string msg = "请先登录，再进行操作！";
+                filterContext.Result = RedirectDialogToAction("Index", "Login", db.SaveChanges(), msg);
             }
         }
     }
