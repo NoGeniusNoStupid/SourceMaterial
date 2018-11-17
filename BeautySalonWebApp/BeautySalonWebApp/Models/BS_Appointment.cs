@@ -21,6 +21,7 @@ namespace BeautySalonWebApp.Models
         public string TimeSlot { get; set; }
         public Nullable<System.DateTime> AddTime { get; set; }
         public string Tel { get; set; }
+        public string State { get; set; }
     
         public virtual BS_Service BS_Service { get; set; }
         public virtual BS_UserInfo BS_UserInfo { get; set; }

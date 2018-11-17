@@ -16,15 +16,26 @@
         function () { $(this).find("img").stop().animate({ opacity: 0.5 }, "normal") },
         function () { $(this).find("img").stop().animate({ opacity: 1 }, "normal") })
     });
-    //function openwin() {
-    //    window.open("/Error.html", "newwindow", "height=400, width=400,top=400,left=400 toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
-
-    //}
+    function openwin(id) {
+        var login= $("#Login").val();
+        if (login == "")
+        {
+            alert("请先登录，再进行操作");
+            window.location.href = "/Login/Index";
+            return;
+        }
+        var iWidth=400;//弹出窗口的宽度; 
+        var iHeight=300;//弹出窗口的高度; 
+        var iTop = (window.screen.height - 30 - iHeight) / 2;//获得窗口的垂直位置; 
+        var iLeft = (window.screen.width - 10 - iWidth) / 2;//获得窗口的水平位置; 
+        window.open("/FrontVIP/AppointMent/"+id, "服务预约", "height=" + iHeight + ", width=" + iWidth + ",top=" + iTop + ",left=" + iLeft + ", toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, status=no");
+    }
 </script>
     }
 <div class="main-block">
     <div class="main">
         <div id="carousel" class="es-carousel-wrapper ">
+            <input type="hidden" id="Login" value="@Session["Id"]" />
             <div class="es-carousel">
                 <ul>
                     @{
@@ -41,7 +52,7 @@
                                 <h5>@item.Price 元/次</h5>
                                 <p>@item.Detail</p>
                               
-                                <a href="#" class="button" >预约</a>
+                               <a href="#" class="button" onclick="openwin(@item.Id)">预约</a>
                           </li>
                         }
                     }

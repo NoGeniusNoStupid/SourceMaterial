@@ -28,6 +28,7 @@
           <Property Name="TimeSlot" Type="varchar" MaxLength="50" />
           <Property Name="AddTime" Type="datetime" />
           <Property Name="Tel" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="BS_Contact">
           <Key>
@@ -299,6 +300,7 @@
           <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BS_Service" Relationship="BeautySalonModel.FK_BS_Appointment_BS_Service" FromRole="BS_Appointment" ToRole="BS_Service" />
           <NavigationProperty Name="BS_UserInfo" Relationship="BeautySalonModel.FK_BS_Appointment_BS_UserInfo" FromRole="BS_Appointment" ToRole="BS_UserInfo" />
+          <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="BS_Contact">
           <Key>
@@ -475,6 +477,7 @@
           <EntitySetMapping Name="BS_Appointment">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_Appointment">
               <MappingFragment StoreEntitySet="BS_Appointment">
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Tel" ColumnName="Tel" />
                 <ScalarProperty Name="AddTime" ColumnName="AddTime" />
                 <ScalarProperty Name="TimeSlot" ColumnName="TimeSlot" />

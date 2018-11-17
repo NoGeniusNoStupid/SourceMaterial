@@ -918,6 +918,7 @@
     <Content Include="Views\GoodsCar\Index.cshtml" />
     <Content Include="Views\GoodsCar\SubmitOrder.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\FrontVIP\AppointMent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

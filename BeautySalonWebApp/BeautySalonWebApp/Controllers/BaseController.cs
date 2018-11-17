@@ -57,7 +57,20 @@ namespace BeautySalonWebApp.Controllers
             Response.Write(strTip);
             return null;
         }
-
-        
+        //关闭小窗口
+        protected ActionResult RedirectDialogToAction(int ros = -1,string msg="")
+        {
+            if (string.IsNullOrEmpty(msg))
+            {
+                if (ros > 0)
+                    msg = "操作成功";
+                else
+                    msg = "操作失败";
+            }
+            //操作成功并跳转
+            string strTip = string.Format(@"<script languge='javascript'>alert('{0}');window.close();</script>", msg);
+            Response.Write(strTip);
+            return null;
+        }
     }
 }
