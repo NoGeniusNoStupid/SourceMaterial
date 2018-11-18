@@ -77,6 +77,7 @@
           <Property Name="OperTime" Type="datetime" />
           <Property Name="Tel" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="BS_OrderDetail">
           <Key>
@@ -87,6 +88,7 @@
           <Property Name="OrderId" Type="varchar" MaxLength="50" />
           <Property Name="AddTime" Type="datetime" />
           <Property Name="Num" Type="int" />
+          <Property Name="Detail" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="BS_Service">
           <Key>
@@ -152,6 +154,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_BS_Order_BS_UserInfo">
+          <End Role="BS_UserInfo" Type="Self.BS_UserInfo" Multiplicity="0..1" />
+          <End Role="BS_Order" Type="Self.BS_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_Order">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_BS_OrderDetail_BS_Goods">
           <End Role="BS_Goods" Type="Self.BS_Goods" Multiplicity="0..1" />
           <End Role="BS_OrderDetail" Type="Self.BS_OrderDetail" Multiplicity="*" />
@@ -198,6 +212,10 @@
             <End Role="BS_Goods" EntitySet="BS_Goods" />
             <End Role="BS_GoodsCar" EntitySet="BS_GoodsCar" />
           </AssociationSet>
+          <AssociationSet Name="FK_BS_Order_BS_UserInfo" Association="Self.FK_BS_Order_BS_UserInfo">
+            <End Role="BS_UserInfo" EntitySet="BS_UserInfo" />
+            <End Role="BS_Order" EntitySet="BS_Order" />
+          </AssociationSet>
           <AssociationSet Name="FK_BS_OrderDetail_BS_Goods" Association="Self.FK_BS_OrderDetail_BS_Goods">
             <End Role="BS_Goods" EntitySet="BS_Goods" />
             <End Role="BS_OrderDetail" EntitySet="BS_OrderDetail" />
@@ -228,6 +246,7 @@
           <Property Name="Lock" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <Property Name="Money" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BS_Appointment" Relationship="BeautySalonModel.FK_BS_Appointment_BS_UserInfo" FromRole="BS_UserInfo" ToRole="BS_Appointment" />
+          <NavigationProperty Name="BS_Order" Relationship="BeautySalonModel.FK_BS_Order_BS_UserInfo" FromRole="BS_UserInfo" ToRole="BS_Order" />
         </EntityType>
         <EntityContainer Name="BeautySalonEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="BS_UserInfo" EntityType="Self.BS_UserInfo" />
@@ -258,6 +277,10 @@
           <AssociationSet Name="FK_BS_Appointment_BS_UserInfo" Association="BeautySalonModel.FK_BS_Appointment_BS_UserInfo">
             <End Role="BS_UserInfo" EntitySet="BS_UserInfo" />
             <End Role="BS_Appointment" EntitySet="BS_Appointment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BS_Order_BS_UserInfo" Association="BeautySalonModel.FK_BS_Order_BS_UserInfo">
+            <End Role="BS_UserInfo" EntitySet="BS_UserInfo" />
+            <End Role="BS_Order" EntitySet="BS_Order" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="BS_Admin">
@@ -362,6 +385,8 @@
           <Property Name="Tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="BS_OrderDetail" Relationship="BeautySalonModel.FK_BS_OrderDetail_BS_Order" FromRole="BS_Order" ToRole="BS_OrderDetail" />
+          <Property Name="State" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BS_UserInfo" Relationship="BeautySalonModel.FK_BS_Order_BS_UserInfo" FromRole="BS_Order" ToRole="BS_UserInfo" />
         </EntityType>
         <EntityType Name="BS_OrderDetail">
           <Key>
@@ -374,6 +399,7 @@
           <NavigationProperty Name="BS_Goods" Relationship="BeautySalonModel.FK_BS_OrderDetail_BS_Goods" FromRole="BS_OrderDetail" ToRole="BS_Goods" />
           <NavigationProperty Name="BS_Order" Relationship="BeautySalonModel.FK_BS_OrderDetail_BS_Order" FromRole="BS_OrderDetail" ToRole="BS_Order" />
           <Property Name="Num" Type="Int32" />
+          <Property Name="Detail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_BS_OrderDetail_BS_Goods">
           <End Type="BeautySalonModel.BS_Goods" Role="BS_Goods" Multiplicity="0..1" />
@@ -419,6 +445,18 @@
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="BS_Appointment">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BS_Order_BS_UserInfo">
+          <End Type="BeautySalonModel.BS_UserInfo" Role="BS_UserInfo" Multiplicity="0..1" />
+          <End Type="BeautySalonModel.BS_Order" Role="BS_Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BS_UserInfo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BS_Order">
               <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
@@ -528,6 +566,7 @@
           <EntitySetMapping Name="BS_Order">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_Order">
               <MappingFragment StoreEntitySet="BS_Order">
+                <ScalarProperty Name="State" ColumnName="State" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="Tel" ColumnName="Tel" />
                 <ScalarProperty Name="OperTime" ColumnName="OperTime" />
@@ -541,6 +580,7 @@
           <EntitySetMapping Name="BS_OrderDetail">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_OrderDetail">
               <MappingFragment StoreEntitySet="BS_OrderDetail">
+                <ScalarProperty Name="Detail" ColumnName="Detail" />
                 <ScalarProperty Name="Num" ColumnName="Num" />
                 <ScalarProperty Name="AddTime" ColumnName="AddTime" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />

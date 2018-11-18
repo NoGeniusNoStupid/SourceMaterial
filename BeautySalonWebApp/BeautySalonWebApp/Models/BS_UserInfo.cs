@@ -17,6 +17,7 @@ namespace BeautySalonWebApp.Models
         public BS_UserInfo()
         {
             this.BS_Appointment = new HashSet<BS_Appointment>();
+            this.BS_Order = new HashSet<BS_Order>();
         }
     
         public int Id { get; set; }
@@ -33,5 +34,6 @@ namespace BeautySalonWebApp.Models
         public string Money { get; set; }
     
         public virtual ICollection<BS_Appointment> BS_Appointment { get; set; }
+        public virtual ICollection<BS_Order> BS_Order { get; set; }
     }
 }

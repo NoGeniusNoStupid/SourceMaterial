@@ -113,13 +113,18 @@ namespace BeautySalonWebApp.Controllers
             }
             //创建订单对象
             BS_Order orderInfo = new BS_Order();
-            orderInfo.Id = Guid.NewGuid().ToString("N");
+            byte[] buffer = Guid.NewGuid().ToByteArray();
+            orderInfo.Id = BitConverter.ToInt64(buffer, 0).ToString();
             orderInfo.UserId = userId;
             orderInfo.PayType = payType;
             orderInfo.Money=countPrice.ToString();
             orderInfo.OperTime = DateTime.Now;
             orderInfo.Tel = Tel;
             orderInfo.Address = Address;
+            orderInfo.State = "未发货";
+            //更新余额
+            double monry = Convert.ToDouble(orderInfo.BS_UserInfo.Money);
+            orderInfo.BS_UserInfo.Money = (monry - countPrice).ToString();
             //创建订单详细集合
             List<BS_OrderDetail> detailList = new List<BS_OrderDetail>();
             foreach (var item in allGoodsCar)
@@ -129,6 +134,7 @@ namespace BeautySalonWebApp.Controllers
                 detailInfo.GoodsId = item.GoodsId;
                 detailInfo.AddTime = item.AddTime;
                 detailInfo.Num = item.SeqNo;
+                detailInfo.Detail = "正常";
                 detailList.Add(detailInfo);
             }
             orderInfo.BS_OrderDetail = detailList;

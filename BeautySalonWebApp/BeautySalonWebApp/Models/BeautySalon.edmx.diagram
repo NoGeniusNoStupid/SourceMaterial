@@ -19,6 +19,7 @@
         <AssociationConnector Association="BeautySalonModel.FK_BS_OrderDetail_BS_Order" />
         <AssociationConnector Association="BeautySalonModel.FK_BS_Appointment_BS_Service" />
         <AssociationConnector Association="BeautySalonModel.FK_BS_Appointment_BS_UserInfo" />
+        <AssociationConnector Association="BeautySalonModel.FK_BS_Order_BS_UserInfo" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

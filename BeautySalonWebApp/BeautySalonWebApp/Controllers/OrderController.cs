@@ -1,5 +1,8 @@
-﻿using System;
+﻿using BeautySalonWebApp.Models;
+using BeautySalonWebApp.Public;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -11,95 +14,89 @@ namespace BeautySalonWebApp.Controllers
         //
         // GET: /Order/
 
-        public ActionResult Index()
+        public ActionResult Index(string search)
         {
+            //分页设置
+            int pageIndex = Request.QueryString["pageIndex"] != null ? int.Parse(Request.QueryString["pageIndex"]) : 1;
+            int pageSize = 6;//页面记录数
+            List<BS_Order> mlist = new List<BS_Order>();
+            //查询记录
+            if (string.IsNullOrEmpty(search))
+            {
+                mlist = db.BS_Order.Where(a => true).OrderByDescending(a => a.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList<BS_Order>();
+            }
+            else
+            {
+                mlist = db.BS_Order.Where(a => a.Id.Contains(search) && a.BS_UserInfo.UserName.Contains(search) && a.BS_UserInfo.RealName.Contains(search)).OrderByDescending(a => a.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList<BS_Order>();
+            }
+            int listCount = db.BS_Order.Where(a => true).Count();
+            //生成导航条
+            string strBar = PageBarHelper.GetGoodsBar(pageIndex, listCount, pageSize);
+
+            ViewData["List"] = mlist;
+            ViewData["Bar"] = strBar;
+
             return View();
         }
 
         //
         // GET: /Order/Details/5
-
-        public ActionResult Details(int id)
+        //发货
+        public ActionResult SendGoods(string id)
         {
-            return View();
-        }
-
-        //
-        // GET: /Order/Create
-
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        //
-        // POST: /Order/Create
-
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
+            var orderInfo = db.BS_Order.FirstOrDefault(a => a.Id == id);
+            if (orderInfo.State == "未发货")
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
+                orderInfo.State = "已发货";
             }
-            catch
+            else if (orderInfo.State == "已发货")
             {
-                return View();
+                orderInfo.State = "确认送达";
             }
-        }
+            db.Entry(orderInfo).State = EntityState.Modified;
 
-        //
-        // GET: /Order/Edit/5
-
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Order/Edit/5
-
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectDialogToAction("Index", "Order", db.SaveChanges());
         }
 
         //
         // GET: /Order/Delete/5
-
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        //
-        // POST: /Order/Delete/5
-
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        //删除
+        public ActionResult Delete(string id)
         {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                var orderInfo = db.BS_Order.FirstOrDefault(a => a.Id == id);
+                var detailList = orderInfo.BS_OrderDetail.ToList();
+                for (int i = 0; i < detailList.Count; i++)
+                {
+                    var detailInfo = detailList[i];
+                    db.Entry(detailInfo).State = EntityState.Deleted;
+                    //i--;
+                }
+                db.Entry(orderInfo).State = EntityState.Deleted;
+                return RedirectDialogToAction("Index", "Order", db.SaveChanges());
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                
+                throw;
             }
         }
+        //退货
+        public ActionResult OutGoods(int id)
+        {
+            var orderDetail = db.BS_OrderDetail.FirstOrDefault(a=>a.Id==id);
+            orderDetail.Detail = "已退货";
+
+            if (orderDetail.BS_Order.PayType == "余额支付")
+            {
+                double money=Convert.ToDouble(orderDetail.BS_Order.BS_UserInfo.Money);
+                double price=Convert.ToDouble(Convert.ToDouble(orderDetail.BS_Goods.GoodsPrice)*orderDetail.Num);
+                orderDetail.BS_Order.BS_UserInfo.Money = (money + price).ToString();
+            }
+
+            return RedirectDialogToAction("Index", "Order", db.SaveChanges());
+        }
+       
     }
 }

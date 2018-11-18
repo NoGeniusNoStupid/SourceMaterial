@@ -55,10 +55,12 @@
             var money = $("#money").val();
             var surePrice = $("#SurePrice").val();
             var payType = $('input:radio[name="payType"]:checked').val(); 
-            if (payType == "余额支付"&&money<surePrice)
+            if (payType == "余额支付")
             {
-                alert("余额不足，请联系管理员进行充值");
-                return false;
+                if (parseInt(money) < parseInt(surePrice)) {
+                    alert("余额不足，请联系管理员进行充值");
+                    return false;
+                }
             }
 
             $("#form1").submit();

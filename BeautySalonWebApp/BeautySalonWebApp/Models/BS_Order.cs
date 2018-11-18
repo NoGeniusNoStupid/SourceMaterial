@@ -26,7 +26,9 @@ namespace BeautySalonWebApp.Models
         public Nullable<System.DateTime> OperTime { get; set; }
         public string Tel { get; set; }
         public string Address { get; set; }
+        public string State { get; set; }
     
         public virtual ICollection<BS_OrderDetail> BS_OrderDetail { get; set; }
+        public virtual BS_UserInfo BS_UserInfo { get; set; }
     }
 }

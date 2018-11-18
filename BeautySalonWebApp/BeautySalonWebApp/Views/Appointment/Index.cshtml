@@ -1,0 +1,96 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="~/Content/Admin/css/css.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Admin/css/main.css" type="text/css" rel="stylesheet" />
+    <link rel="shortcut icon" href="images/main/favicon.ico" />
+    <link href="~/Content/css/listPage.css" rel="stylesheet" />
+</head>
+<body>
+    <!--main_top-->
+    <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
+        <tr>
+            <td width="99%" align="left" valign="top">您的位置：预约管理</td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
+                    <tr>
+                        <td width="90%" align="left" valign="middle">
+                            <form method="post" action="/Appointment/Index">
+                                <span>用户名/姓名：</span>
+                                <input type="text" name="search" class="text-word">
+                                <input type="submit" class="text-but" value="查询">
+                            </form>
+                        </td>
+                        @*<td width="10%" align="center" valign="middle" style="text-align:right; width:150px;">
+                                <a href="~/Goods/Create" target="mainFrame" onfocus="  this.blur()" class="add">新增预约</a>
+                            </td>*@
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+    <td align="left" valign="top">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
+            <tr>
+                <th align="center" valign="middle" class="borderright">编号</th>
+                <th align="center" valign="middle" class="borderright">用户名</th>
+                <th align="center" valign="middle" class="borderright">姓名</th>
+                <th align="center" valign="middle" class="borderright">余额</th>
+                <th align="center" valign="middle" class="borderright">服务项目</th>
+                <th align="center" valign="middle" class="borderright">服务价格</th>
+                <th align="center" valign="middle" class="borderright">预约日期</th>
+                <th align="center" valign="middle" class="borderright">预约时间段</th>
+                <th align="center" valign="middle" class="borderright">联系电话</th>
+                <th align="center" valign="middle" class="borderright">状态</th>
+                <th align="center" valign="middle">操作</th>
+            </tr>
+            @{
+                List<BeautySalonWebApp.Models.BS_Appointment> mlist = (List<BeautySalonWebApp.Models.BS_Appointment>)ViewData["List"];
+
+                foreach (var item in mlist)
+                {
+                    <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
+                        <td align="center" valign="middle" class="borderright borderbottom">@item.Id</td>
+                        <td align="center" valign="middle" class="borderright borderbottom">@item.BS_UserInfo.UserName</td>
+                        <td align="center" valign="middle" class="borderright borderbottom">@item.BS_UserInfo.RealName</td>
+                        <td align="center" valign="middle" class="borderright borderbottom">@item.BS_UserInfo.Money</td>
+                        <td align="center" valign="middle" class="borderright borderbottom">@item.BS_Service.Title</td>
+                        <td align="center" valign="middle" class="borderright borderbottom">@item.BS_Service.Price</td>
+                        <td align="center" valign="middle" class="borderright borderbottom">@item.Time</td>
+                        <td align="center" valign="middle" class="borderright borderbottom">@item.TimeSlot</td>
+                        <td align="center" valign="middle" class="borderright borderbottom">@item.Tel</td>
+                        <td align="center" valign="middle" class="borderright borderbottom">@item.State</td>
+                <td align="center" valign="middle" class="borderbottom">
+                    <a href="/Appointment/Settlement/@item.Id" onclick="confirm('是否要进行结算?')" target="mainFrame" onfocus="this.blur()" class="add">
+                        @if (item.State == "未完成")
+                        {
+                             @Html.Raw("结算")
+                             <span class="gray">&nbsp;|&nbsp;</span>
+                        }
+                    </a>
+                   
+                    <a href="/Appointment/Delete/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
+                </td>
+            </tr>
+                }
+            }
+
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" valign="top" class="fenye">
+                @Html.Raw(ViewData["Bar"])
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
