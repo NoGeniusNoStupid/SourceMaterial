@@ -22,5 +22,6 @@ namespace BeautySalonWebApp.Models
         public string Reply { get; set; }
         public Nullable<System.DateTime> AddTime { get; set; }
         public Nullable<System.DateTime> ReplyTime { get; set; }
+        public Nullable<int> UserId { get; set; }
     }
 }

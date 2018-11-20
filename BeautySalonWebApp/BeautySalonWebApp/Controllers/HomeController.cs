@@ -19,6 +19,12 @@ namespace BeautySalonWebApp.Controllers
         }
         public ActionResult About()
         {
+            List<BS_Goods> mGoodslist = new List<BS_Goods>();
+            mGoodslist = db.BS_Goods.Where(a => true).OrderByDescending(a=>a.Id).Take(5).ToList();
+            List<BS_Service> mServicelist = new List<BS_Service>();
+            mServicelist = db.BS_Service.Where(a => true).OrderByDescending(a => a.Id).Take(3).ToList();
+            ViewData["mGoodslist"] = mGoodslist;
+            ViewData["mServicelist"] = mServicelist;
             return View();
         }
 
@@ -62,6 +68,10 @@ namespace BeautySalonWebApp.Controllers
         //提交页面
         public ActionResult Contact(BS_Contact contactInfo)
         {
+            int id = Convert.ToInt32(Session["Id"]);
+            if (Session["Id"] != null)
+                contactInfo.UserId = id;
+
             contactInfo.Reply = "未处理";
             contactInfo.AddTime = DateTime.Now;
             db.BS_Contact.Add(contactInfo);

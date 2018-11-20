@@ -42,6 +42,7 @@
           <Property Name="Reply" Type="varchar" MaxLength="50" />
           <Property Name="AddTime" Type="datetime" />
           <Property Name="ReplyTime" Type="datetime" />
+          <Property Name="UserId" Type="int" />
         </EntityType>
         <EntityType Name="BS_Goods">
           <Key>
@@ -337,6 +338,7 @@
           <Property Name="Reply" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="AddTime" Type="DateTime" Precision="3" />
           <Property Name="ReplyTime" Type="DateTime" Precision="3" />
+          <Property Name="UserId" Type="Int32" />
         </EntityType>
         <EntityType Name="BS_GoodsCar">
           <Key>
@@ -529,6 +531,7 @@
           <EntitySetMapping Name="BS_Contact">
             <EntityTypeMapping TypeName="BeautySalonModel.BS_Contact">
               <MappingFragment StoreEntitySet="BS_Contact">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ReplyTime" ColumnName="ReplyTime" />
                 <ScalarProperty Name="AddTime" ColumnName="AddTime" />
                 <ScalarProperty Name="Reply" ColumnName="Reply" />

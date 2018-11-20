@@ -16,6 +16,11 @@ namespace BeautySalonWebApp.Controllers
         {
             return View();
         }
+        public ActionResult Left()
+        {
+            return View();
+        }
+
         //弹窗功能实现
         public ActionResult AppointMent(int id)
         {
@@ -54,5 +59,8 @@ namespace BeautySalonWebApp.Controllers
             db.BS_Appointment.Add(appInfo);
             return RedirectDialogToAction(db.SaveChanges());
         }
+
+
+
     }
 }

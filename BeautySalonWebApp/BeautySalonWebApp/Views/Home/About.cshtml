@@ -32,22 +32,32 @@
                 <article class="grid_3 prefix_2">
                     <h3>我们的服务</h3>
                     <ul class="list-services">
+                       
                         <li>
                             <figure class="img-rounded1"><img src="images/page2-img2.jpg" alt="" /> </figure>
-                            <h4><a href="#">美容服务</a></h4>
+                            <h4><a href="#">商品服务</a></h4>
                             <ul class="list">
-                                <li><a href="#">面部按摩</a></li>
-                                <li><a href="#">祛斑疗程</a></li>
-                                <li><a href="#">去痘疗程</a></li>
+                                @{
+                                    List<BeautySalonWebApp.Models.BS_Goods> mGoodslist = (List<BeautySalonWebApp.Models.BS_Goods>)ViewData["mGoodslist"];
+                                    foreach (var item in mGoodslist)
+                                    {
+                                        <li><a href="/Home/GoodsDetails/@item.Id">@item.GoodsName</a></li>
+                                    }
+                                }
                             </ul>
                         </li>
                         <li>
                             <figure class="img-rounded1"><img src="images/page2-img3.jpg" alt="" /> </figure>
-                            <h4><a href="#">美甲服务</a></h4>
+                            <h4><a href="#">美容服务</a></h4>
                             <ul class="list">
-                                <li><a href="#">水晶甲</a></li>
-                                <li><a href="#">光疗甲</a></li>
-                                <li><a href="#">QQ甲</a></li>
+                                @{
+                                    List<BeautySalonWebApp.Models.BS_Service> mServicelist = (List<BeautySalonWebApp.Models.BS_Service>)ViewData["mServicelist"];
+                                    foreach (var item in mServicelist)
+                                    {
+                                        <li><a href="/Home/Service">@item.Title</a></li>
+                                    }
+                                }
+                               
                             </ul>
                         </li>
                     </ul>
