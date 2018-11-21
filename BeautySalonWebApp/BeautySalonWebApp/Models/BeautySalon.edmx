@@ -120,7 +120,9 @@
           <Property Name="Money" Type="varchar" MaxLength="20" />
         </EntityType>
         <Association Name="FK_BS_Appointment_BS_Service">
-          <End Role="BS_Service" Type="Self.BS_Service" Multiplicity="0..1" />
+          <End Role="BS_Service" Type="Self.BS_Service" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BS_Appointment" Type="Self.BS_Appointment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BS_Service">
@@ -132,7 +134,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BS_Appointment_BS_UserInfo">
-          <End Role="BS_UserInfo" Type="Self.BS_UserInfo" Multiplicity="0..1" />
+          <End Role="BS_UserInfo" Type="Self.BS_UserInfo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BS_Appointment" Type="Self.BS_Appointment" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BS_UserInfo">
@@ -144,7 +148,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BS_GoodsCar_BS_Goods">
-          <End Role="BS_Goods" Type="Self.BS_Goods" Multiplicity="0..1" />
+          <End Role="BS_Goods" Type="Self.BS_Goods" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BS_GoodsCar" Type="Self.BS_GoodsCar" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BS_Goods">
@@ -156,7 +162,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BS_Order_BS_UserInfo">
-          <End Role="BS_UserInfo" Type="Self.BS_UserInfo" Multiplicity="0..1" />
+          <End Role="BS_UserInfo" Type="Self.BS_UserInfo" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BS_Order" Type="Self.BS_Order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BS_UserInfo">
@@ -168,7 +176,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BS_OrderDetail_BS_Goods">
-          <End Role="BS_Goods" Type="Self.BS_Goods" Multiplicity="0..1" />
+          <End Role="BS_Goods" Type="Self.BS_Goods" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BS_OrderDetail" Type="Self.BS_OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BS_Goods">
@@ -180,7 +190,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_BS_OrderDetail_BS_Order">
-          <End Role="BS_Order" Type="Self.BS_Order" Multiplicity="0..1" />
+          <End Role="BS_Order" Type="Self.BS_Order" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="BS_OrderDetail" Type="Self.BS_OrderDetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BS_Order">

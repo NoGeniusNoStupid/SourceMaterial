@@ -1,4 +1,4 @@
-﻿@model BeautySalonWebApp.Models.BS_Admin
+﻿@model BeautySalonWebApp.Models.BS_UserInfo
 @{
     Layout = null;
 }
@@ -102,25 +102,29 @@
     <table width="99%" border="0" cellspacing="0" cellpadding="0" id="main">
         <tr>
             <td colspan="2" align="left" valign="top">
-                <span class="time"><strong>上午好！@Model.AdminName </strong><u>[管理员]</u></span>
-                <div class="top"><span class="left">您上次的登灵时间：@Model.LastTime   登录IP：127.0.0.1 &nbsp;&nbsp;&nbsp;&nbsp;如非您本人操作，请及时</span><a href="/Admin/AdminUpdatePassword" target="mainFrame" onfocus="this.blur()">更改密码</a></div>
-                <div class="sec">这是您第<span class="num">@Model.LoginCount</span>次,登录！</div>
+                <span class="time"><strong>上午好！@Model.RealName</strong><u>[普通用户]</u></span>
+                <div class="top"><span class="left">您的上次时间：@Model.regTime   登录IP：127.0.0.1 &nbsp;&nbsp;&nbsp;&nbsp;如非您本人操作，请及时</span><a href="/FrontVIP/UpdetePassword" target="mainFrame" onfocus="this.blur()">更改密码</a></div>
+
             </td>
         </tr>
         <tr>
             <td align="left" valign="top" width="50%">
-                <div class="main-tit">网站信息</div>
+                <div class="main-tit">个人信息</div>
                 <div class="main-con">
-                    会员注册：开启<br />  
-                    程序编码：UTF-8<br />
+                    用户名：@Model.UserName<br />
+                    姓名：@Model.RealName<br />
+                    性别：@Model.Sex<br />
+                    年龄：@Model.Age<br />
+                    邮箱：@Model.Email<br />
+                    电话：@Model.Tel<br />
                 </div>
             </td>
             <td align="left" valign="top" width="49%">
-                <div class="main-tit">服务器信息</div>
+                <div class="main-tit">账户信息</div>
                 <div class="main-con">
-                    服务器软件：IIS<br />
-                    ASP.NET版本：MVC 4.0<br />
-                    数据库版本：SQLServer 2008 R2<br />        
+                    余额：@Model.Money<br />
+                    已购订单:@Model.BS_Order.Count  次<br />
+                    已预约服务:@Model.BS_Appointment.Count 次<br />
                 </div>
             </td>
         </tr>
@@ -136,3 +140,4 @@
     </table>
 </body>
 </html>
+

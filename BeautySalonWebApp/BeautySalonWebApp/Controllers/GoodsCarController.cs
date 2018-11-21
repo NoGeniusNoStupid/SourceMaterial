@@ -55,6 +55,8 @@ namespace BeautySalonWebApp.Controllers
         public ActionResult Delete(int id)
         {
             var carInfo = db.BS_GoodsCar.FirstOrDefault(a => a.Id == id);
+
+
             db.Entry(carInfo).State = EntityState.Deleted;
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -104,6 +106,7 @@ namespace BeautySalonWebApp.Controllers
         public ActionResult ConfirmOrder(string Tel, string Address, string payType)
         {
             int userId = Convert.ToInt32(Session["Id"]);
+            var UserInfo = db.BS_UserInfo.FirstOrDefault(a => a.Id == userId);
             //获取购物车对象
             var allGoodsCar = db.BS_GoodsCar.Where(a => a.UserId == userId);
             double countPrice = 0;
@@ -123,8 +126,12 @@ namespace BeautySalonWebApp.Controllers
             orderInfo.Address = Address;
             orderInfo.State = "未发货";
             //更新余额
-            double monry = Convert.ToDouble(orderInfo.BS_UserInfo.Money);
-            orderInfo.BS_UserInfo.Money = (monry - countPrice).ToString();
+            if (orderInfo.PayType == "余额支付")
+            {
+                double monry = Convert.ToDouble(UserInfo.Money);
+                UserInfo.Money = (monry - countPrice).ToString();
+                db.Entry(UserInfo).State = EntityState.Modified;
+            }
             //创建订单详细集合
             List<BS_OrderDetail> detailList = new List<BS_OrderDetail>();
             foreach (var item in allGoodsCar)

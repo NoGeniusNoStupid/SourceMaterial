@@ -16,15 +16,15 @@
     <!--main_top-->
     <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
         <tr>
-            <td width="99%" align="left" valign="top">您的位置：留言管理</td>
+            <td width="99%" align="left" valign="top">您的位置：我的留言</td>
         </tr>
         <tr>
             <td align="left" valign="top">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
                     <tr>
                         <td width="90%" align="left" valign="middle">
-                            <form method="post" action="/Contact/Index">
-                                <span>姓名/电话：</span>
+                            <form method="post" action="/FrontVIP/ContactManage">
+                                <span>内容：</span>
                                 <input type="text" name="search" class="text-word">
                                 <input type="submit" class="text-but" value="查询">
                             </form>
@@ -47,8 +47,7 @@
                         <th align="center" valign="middle" class="borderright">留言内容</th>
                         <th align="center" valign="middle" class="borderright">留言时间</th>
                         <th align="center" valign="middle" class="borderright">是否处理</th>
-                        <th align="center" valign="middle" class="borderright">处理时间</th>
-                        <th align="center" valign="middle">操作</th>
+                        <th align="center" valign="middle" class="borderright">处理时间</th>   
                     </tr>
                     @{
                         List<BeautySalonWebApp.Models.BS_Contact> mlist = (List<BeautySalonWebApp.Models.BS_Contact>)ViewData["List"];
@@ -63,17 +62,7 @@
                                 <td align="center" valign="middle" class="borderright borderbottom">@item.Message</td>
                                 <td align="center" valign="middle" class="borderright borderbottom">@item.AddTime</td>
                                 <td align="center" valign="middle" class="borderright borderbottom">@item.Reply</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.ReplyTime</td>
-                                <td align="center" valign="middle" class="borderbottom">
-                                    <a href="/Contact/ContactDone/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">
-                                        @if (item.Reply == "未处理")
-                                        { @Html.Raw("已处理")}
-                                        else
-                                        { @Html.Raw("撤销")}
-                                    </a>
-                                    <span class="gray">&nbsp;|&nbsp;</span>
-                                    <a href="/Contact/Delete/@item.Id" onclick="return confirm('确定要删除吗?')" target="mainFrame" onfocus="    this.blur()" class="add">删除</a>
-                                </td>
+                                <td align="center" valign="middle" class="borderright borderbottom">@item.ReplyTime</td>                               
                             </tr>
                         }
                     }

@@ -32,10 +32,10 @@
     <form id="form1" method="post" action="/FrontVIP/AppointMent" >
         <div>
             <input type="hidden" value="@Model.Id" name="id" />
-            <input type="hidden" value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" id="NowTime"  />
+            <input type="hidden" value="@DateTime.Now.ToString("yyyy-MM-dd")" id="NowTime"  />
             <p>服务项目：<label>@Model.Title</label></p>
             <p>服务价格：<label>@Model.Price 元/次</label></p>
-            <p> 预约日期： <input type="date" id="Time" name="Time" value="@DateTime.Now.ToString("yyyy-MM-dd")" />
+            <p> 预约日期： <input type="date" id="Time" name="Time" value="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")" />
             <p>
                 时间选择： <select name="TimeSlot">
                     <option value="10:00~11:00" selected="selected">10:00~11:00</option>

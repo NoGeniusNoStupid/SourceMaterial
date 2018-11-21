@@ -1,0 +1,89 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <link href="~/Content/Admin/css/css.css" type="text/css" rel="stylesheet" />
+    <link href="~/Content/Admin/css/main.css" type="text/css" rel="stylesheet" />
+    <link rel="shortcut icon" href="images/main/favicon.ico" />
+    <link href="~/Content/css/listPage.css" rel="stylesheet" />
+</head>
+<body>
+    <!--main_top-->
+    <table width="99%" border="0" cellspacing="0" cellpadding="0" id="searchmain">
+        <tr>
+            <td width="99%" align="left" valign="top">您的位置：我的订单</td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" id="search">
+                    <tr>
+                        <td width="90%" align="left" valign="middle">
+                            <form method="post" action="/FrontVIP/OrderManage">
+                                <span>订单号：</span>
+                                <input type="text" name="search" class="text-word">
+                                <input type="submit" class="text-but" value="查询">
+                            </form>
+                        </td> 
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" valign="top">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" id="main-tab">
+                    @{}
+                    @{
+                        List<BeautySalonWebApp.Models.BS_Order> mlist = (List<BeautySalonWebApp.Models.BS_Order>)ViewData["List"];
+                        foreach (var item in mlist)
+                        {
+                            <tr>
+                                <td colspan="2">@item.OperTime</td>
+                                <td colspan="4">订单号：@item.Id</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">收货人：@item.BS_UserInfo.RealName</td>
+                                <td>
+                                    订单金额：@item.Money 元 &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                </td>
+                                <td>支付方式：@item.PayType</td>
+                                <td>订单状态：@item.State</td>
+                            </tr>
+                            foreach (var detailitem in item.BS_OrderDetail)
+                            {
+                                <tr>
+                                    <td width="40"><img width="30" height="30" src="@detailitem.BS_Goods.GoodsPic" /></td>
+                                    <td width="">@detailitem.BS_Goods.GoodsName</td>
+                                    <td width="">数量：× @detailitem.Num</td>
+                                    <td width="">单价： @detailitem.BS_Goods.GoodsPrice 元</td>
+                                    <td width="">总价： @(Convert.ToDouble(detailitem.BS_Goods.GoodsPrice) * detailitem.Num) 元</td>
+                                    <td width="">状态：@detailitem.Detail </td>
+                                    <td>
+                                        <a href="/FrontVIP/OutGoods/@detailitem.Id" onclick="return confirm('确定申请退货吗?')" target="mainFrame" onfocus="    this.blur()" class="add">
+                                            @if (detailitem.Detail == "正常")
+                                            {
+                                                @Html.Raw("申请退货")
+                                            }
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" valign="top" class="fenye">
+                @Html.Raw(ViewData["Bar"])
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

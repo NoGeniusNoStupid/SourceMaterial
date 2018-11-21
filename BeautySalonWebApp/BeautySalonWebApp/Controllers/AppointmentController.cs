@@ -49,7 +49,7 @@ namespace BeautySalonWebApp.Controllers
             if (money < price)
             {
                 //提升
-                return RedirectDialogToAction("余额不足，请前往充值！");
+                return RedirectDialogToAction("Index", "Appointment", -1, "余额不足，请前往充值！");
             }
             else
                 Info.BS_UserInfo.Money = (money - price).ToString();
@@ -63,6 +63,13 @@ namespace BeautySalonWebApp.Controllers
             return RedirectDialogToAction("Index", "Appointment", db.SaveChanges());
         }
 
+        public ActionResult CancelAppointment(int id)
+        {
+            var Info = db.BS_Appointment.FirstOrDefault(a => a.Id == id);
+            Info.State = "已取消";
+            return RedirectDialogToAction("Index", "Appointment", db.SaveChanges());
+        }
+        //删除
         public ActionResult Delete(int id)
         {
             var Info = db.BS_Appointment.FirstOrDefault(a => a.Id == id);

@@ -2,6 +2,7 @@
 using BeautySalonWebApp.Public;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -25,15 +26,19 @@ namespace BeautySalonWebApp.Controllers
         {
             return View();
         }
-        public ActionResult Swich()
-        {
-            return View();
-        }
+      
         public ActionResult Main()
         {
-            return View();
+            int id = Convert.ToInt32(Session["AdminId"]);
+            var adminInfo = db.BS_Admin.FirstOrDefault(a => a.Id == id);
+            return View(adminInfo);
         }
         public ActionResult Top()
+        {
+            return View();
+        }
+
+        public ActionResult Swich()
         {
             return View();
         }
@@ -119,7 +124,7 @@ namespace BeautySalonWebApp.Controllers
         }
         #endregion
 
-        #region 详情
+        #region 修改
         public ActionResult EditInfo(int id)
         { 
             var adminInfo = db.BS_Admin.FirstOrDefault(a => a.Id == id);
@@ -179,6 +184,25 @@ namespace BeautySalonWebApp.Controllers
             db.Entry(adminInfo).State = System.Data.EntityState.Modified;
 
             return RedirectDialogToAction("AdminManage", "Admin", db.SaveChanges());
+        }
+        #endregion
+
+        #region 密码修改
+        public ActionResult AdminUpdatePassword()
+        {
+            int id = Convert.ToInt32(Session["AdminId"]);
+            var adminInfo = db.BS_Admin.FirstOrDefault(a => a.Id == id);
+            return View(adminInfo);
+        }
+        [HttpPost]
+        public ActionResult AdminUpdatePassword(string Password)
+        {
+            int id = Convert.ToInt32(Session["AdminId"]);
+            var adminInfo = db.BS_Admin.FirstOrDefault(a => a.Id == id);
+            adminInfo.AdminPassword = Password;
+            db.Entry(adminInfo).State = EntityState.Modified;
+            return RedirectDialogToAction("Main", "Admin", db.SaveChanges());
+         
         }
         #endregion
 

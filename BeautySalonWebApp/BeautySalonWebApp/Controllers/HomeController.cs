@@ -58,9 +58,12 @@ namespace BeautySalonWebApp.Controllers
         public ActionResult Contact()
         {
             BS_UserInfo userInfo = new BS_UserInfo();
-            int id=Convert.ToInt32(Session["Id"]);
+
             if (Session["Id"] != null)
-                userInfo = db.BS_UserInfo.FirstOrDefault(a => a.Id == id);
+            {
+                int id = Convert.ToInt32(Session["Id"]);
+                userInfo = db.BS_UserInfo.FirstOrDefault(a => a.Id == id); 
+            }
 
             return View(userInfo);
         }
@@ -68,9 +71,9 @@ namespace BeautySalonWebApp.Controllers
         //提交页面
         public ActionResult Contact(BS_Contact contactInfo)
         {
-            int id = Convert.ToInt32(Session["Id"]);
+            //已登录，记录用户
             if (Session["Id"] != null)
-                contactInfo.UserId = id;
+                contactInfo.UserId = Convert.ToInt32(Session["Id"]);
 
             contactInfo.Reply = "未处理";
             contactInfo.AddTime = DateTime.Now;

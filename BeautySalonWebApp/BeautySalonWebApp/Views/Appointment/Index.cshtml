@@ -69,15 +69,26 @@
                         <td align="center" valign="middle" class="borderright borderbottom">@item.Tel</td>
                         <td align="center" valign="middle" class="borderright borderbottom">@item.State</td>
                 <td align="center" valign="middle" class="borderbottom">
-                    <a href="/Appointment/Settlement/@item.Id" onclick="confirm('是否要进行结算?')" target="mainFrame" onfocus="this.blur()" class="add">
+                    <a href="/Appointment/Settlement/@item.Id" onclick="return confirm('是否要进行结算?')" target="mainFrame" onfocus="    this.blur()" class="add">
                         @if (item.State == "未完成")
                         {
                              @Html.Raw("结算")
                              <span class="gray">&nbsp;|&nbsp;</span>
                         }
                     </a>
-                   
-                    <a href="/Appointment/Delete/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
+                    <a href="/Appointment/CancelAppointment/@item.Id" onclick="return confirm('是否要取消预约?')" target="mainFrame" onfocus="    this.blur()" class="add">
+                        @if (item.State == "未完成")
+                        {
+                            @Html.Raw("取消预约")
+                            <span class="gray">&nbsp;|&nbsp;</span>
+                        }
+                        @if (item.State == "取消预约")
+                        {
+                            @Html.Raw("同意取消")
+                            <span class="gray">&nbsp;|&nbsp;</span>
+                        }
+                    </a>
+                    <a href="/Appointment/Delete/@item.Id" onclick="return confirm('确定要删除吗?')" target="mainFrame" onfocus="    this.blur()" class="add">删除</a>
                 </td>
             </tr>
                 }

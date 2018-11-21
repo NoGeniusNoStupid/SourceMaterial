@@ -66,13 +66,13 @@ namespace BeautySalonWebApp.Controllers
             try
             {
                 var orderInfo = db.BS_Order.FirstOrDefault(a => a.Id == id);
-                var detailList = orderInfo.BS_OrderDetail.ToList();
-                for (int i = 0; i < detailList.Count; i++)
-                {
-                    var detailInfo = detailList[i];
-                    db.Entry(detailInfo).State = EntityState.Deleted;
-                    //i--;
-                }
+                //var detailList = orderInfo.BS_OrderDetail.ToList();
+                //for (int i = 0; i < detailList.Count; i++)
+                //{
+                //    var detailInfo = detailList[i];
+                //    db.Entry(detailInfo).State = EntityState.Deleted;
+                //    //i--;
+                //}
                 db.Entry(orderInfo).State = EntityState.Deleted;
                 return RedirectDialogToAction("Index", "Order", db.SaveChanges());
             }

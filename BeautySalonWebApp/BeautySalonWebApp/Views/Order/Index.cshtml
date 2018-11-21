@@ -60,8 +60,9 @@
                                    @Html.Raw("确认送达")
                                    <span class="gray">&nbsp;|&nbsp;</span>
                                }
+                               
                            </a>         
-                           <a href="/Order/Delete/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
+                           <a href="/Order/Delete/@item.Id" onclick="return confirm('确定要删除吗?')" target="mainFrame" onfocus="    this.blur()" class="add">删除</a>
                        </td>
                     </tr>
                      <tr>
@@ -83,11 +84,15 @@
                                   <td width="">总价： @(Convert.ToDouble(detailitem.BS_Goods.GoodsPrice)*detailitem.Num) 元</td>
                                   <td width="">状态：@detailitem.Detail </td>
                                   <td>
-                                      <a href="/Order/OutGoods/@detailitem.Id" onclick="confirm('确定退货吗?')" target="mainFrame" onfocus="this.blur()" class="add">
+                                      <a href="/Order/OutGoods/@detailitem.Id" onclick="return confirm('确定退货吗?')" target="mainFrame" onfocus="    this.blur()" class="add">
                                           @if (detailitem.Detail == "正常")
                                           {
                                               @Html.Raw("退货")
-
+                                          }
+                                          @if (detailitem.Detail == "申请退货")
+                                          {
+                                               @Html.Raw("同意退货")
+                                              
                                           }
                                       </a>
                                   </td>
@@ -95,47 +100,7 @@
                             }                                                              
                         } 
                         }               
-                    @*<tr>
-                        <th align="center" valign="middle" class="borderright">编号</th>
-                        <th align="center" valign="middle" class="borderright">用户名</th>
-                        <th align="center" valign="middle" class="borderright">姓名</th>
-                        <th align="center" valign="middle" class="borderright">金额</th>
-                        <th align="center" valign="middle" class="borderright">操作时间</th>
-                        <th align="center" valign="middle" class="borderright">收货地址</th>
-                        <th align="center" valign="middle" class="borderright">联系电话</th>
-                        <th align="center" valign="middle" class="borderright">状态</th>
-                        <th align="center" valign="middle">操作</th>
-                    </tr>
-                    @{
-                        List<BeautySalonWebApp.Models.BS_Appointment> mlist = (List<BeautySalonWebApp.Models.BS_Appointment>)ViewData["List"];
-
-                        foreach (var item in mlist)
-                        {
-                            <tr onmouseout="this.style.backgroundColor='#ffffff'" onmouseover="this.style.backgroundColor='#edf5ff'">
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.Id</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.BS_UserInfo.UserName</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.BS_UserInfo.RealName</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.BS_UserInfo.Money</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.BS_Service.Title</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.BS_Service.Price</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.Time</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.TimeSlot</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.Tel</td>
-                                <td align="center" valign="middle" class="borderright borderbottom">@item.State</td>
-                                <td align="center" valign="middle" class="borderbottom">
-                                    <a href="/Appointment/Settlement/@item.Id" onclick="confirm('是否要进行结算?')" target="mainFrame" onfocus="this.blur()" class="add">
-                                        @if (item.State == "未完成")
-                                        {
-                                            @Html.Raw("结算")
-                                            <span class="gray">&nbsp;|&nbsp;</span>
-                                        }
-                                    </a>
-
-                                    <a href="/Appointment/Delete/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
-                                </td>
-                            </tr>
-                        }
-                    }*@
+                   
                 </table>
             </td>
         </tr>

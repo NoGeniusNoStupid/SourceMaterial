@@ -74,7 +74,7 @@
                                 <span class="gray">&nbsp;|&nbsp;</span>
                                 <a href="/GoodsCar/Remove/@item.Id" target="mainFrame" onfocus="this.blur()" class="add">减少</a>
                                 <span class="gray">&nbsp;|&nbsp;</span>
-                                <a href="/GoodsCar/Delete/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
+                                <a href="/GoodsCar/Delete/@item.Id" onclick="return confirm('确定要删除吗?')" target="mainFrame" onfocus="    this.blur()" class="add">删除</a>
                             </td>
                         </tr>
                     }
@@ -107,7 +107,7 @@
                 }
 
             </table>
-            <a href="/GoodsCar/SubmitOrder" style="float:right" class="button" onclick="confirm('确定要提交吗?')">提交订单</a>
+            <a href="/GoodsCar/SubmitOrder" style="float:right" class="button" onclick="return confirm('确定要提交吗?')">提交订单</a>
             <form id="contact-form"></form>
 
 

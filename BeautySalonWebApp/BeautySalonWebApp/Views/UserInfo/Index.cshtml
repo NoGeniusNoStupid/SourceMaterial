@@ -82,7 +82,7 @@
                                         { @Html.Raw("解锁")}
                                     </a>
                                     <span class="gray">&nbsp;|&nbsp;</span>   
-                                    <a href="/UserInfo/Delete/@item.Id" onclick="confirm('确定要删除吗?')" target="mainFrame" onfocus="this.blur()" class="add">删除</a>
+                                    <a href="/UserInfo/Delete/@item.Id" onclick="return confirm('确定要删除吗?')" target="mainFrame" onfocus="    this.blur()" class="add">删除</a>
                                 </td>
                             </tr>
                         }

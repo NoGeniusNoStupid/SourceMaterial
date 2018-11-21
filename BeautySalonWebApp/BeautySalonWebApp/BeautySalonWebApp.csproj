@@ -923,6 +923,16 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\FrontVIP\Index.cshtml" />
     <Content Include="Views\FrontVIP\Left.cshtml" />
+    <Content Include="Views\FrontVIP\Top.cshtml" />
+    <Content Include="Views\FrontVIP\ContactManage.cshtml" />
+    <Content Include="Views\FrontVIP\OrderManage.cshtml" />
+    <Content Include="Views\FrontVIP\AppointmentManage.cshtml" />
+    <Content Include="Views\FrontVIP\UpdeteInfo.cshtml" />
+    <Content Include="Views\FrontVIP\UpdetePassword.cshtml" />
+    <Content Include="Views\FrontVIP\Main.cshtml" />
+    <Content Include="Views\Admin\AdminUpdatePassword.cshtml" />
+    <Content Include="Views\FrontVIP\Swich.cshtml" />
+    <Content Include="Views\FrontVIP\Bottom.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

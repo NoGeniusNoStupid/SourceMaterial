@@ -117,10 +117,11 @@ namespace BeautySalonWebApp.Controllers
 
         public ActionResult Delete(int id)
         {
-            var adminInfo = db.BS_Goods.FirstOrDefault(a => a.Id == id);
+            var Info = db.BS_Goods.FirstOrDefault(a => a.Id == id);
 
+          
             //删除操作
-            db.Entry(adminInfo).State = System.Data.EntityState.Deleted;
+            db.Entry(Info).State = System.Data.EntityState.Deleted;
 
             return RedirectDialogToAction("Index", "Goods", db.SaveChanges());
         }

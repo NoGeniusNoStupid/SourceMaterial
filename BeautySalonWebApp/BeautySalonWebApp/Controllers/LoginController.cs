@@ -2,6 +2,7 @@
 using BeautySalonWebApp.Public;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -41,9 +42,23 @@ namespace BeautySalonWebApp.Controllers
             BS_UserInfo userInfo = db.BS_UserInfo.FirstOrDefault(a => a.UserName == UserName && a.Password == Password);
             if (userInfo==null)
                 return Content("用户名或密码输入错误");
+            if (userInfo.Lock=="1")
+                return Content("用户已被锁定，请联系管理员！");
+          
             Session["realName"] = userInfo.RealName;//用户真实姓名
             Session["Id"] = userInfo.Id;//用户id
             return Content("ok");
+        }
+
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult UserOut()
+        {
+            Session["Id"] = null;//用户名
+            Session["realName"] = null;//用户真实姓名
+            return RedirectToAction("Index", "Login");
         }
         /// <summary>
         /// 显示验证码
@@ -78,7 +93,10 @@ namespace BeautySalonWebApp.Controllers
             var adminInfo = db.BS_Admin.FirstOrDefault(a => a.AdminName == username && a.AdminPassword == pwd);
             if (adminInfo == null)
                 return RedirectDialogToAction("AdminLogin", "Login", 1, "用户名或密码输入错误");
-
+            adminInfo.LastTime = DateTime.Now;
+            adminInfo.LoginCount =(Convert.ToInt32(adminInfo.LoginCount)+1).ToString();//记录登陆次数
+            db.Entry(adminInfo).State = EntityState.Modified;
+            db.SaveChanges();
             Session["AdminName"] = adminInfo.AdminName;//用户名
             Session["AdminId"] = adminInfo.Id;//用户id
             return RedirectToAction("Index","Admin");
@@ -93,6 +111,8 @@ namespace BeautySalonWebApp.Controllers
             Session["AdminId"] = null;//用户id
             return RedirectToAction("AdminLogin", "Login");
         }
+
+
         #endregion 
     }
 }

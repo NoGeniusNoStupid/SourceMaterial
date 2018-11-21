@@ -1,4 +1,5 @@
-﻿@{
+﻿@model BeautySalonWebApp.Models.BS_UserInfo
+@{
     Layout = null;
 }
 
@@ -39,26 +40,26 @@
 <body onselectstart="return false;" ondragstart="return false;" oncontextmenu="return false;">
     <div id="left-top">
         <div><img src="/Content/admin/images/main/member.gif" width="44" height="44" /></div>
-        <span>用户：admin<br>角色：普通会员</span>
+        <span>用户：@Model.RealName<br>角色：普通会员</span>
     </div>
     <div style="float: left" id="my_menu" class="sdmenu">
         <div class="collapsed">
             <span>系统设置</span>
-            <a href="/Admin/Main" target="mainFrame" onfocus="this.blur()">后台首页</a>
-            <a href="/Admin/AddAdminInfo" target="mainFrame" onfocus="this.blur()">个人信息修改</a>
-            <a href="main_list.html" target="mainFrame" onfocus="this.blur()">密码修改</a>
+            <a href="/FrontVIP/Main" target="mainFrame" onfocus="this.blur()">后台首页</a>
+            <a href="/FrontVIP/UpdeteInfo" target="mainFrame" onfocus="this.blur()">个人信息修改</a>
+            <a href="/FrontVIP/UpdetePassword" target="mainFrame" onfocus="this.blur()">密码修改</a>
         </div>
         <div>
-            <span>销售管理</span>
-            <a href="/Order/Index" target="mainFrame" onfocus="this.blur()">订单管理</a>  
+            <span>订单管理</span>
+            <a href="/FrontVIP/OrderManage" target="mainFrame" onfocus="this.blur()">订单管理</a>  
         </div>
         <div>
             <span>预约管理</span>
-            <a href="/Appointment/Index" target="mainFrame" onfocus="this.blur()">预约管理</a>
+            <a href="/FrontVIP/AppointmentManage" target="mainFrame" onfocus="this.blur()">预约管理</a>
         </div>
         <div>
             <span>留言管理</span>
-            <a href="/Contact/Index" target="mainFrame" onfocus="this.blur()">留言管理</a>
+            <a href="/FrontVIP/ContactManage" target="mainFrame" onfocus="this.blur()">留言管理</a>
         </div>
     </div>
 </body>
